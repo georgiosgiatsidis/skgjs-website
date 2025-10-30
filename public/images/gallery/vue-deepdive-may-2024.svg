@@ -1,0 +1,6 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#42B883"/>
+  <polygon points="400,150 500,350 300,350" fill="#FFFFFF" opacity="0.2"/>
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Vue.js Deep Dive</text>
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="28" fill="#FFFFFF" text-anchor="middle">May 2024</text>
+</svg>

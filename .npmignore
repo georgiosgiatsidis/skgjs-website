@@ -1,0 +1,15 @@
+# .npmignore for publishing (if needed)
+node_modules/
+dist/
+build/
+*.log
+.next/
+out/
+coverage/
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+*.tmp
+*.swp
+.env*

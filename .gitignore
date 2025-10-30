@@ -1,0 +1,16 @@
+# .gitignore for Next.js 14 + TypeScript + Tailwind + Node.js
+node_modules/
+dist/
+build/
+*.log
+.env*
+.next/
+out/
+coverage/
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+*.tmp
+*.swp
+*.tsbuildinfo
