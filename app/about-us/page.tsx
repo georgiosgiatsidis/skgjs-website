@@ -32,9 +32,7 @@ export default async function AboutUsPage() {
             <h1 className="mb-6 text-5xl font-bold text-white md:text-6xl">
               About <span className="text-js-yellow">SKG JS</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              {siteConfig.description}
-            </p>
+            <p className="mx-auto max-w-2xl text-xl text-gray-300">{siteConfig.description}</p>
           </div>
         </Container>
       </section>
@@ -92,35 +90,31 @@ export default async function AboutUsPage() {
               </h2>
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-gray-700 dark:bg-gray-800">
-                  <h3 className="mb-3 text-xl font-bold text-js-yellow">
-                    Inclusivity
-                  </h3>
+                  <h3 className="mb-3 text-xl font-bold text-js-yellow">Inclusivity</h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Everyone is welcome regardless of experience level, background, or identity. We foster a safe and supportive environment for all.
+                    Everyone is welcome regardless of experience level, background, or identity. We
+                    foster a safe and supportive environment for all.
                   </p>
                 </div>
                 <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-gray-700 dark:bg-gray-800">
-                  <h3 className="mb-3 text-xl font-bold text-js-yellow">
-                    Knowledge Sharing
-                  </h3>
+                  <h3 className="mb-3 text-xl font-bold text-js-yellow">Knowledge Sharing</h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    We believe in the power of sharing knowledge and learning from each other through talks, workshops, and mentorship.
+                    We believe in the power of sharing knowledge and learning from each other
+                    through talks, workshops, and mentorship.
                   </p>
                 </div>
                 <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-gray-700 dark:bg-gray-800">
-                  <h3 className="mb-3 text-xl font-bold text-js-yellow">
-                    Community First
-                  </h3>
+                  <h3 className="mb-3 text-xl font-bold text-js-yellow">Community First</h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Building connections and relationships is at the heart of what we do. Come for the talks, stay for the community.
+                    Building connections and relationships is at the heart of what we do. Come for
+                    the talks, stay for the community.
                   </p>
                 </div>
                 <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-gray-700 dark:bg-gray-800">
-                  <h3 className="mb-3 text-xl font-bold text-js-yellow">
-                    Growth Mindset
-                  </h3>
+                  <h3 className="mb-3 text-xl font-bold text-js-yellow">Growth Mindset</h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    We encourage continuous learning and growth, celebrating both successes and learning opportunities.
+                    We encourage continuous learning and growth, celebrating both successes and
+                    learning opportunities.
                   </p>
                 </div>
               </div>
@@ -128,11 +122,10 @@ export default async function AboutUsPage() {
 
             {/* Contact CTA */}
             <div className="mt-16 rounded-2xl bg-gradient-to-r from-js-yellow to-amber-400 p-8 text-center shadow-xl md:p-12">
-              <h2 className="mb-4 text-3xl font-bold text-js-black">
-                Join Our Community
-              </h2>
+              <h2 className="mb-4 text-3xl font-bold text-js-black">Join Our Community</h2>
               <p className="mb-6 text-lg text-gray-800">
-                Interested in speaking, sponsoring, or just attending? We'd love to hear from you!
+                Interested in speaking, sponsoring, or just attending? We&apos;d love to hear from
+                you!
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
