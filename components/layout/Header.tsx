@@ -16,6 +16,12 @@ const menuItems = [
     showInMobile: true,
   },
   {
+    label: 'About Us',
+    href: ROUTES.aboutUs,
+    showInDesktop: true,
+    showInMobile: true,
+  },
+  {
     label: 'Events',
     href: ROUTES.events,
     showInDesktop: true,

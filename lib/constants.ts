@@ -17,6 +17,7 @@ export const SOCIAL_PLATFORMS = {
 
 export const ROUTES = {
   home: '/',
+  aboutUs: '/about-us/',
   events: '/events/',
   community: '/community/',
   contact: '/contact/',
