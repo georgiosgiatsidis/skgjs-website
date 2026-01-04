@@ -1,14 +1,50 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
+import { AnimatedText } from '@/components/animations/AnimatedText'
+import { CountUp } from '@/components/animations/CountUp'
+import { MagneticButton } from '@/components/animations/MagneticButton'
 import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
+
+const stats = [
+  { value: 5, suffix: '+', label: 'Meetups' },
+  { value: 300, suffix: '+', label: 'Members' },
+  { value: 10, suffix: '+', label: 'Speakers' },
+  { value: 1, suffix: '+', label: 'Years' },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
+  },
+}
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center">
+    <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0 z-10 opacity-30">
         <LiquidEther
-          colors={['#F7DD3E', '#FFD700', '#FFD700']}
+          colors={['#F7DD3E', '#FFD700', '#FFA500']}
           mouseForce={30}
           cursorSize={100}
           isViscous={false}
@@ -32,69 +68,180 @@ export function Hero() {
           src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop"
           alt="JavaScript developers collaborating"
           fill
-          className="object-cover opacity-100"
+          className="object-cover"
           priority
           quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-js-black/80 via-js-black/80 to-js-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-js-black/90 via-js-black/85 to-js-black/80" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 py-4">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-8 flex justify-center">
-            <Image
-              src="/images/logo.svg"
-              alt="Thessaloniki JavaScript Meetup Logo"
-              width={120}
-              height={120}
-              className="h-24 w-24 md:h-32 md:w-32"
-              priority
+      <motion.div
+        className="container relative z-20 mx-auto px-4 py-20"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="mx-auto max-w-5xl text-center">
+          <motion.div className="mb-8 flex justify-center" variants={itemVariants}>
+            <motion.div
+              className="relative"
+              animate={{
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <Image
+                src="/images/logo.svg"
+                alt="Thessaloniki JavaScript Meetup Logo"
+                width={140}
+                height={140}
+                className="h-28 w-28 drop-shadow-2xl md:h-36 md:w-36"
+                priority
+              />
+              <motion.div
+                className="absolute inset-0 rounded-full bg-js-yellow/30 blur-2xl"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+            </motion.div>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <AnimatedText
+              text="Thessaloniki"
+              type="chars"
+              animation="slide"
+              stagger={0.03}
+              className="mb-2 text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl"
+              as="h1"
             />
-          </div>
+          </motion.div>
 
-          <h1 className="mb-6 text-4xl font-bold text-white md:text-6xl">
-            Thessaloniki
-            <span className="mt-2 block text-js-yellow">JavaScript Meetup</span>
-          </h1>
+          <motion.div variants={itemVariants}>
+            <AnimatedText
+              text="JavaScript Meetup"
+              type="words"
+              animation="blur"
+              stagger={0.1}
+              delay={0.5}
+              className="mb-8 text-4xl font-black text-js-yellow md:text-6xl lg:text-7xl"
+              as="span"
+            />
+          </motion.div>
 
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-200 md:text-2xl">
+          <motion.p
+            className="mx-auto mb-10 max-w-2xl text-lg text-gray-300 md:text-xl lg:text-2xl"
+            variants={itemVariants}
+          >
             Join the vibrant JavaScript community in Thessaloniki. Learn, share, and connect with
             fellow developers.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/events">
-              <Button variant="primary" className="w-full sm:w-auto">
-                Explore Events
-              </Button>
-            </Link>
-            <Link href="/community">
-              <Button variant="outline" className="w-full sm:w-auto">
-                Meet the Community
-              </Button>
-            </Link>
-          </div>
+          <motion.div
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+            variants={itemVariants}
+          >
+            <MagneticButton strength={0.2}>
+              <Link href="/events">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  magnetic
+                  glowOnHover
+                  className="w-full px-10 sm:w-auto"
+                >
+                  Explore Events
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </Button>
+              </Link>
+            </MagneticButton>
+            <MagneticButton strength={0.2}>
+              <Link href="/community">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow sm:w-auto"
+                >
+                  Meet the Community
+                </Button>
+              </Link>
+            </MagneticButton>
+          </motion.div>
 
-          <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4">
-            <div>
-              <div className="mb-2 text-3xl font-bold text-js-yellow md:text-4xl">5+</div>
-              <div className="text-sm text-gray-300 md:text-base">Meetups</div>
-            </div>
-            <div>
-              <div className="mb-2 text-3xl font-bold text-js-yellow md:text-4xl">300+</div>
-              <div className="text-sm text-gray-300 md:text-base">Members</div>
-            </div>
-            <div>
-              <div className="mb-2 text-3xl font-bold text-js-yellow md:text-4xl">10+</div>
-              <div className="text-sm text-gray-300 md:text-base">Speakers</div>
-            </div>
-            <div>
-              <div className="mb-2 text-3xl font-bold text-js-yellow md:text-4xl">1+</div>
-              <div className="text-sm text-gray-300 md:text-base">Years</div>
-            </div>
-          </div>
+          <motion.div
+            className="mt-20 grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8"
+            variants={itemVariants}
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className="group relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 + index * 0.1 }}
+              >
+                <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-js-yellow/30 hover:bg-white/10">
+                  <div className="mb-2 text-4xl font-black text-js-yellow md:text-5xl">
+                    <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-sm font-medium text-gray-400 md:text-base">{stat.label}</div>
+                  <motion.div
+                    className="absolute bottom-0 left-1/2 h-1 -translate-x-1/2 rounded-full bg-js-yellow"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '50%' }}
+                    transition={{ delay: 1.5 + index * 0.1, duration: 0.5 }}
+                    viewport={{ once: true }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.6 }}
+      >
+        <motion.div
+          className="flex flex-col items-center gap-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <span className="text-xs font-medium uppercase tracking-widest text-gray-400">
+            Scroll to explore
+          </span>
+          <svg className="h-6 w-6 text-js-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

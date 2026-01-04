@@ -1,81 +1,95 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { getAllPartners } from '@/lib/content'
+import { Marquee } from '@/components/ui/Marquee'
+import { ScrollReveal } from '@/components/animations/ScrollReveal'
 
 export async function PartnersSection() {
-  const allPartners = await getAllPartners(true) // Only active partners
+  const allPartners = await getAllPartners(true)
 
   if (allPartners.length === 0) {
     return null
   }
 
   return (
-    <section className="bg-gradient-to-b from-white to-gray-50 py-20 dark:from-gray-900 dark:to-gray-800">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24 dark:from-gray-900 dark:to-gray-950">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-js-yellow/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-js-yellow/30 to-transparent" />
+      </div>
+
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-6xl">
-          {/* Header */}
+        <ScrollReveal>
           <div className="mb-16 text-center">
+            <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-widest text-js-yellow">
+              Supported By
+            </span>
             <h2 className="mb-4 text-3xl font-bold text-js-black dark:text-white md:text-4xl">
               Our Community Partners
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              Amazing organizations helping us build the JavaScript community in Thessaloniki! 🤝
+            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-400">
+              Amazing organizations helping us build the JavaScript community in Thessaloniki
             </p>
           </div>
+        </ScrollReveal>
 
-          {/* Partners Grid */}
-          <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-3 md:gap-12 lg:grid-cols-4">
-            {allPartners.map((partner) => (
-              <Link
-                key={partner.slug}
-                href={partner.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex items-center justify-center rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:scale-105 hover:border-js-yellow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:border-js-yellow"
-              >
-                <div className="relative flex h-20 w-full items-center justify-center">
+        <ScrollReveal delay={0.2}>
+          <div className="relative">
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent dark:from-gray-900" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent dark:from-gray-900" />
+
+            <Marquee speed={30} pauseOnHover className="py-8">
+              {allPartners.map((partner) => (
+                <Link
+                  key={partner.slug}
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative mx-8 flex h-24 w-40 items-center justify-center rounded-xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:border-js-yellow hover:shadow-lg hover:shadow-js-yellow/10 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-js-yellow"
+                >
                   <Image
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    width={160}
-                    height={80}
-                    className="max-h-20 w-auto object-contain grayscale transition-all duration-300 [filter:brightness(0)_saturate(100%)] group-hover:grayscale-0 group-hover:[filter:none] dark:[filter:brightness(0)_saturate(100%)_invert(1)] dark:group-hover:[filter:none]"
+                    width={120}
+                    height={60}
+                    className="max-h-12 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                   />
-                </div>
-
-                {/* Tooltip on hover */}
-                <div className="pointer-events-none absolute -bottom-12 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded bg-js-black px-3 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gray-700">
-                  {partner.name}
-                </div>
-              </Link>
-            ))}
+                  <div className="pointer-events-none absolute -bottom-10 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-js-black px-3 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100 dark:bg-gray-700">
+                    {partner.name}
+                    <div className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-js-black dark:bg-gray-700" />
+                  </div>
+                </Link>
+              ))}
+            </Marquee>
           </div>
+        </ScrollReveal>
 
-          {/* Become a Partner CTA */}
-          <div className="mt-16 text-center">
-            <p className="mb-4 text-gray-600 dark:text-gray-400">
+        <ScrollReveal delay={0.3}>
+          <div className="mt-12 text-center">
+            <p className="mb-4 text-gray-500 dark:text-gray-400">
               Interested in supporting our community?
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 font-semibold text-js-yellow transition-colors duration-200 hover:text-js-yellow/80"
+              className="group inline-flex items-center gap-2 font-semibold text-js-yellow transition-all duration-300 hover:gap-3"
             >
               Become a Partner
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+                className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
                 <path
-                  fillRule="evenodd"
-                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
             </Link>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )
