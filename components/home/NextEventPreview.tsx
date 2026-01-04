@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Countdown } from '@/components/ui/Countdown'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
-import { MagneticButton } from '@/components/animations/MagneticButton'
 
 interface NextEventPreviewProps {
   event: Event | null
@@ -288,7 +287,6 @@ export function NextEventPreview({ event }: NextEventPreviewProps) {
 
                     <div className="flex flex-col gap-4 pt-6 sm:flex-row">
                       {event.rsvpLink && (
-                        <MagneticButton strength={0.15}>
                           <a
                             href={event.rsvpLink}
                             target="_blank"
@@ -318,7 +316,6 @@ export function NextEventPreview({ event }: NextEventPreviewProps) {
                               RSVP Now
                             </Button>
                           </a>
-                        </MagneticButton>
                       )}
                       <Link href="/events" className="inline-block">
                         <Button

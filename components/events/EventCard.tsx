@@ -3,7 +3,6 @@
 import { Event } from '@/lib/types'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { MagneticButton } from '@/components/animations/MagneticButton'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -128,16 +127,14 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
 
       {event.status === 'upcoming' && (
         <div className="mt-6 border-t border-gray-100 pt-6 dark:border-gray-800">
-          <MagneticButton strength={0.15}>
-            <Link href={event.rsvpLink} target="_blank" rel="noopener noreferrer" className="block">
-              <Button variant="primary" glowOnHover className="w-full">
-                <span>RSVP Now</span>
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Button>
-            </Link>
-          </MagneticButton>
+          <Link href={event.rsvpLink} target="_blank" rel="noopener noreferrer" className="block">
+            <Button variant="primary" glowOnHover className="w-full">
+              <span>RSVP Now</span>
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Button>
+          </Link>
         </div>
       )}
     </Card>

@@ -5,7 +5,6 @@ import { AnimatedText } from '@/components/animations/AnimatedText'
 import { CountUp } from '@/components/animations/CountUp'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { MagneticButton } from '@/components/animations/MagneticButton'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -192,27 +191,23 @@ export default async function AboutUsPage() {
                   you!
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <MagneticButton strength={0.2}>
-                    <a
-                      href={siteConfig.social.meetup}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button variant="secondary" size="lg" glowOnHover>
-                        Join on Meetup
-                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </Button>
-                    </a>
-                  </MagneticButton>
-                  <MagneticButton strength={0.2}>
-                    <Link href="/contact">
-                      <Button variant="outline" size="lg" className="border-js-black text-js-black hover:bg-js-black hover:text-white">
-                        Contact Us
-                      </Button>
-                    </Link>
-                  </MagneticButton>
+                  <a
+                    href={siteConfig.social.meetup}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="secondary" size="lg" glowOnHover>
+                      Join on Meetup
+                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </Button>
+                  </a>
+                  <Link href="/contact">
+                    <Button variant="outline" size="lg" className="border-js-black text-js-black hover:bg-js-black hover:text-white">
+                      Contact Us
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

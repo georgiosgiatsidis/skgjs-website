@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { AnimatedText } from '@/components/animations/AnimatedText'
 import { CountUp } from '@/components/animations/CountUp'
-import { MagneticButton } from '@/components/animations/MagneticButton'
 import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
 
 const stats = [
@@ -153,38 +152,33 @@ export function Hero() {
             className="flex flex-col items-center justify-center gap-4 sm:flex-row"
             variants={itemVariants}
           >
-            <MagneticButton strength={0.2}>
-              <Link href="/events">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  magnetic
-                  glowOnHover
-                  className="w-full px-10 sm:w-auto"
-                >
-                  Explore Events
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </Button>
-              </Link>
-            </MagneticButton>
-            <MagneticButton strength={0.2}>
-              <Link href="/community">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow sm:w-auto"
-                >
-                  Meet the Community
-                </Button>
-              </Link>
-            </MagneticButton>
+            <Link href="/events">
+              <Button
+                variant="primary"
+                size="lg"
+                glowOnHover
+                className="w-full px-10 sm:w-auto"
+              >
+                Explore Events
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </Button>
+            </Link>
+            <Link href="/community">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow sm:w-auto"
+              >
+                Meet the Community
+              </Button>
+            </Link>
           </motion.div>
 
           <motion.div

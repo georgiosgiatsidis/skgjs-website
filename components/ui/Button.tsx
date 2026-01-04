@@ -10,7 +10,6 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, Conf
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
-  magnetic?: boolean
   ripple?: boolean
   glowOnHover?: boolean
 }
@@ -19,7 +18,6 @@ export function Button({
   children,
   variant = 'primary',
   size = 'md',
-  magnetic = false,
   ripple = true,
   glowOnHover = false,
   className,
@@ -30,8 +28,6 @@ export function Button({
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!magnetic || !buttonRef.current) return
-
     const rect = buttonRef.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
@@ -78,7 +74,8 @@ export function Button({
       className={clsx(
         'relative overflow-hidden rounded-lg font-semibold transition-all duration-300 ease-out-expo focus:outline-none focus:ring-2 focus:ring-offset-2',
         {
-          'bg-js-yellow text-js-black hover:bg-yellow-400 focus:ring-js-yellow': variant === 'primary',
+          'bg-js-yellow text-js-black hover:bg-yellow-400 focus:ring-js-yellow':
+            variant === 'primary',
           'bg-gray-800 text-white hover:bg-gray-700 focus:ring-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600':
             variant === 'secondary',
           'border-2 border-js-black bg-transparent text-js-black hover:bg-js-yellow dark:border-js-yellow dark:text-js-yellow dark:hover:bg-js-yellow dark:hover:text-js-black':

@@ -5,7 +5,6 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GoogleAnalytics } from '@/components/ui/GoogleAnalytics'
 import { SmoothScroll } from '@/components/animations/SmoothScroll'
-import { CursorFollower } from '@/components/animations/CursorFollower'
 import { getSiteConfig } from '@/lib/content'
 import '@/styles/globals.css'
 
@@ -57,7 +56,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const siteConfig = await getSiteConfig()
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${ubuntu.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${ubuntu.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
@@ -65,7 +68,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SmoothScroll>
-            <CursorFollower />
             <Header />
             <main id="main-content" className="flex-1">
               {children}
