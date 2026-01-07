@@ -14,7 +14,8 @@ speakers:
       twitter: "sofiadev"
       linkedin: "sofia-georgiou"
 tags: ["next.js", "react", "workshop"]
-capacity: 45
+capacity: 45,
+image: "/images/events/next-app-router-workshop-2025-10.jpg"
 ---
 
 An intensive workshop on building modern web applications with Next.js 14 and the new App Router.

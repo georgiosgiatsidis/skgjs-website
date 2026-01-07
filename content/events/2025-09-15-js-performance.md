@@ -13,7 +13,8 @@ speakers:
       github: "georgenikolaou"
       linkedin: "george-nikolaou"
 tags: ["javascript", "performance", "advanced"]
-capacity: 50
+capacity: 50,
+image: "/images/events/js-performance-optimization-2025-09.jpg"
 ---
 
 Deep dive into JavaScript performance optimization techniques for modern web applications.

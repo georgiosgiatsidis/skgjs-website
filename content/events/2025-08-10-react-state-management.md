@@ -13,7 +13,8 @@ speakers:
       github: "elenachristou"
       twitter: "elenac"
 tags: ["react", "state-management", "intermediate"]
-capacity: 40
+capacity: 40,
+image: "/images/events/modern-state-management-in-react-2025-08.jpg"
 ---
 
 Explore modern approaches to state management in React applications.
