@@ -153,12 +153,7 @@ export function Hero() {
             variants={itemVariants}
           >
             <Link href="/events">
-              <Button
-                variant="primary"
-                size="lg"
-                glowOnHover
-                className="w-full px-10 sm:w-auto"
-              >
+              <Button variant="primary" size="lg" glowOnHover className="w-full px-10 sm:w-auto">
                 Explore Events
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -213,9 +208,10 @@ export function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
+        data-testid="scroll-to-explore-container"
+        className="absolute bottom-8 left-1/2 z-20"
+        initial={{ opacity: 0, y: -10, x: '-50%' }}
+        animate={{ opacity: 1, y: 0, x: '-50%' }}
         transition={{ delay: 2, duration: 0.6 }}
       >
         <motion.div
@@ -226,7 +222,12 @@ export function Hero() {
           <span className="text-xs font-medium uppercase tracking-widest text-gray-400">
             Scroll to explore
           </span>
-          <svg className="h-6 w-6 text-js-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            className="h-6 w-6 text-js-yellow"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
