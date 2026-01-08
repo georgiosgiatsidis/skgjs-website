@@ -204,7 +204,7 @@ export default async function AboutUsPage() {
                     </Button>
                   </a>
                   <Link href="/contact">
-                    <Button variant="outline" size="lg" className="border-js-black text-js-black hover:bg-js-black hover:text-white">
+                    <Button variant="secondary" size="lg">
                       Contact Us
                     </Button>
                   </Link>
