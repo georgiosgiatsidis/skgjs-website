@@ -4,6 +4,8 @@ import { ThemeProvider } from 'next-themes'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GoogleAnalytics } from '@/components/ui/GoogleAnalytics'
+import { SmoothScroll } from '@/components/animations/SmoothScroll'
+import { getSiteConfig } from '@/lib/content'
 import '@/styles/globals.css'
 
 const ubuntu = Ubuntu({
@@ -50,20 +52,28 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const siteConfig = await getSiteConfig()
+
   return (
-    <html lang="en" suppressHydrationWarning className={`${ubuntu.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${ubuntu.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
+          <SmoothScroll>
+            <Header />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer social={siteConfig.social} email={siteConfig.contact.email} />
+          </SmoothScroll>
         </ThemeProvider>
       </body>
     </html>

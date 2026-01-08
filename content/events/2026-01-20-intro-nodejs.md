@@ -13,7 +13,8 @@ speakers:
       github: "dimitriskostopoulos"
       twitter: "dimitrisk"
 tags: ["node.js", "backend", "beginner"]
-capacity: 60
+capacity: 60,
+image: "/images/events/introduction-to-node-2026-01.jpg"
 ---
 
 A beginner-friendly introduction to Node.js and server-side JavaScript.

@@ -13,7 +13,8 @@ speakers:
       github: "mariapapadopoulos"
       linkedin: "maria-papadopoulos"
 tags: ["typescript", "best-practices", "advanced"]
-capacity: 40
+capacity: 40,
+image: "/images/events/typescript-and-best-practices-2025-12.jpg"
 ---
 
 Master TypeScript with proven patterns and practices from real-world projects.

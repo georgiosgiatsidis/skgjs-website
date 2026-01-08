@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
 import { getAllEvents } from '@/lib/content'
 
+export const dynamic = 'force-static'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://skgjs.gr'
   const events = await getAllEvents()
