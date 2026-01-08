@@ -2,7 +2,6 @@
 
 import { Event } from '@/lib/types'
 import { Card } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -19,7 +18,8 @@ export function EventCard({ event }: EventCardProps) {
   const weekday = eventDate.toLocaleDateString('en-US', { weekday: 'long' })
 
   return (
-    <Card hover glowOnHover className="group flex h-full flex-col overflow-hidden">
+    <Link href={`/events/${event.slug}`} className="block h-full">
+      <Card hover glowOnHover className="group flex h-full flex-col overflow-hidden">
       <div className="relative">
         {event.image && (
           <div className="relative -mx-6 -mt-6 mb-6 h-48 overflow-hidden">
@@ -160,23 +160,20 @@ export function EventCard({ event }: EventCardProps) {
         )}
       </div>
 
-      {event.status === 'upcoming' && (
-        <div className="mt-6 border-t border-gray-100 pt-6 dark:border-gray-800">
-          <Link href={event.rsvpLink} target="_blank" rel="noopener noreferrer" className="block">
-            <Button variant="primary" ripple={false} className="w-full">
-              <span>RSVP Now</span>
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </Button>
-          </Link>
-        </div>
-      )}
-    </Card>
+      <div className="mt-6 border-t border-gray-100 pt-6 dark:border-gray-800">
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-js-yellow transition-colors group-hover:underline">
+          View details
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </span>
+      </div>
+      </Card>
+    </Link>
   )
 }
