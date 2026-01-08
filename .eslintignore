@@ -1,8 +1,0 @@
-# .eslintignore for Next.js/TypeScript
-node_modules/
-dist/
-build/
-coverage/
-*.min.js
-.next/
-out/
