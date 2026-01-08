@@ -86,12 +86,11 @@ export function Card({
       className={clsx(
         'rounded-xl bg-white p-6 shadow-md transition-all duration-300 dark:bg-gray-800',
         {
-          'hover:-translate-y-1 hover:shadow-xl': hover,
+          'hover:shadow-xl': hover,
           'hover:shadow-lg hover:shadow-js-yellow/20': glowOnHover,
         },
         className
       )}
-      whileHover={hover ? { y: -4 } : undefined}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
     >
       {children}
