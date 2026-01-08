@@ -71,7 +71,14 @@ export function EventList({ events, emptyMessage = 'No events found.' }: EventLi
     >
       <AnimatePresence mode="popLayout">
         {events.map((event, index) => (
-          <motion.div key={event.slug} variants={itemVariants} layout>
+          <motion.div
+            key={event.slug}
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            layout
+          >
             <EventCard event={event} index={index} />
           </motion.div>
         ))}
