@@ -11,7 +11,7 @@ interface EventCardProps {
   index?: number
 }
 
-export function EventCard({ event, index = 0 }: EventCardProps) {
+export function EventCard({ event }: EventCardProps) {
   const eventDate = new Date(event.date)
   const day = eventDate.getDate()
   const month = eventDate.toLocaleDateString('en-US', { month: 'short' })
@@ -19,7 +19,7 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
   const weekday = eventDate.toLocaleDateString('en-US', { weekday: 'long' })
 
   return (
-    <Card hover tilt glowOnHover className="group flex h-full flex-col overflow-hidden">
+    <Card hover glowOnHover className="group flex h-full flex-col overflow-hidden">
       <div className="relative">
         {event.image && (
           <div className="relative -mx-6 -mt-6 mb-6 h-48 overflow-hidden">
@@ -62,15 +62,40 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
 
         <div className="mb-4 space-y-2">
           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-            <svg className="h-4 w-4 shrink-0 text-js-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="h-4 w-4 shrink-0 text-js-yellow"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <span>{event.time}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-            <svg className="h-4 w-4 shrink-0 text-js-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            <svg
+              className="h-4 w-4 shrink-0 text-js-yellow"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
             </svg>
             <span className="truncate">{event.location}</span>
           </div>
@@ -79,8 +104,18 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
         {event.speakers && event.speakers.length > 0 && (
           <div className="mb-4">
             <div className="mb-2 flex items-center gap-2">
-              <svg className="h-4 w-4 text-js-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              <svg
+                className="h-4 w-4 text-js-yellow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
               </svg>
               <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Speaker{event.speakers.length > 1 ? 's' : ''}
@@ -128,10 +163,15 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
       {event.status === 'upcoming' && (
         <div className="mt-6 border-t border-gray-100 pt-6 dark:border-gray-800">
           <Link href={event.rsvpLink} target="_blank" rel="noopener noreferrer" className="block">
-            <Button variant="primary" glowOnHover className="w-full">
+            <Button variant="primary" ripple={false} className="w-full">
               <span>RSVP Now</span>
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
               </svg>
             </Button>
           </Link>
