@@ -1,4 +1,5 @@
 ---
+index: 4
 title: 'SKG JS Meetup #4: Youtube Chrome Extension & Playwright Coverage'
 date: '2025-06-19'
 time: '19:00'
@@ -19,6 +20,7 @@ image: 'https://secure.meetupstatic.com/photos/event/b/d/0/d/highres_528348397.j
 Speaker: Elias Papavasileiou, Senior Frontend Tooling Engineer @ Prezi
 
 The behind-the-scenes developer story of Youtube Share Clip:
+
 - Building an open source extension for Chrome
 - Technologies used and why
 - Promotion and feedback strategies

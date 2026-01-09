@@ -1,4 +1,5 @@
 ---
+index: 6
 title: 'SKG JS Meetup #6: AI Supercharged Angular & Rethinking Reactivity'
 date: '2025-12-16'
 time: '19:00'
@@ -19,6 +20,7 @@ image: 'https://secure.meetupstatic.com/photos/event/1/6/e/3/highres_531485859.j
 Speaker: Konstantinos Ziazios, Microsoft
 
 AI is rapidly transforming how developers build modern applications. Learn how Angular developers can develop faster and more efficiently using AI:
+
 - Angular-focused LLM prompts
 - Setting up an AI-powered IDE workflow
 - Design patterns and best practices for AI-assisted development
@@ -27,10 +29,12 @@ AI is rapidly transforming how developers build modern applications. Learn how A
 Speaker: Savvas Papageorgiadis, WeAre8
 
 Reactivity is central to every modern UI framework, but how that reactivity is achieved differs greatly. Deep dive into two leading paradigms:
+
 - Virtual DOM diffing (React)
 - Fine-grained signals (Solid.js)
 
 Topics covered:
+
 - How each model handles state and updates
 - Performance trade-offs
 - How the React Compiler optimizes React's model

@@ -1,4 +1,5 @@
 ---
+index: 1
 title: 'SKG JS Meetup #1: Kickoff Meetup'
 date: '2024-12-05'
 time: '19:00'

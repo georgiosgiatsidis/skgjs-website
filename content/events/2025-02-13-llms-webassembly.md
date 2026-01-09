@@ -1,4 +1,5 @@
 ---
+index: 2
 title: 'SKG JS Meetup #2: LLMs in Javascript & Web Assembly'
 date: '2025-02-13'
 time: '19:00'

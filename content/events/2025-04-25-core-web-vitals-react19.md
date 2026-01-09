@@ -1,4 +1,5 @@
 ---
+index: 3
 title: 'SKG JS Meetup #3: Beyond Core Web Vitals & New Features in React 19'
 date: '2025-04-25'
 time: '19:00'
