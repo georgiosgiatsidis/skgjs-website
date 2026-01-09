@@ -35,7 +35,7 @@ export function EventsClient({ events }: EventsClientProps) {
   return (
     <>
       <EventFilter activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-      <EventList events={displayedEvents} emptyMessage={emptyMessage} />
+      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} />
     </>
   )
 }
