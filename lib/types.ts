@@ -78,6 +78,7 @@ export interface SiteConfig {
   analytics?: {
     googleAnalyticsId?: string
   }
+  speakerFormUrl?: string
   aboutMarkdown: string
 }
 

@@ -8,9 +8,10 @@ import { isUpcomingEvent } from '@/lib/event-utils'
 
 interface EventsClientProps {
   events: Event[]
+  speakerFormUrl?: string
 }
 
-export function EventsClient({ events }: EventsClientProps) {
+export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
   const [activeFilter, setActiveFilter] = useState<'upcoming' | 'past'>('upcoming')
 
   // Filter and sort events client-side based on current date
@@ -35,7 +36,7 @@ export function EventsClient({ events }: EventsClientProps) {
   return (
     <>
       <EventFilter activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} />
+      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} speakerFormUrl={speakerFormUrl} />
     </>
   )
 }

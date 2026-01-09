@@ -1,11 +1,12 @@
 import { Container } from '@/components/layout/Container'
 import { EventsClient } from '@/components/events/EventsClient'
-import { getAllEvents } from '@/lib/content'
+import { getAllEvents, getSiteConfig } from '@/lib/content'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { AnimatedText } from '@/components/animations/AnimatedText'
 
 export default function EventsPage() {
   const allEvents = getAllEvents()
+  const siteConfig = getSiteConfig()
 
   return (
     <>
@@ -45,7 +46,7 @@ export default function EventsPage() {
 
       <section className="relative -mt-8 md:-mt-12">
         <Container>
-          <EventsClient events={allEvents} />
+          <EventsClient events={allEvents} speakerFormUrl={siteConfig.speakerFormUrl} />
         </Container>
       </section>
     </>
