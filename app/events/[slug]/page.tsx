@@ -7,6 +7,8 @@ import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { getAllEvents, getEventBySlug } from '@/lib/content'
 import { EventStatusBadge } from '@/components/events/EventStatusBadge'
 import { EventRsvpButton } from '@/components/events/EventRsvpButton'
+import { EventPhotoGallery } from '@/components/events/EventPhotoGallery'
+import { listEventPhotos } from '@/lib/b2'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -44,6 +46,9 @@ export default async function EventPage({ params }: EventPageProps) {
   if (!event) {
     notFound()
   }
+
+  // Fetch photos from B2 for this event
+  const photos = await listEventPhotos(event.index)
 
   const eventDate = new Date(event.date)
   const formattedDate = eventDate.toLocaleDateString('en-US', {
@@ -392,6 +397,16 @@ export default async function EventPage({ params }: EventPageProps) {
           </div>
         </Container>
       </section>
+
+      {photos.length > 0 && (
+        <section className="py-16">
+          <Container>
+            <ScrollReveal>
+              <EventPhotoGallery photos={photos} eventTitle={event.title} />
+            </ScrollReveal>
+          </Container>
+        </section>
+      )}
 
       <section className="py-16">
         <Container>

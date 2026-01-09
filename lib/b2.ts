@@ -77,3 +77,59 @@ export function getB2BucketConfig() {
 
   return { bucketId, bucketName }
 }
+
+// Supported image extensions for photo gallery
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+
+function isImageFile(fileName: string): boolean {
+  const ext = fileName.toLowerCase().slice(fileName.lastIndexOf('.'))
+  return IMAGE_EXTENSIONS.includes(ext)
+}
+
+export interface EventPhoto {
+  url: string
+  fileName: string
+}
+
+/**
+ * Lists all photos for a specific event from B2 bucket.
+ * Photos are expected at: events/<eventIndex>/photos/
+ * Returns public URLs for a public bucket.
+ */
+export async function listEventPhotos(eventIndex: number): Promise<EventPhoto[]> {
+  try {
+    const b2Client = getB2Client()
+    const client = await b2Client.getAuthorizedClient()
+    const { bucketId, bucketName } = getB2BucketConfig()
+
+    const prefix = `events/${eventIndex}/photos/`
+
+    const response = await client.listFileNames({
+      bucketId,
+      prefix,
+      maxFileCount: 100,
+    })
+
+    const files = response.data.files || []
+
+    // Get download URL base from the authorized client
+    // Falls back to standard B2 URL format if not available
+    const downloadUrl =
+      (client as unknown as { downloadUrl?: string }).downloadUrl ||
+      'https://f003.backblazeb2.com'
+
+    // Filter for image files and build public URLs
+    const photos: EventPhoto[] = files
+      .filter((file: { fileName: string }) => isImageFile(file.fileName))
+      .map((file: { fileName: string }) => ({
+        fileName: file.fileName.split('/').pop() || file.fileName,
+        url: `${downloadUrl}/file/${bucketName}/${file.fileName}`,
+      }))
+
+    return photos
+  } catch (error) {
+    // Log error but return empty array to gracefully handle missing folders
+    console.error(`Failed to list photos for event ${eventIndex}:`, error)
+    return []
+  }
+}

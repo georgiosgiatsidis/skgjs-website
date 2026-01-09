@@ -11,6 +11,7 @@ export interface Speaker {
 
 export interface Event {
   slug: string
+  index: number
   title: string
   date: string
   time: string
