@@ -12,7 +12,7 @@ export default async function HomePage() {
   return (
     <div>
       <Hero />
-      <NextEventPreview event={nextEvent} />
+      <NextEventPreview event={nextEvent} speakerFormUrl={siteConfig.speakerFormUrl} />
       <AboutSection content={siteConfig.aboutMarkdown} />
       <PartnersSection />
       <CTASection />

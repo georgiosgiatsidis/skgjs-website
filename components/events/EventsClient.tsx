@@ -1,17 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { EventFilter } from './EventFilter'
 import { EventList } from './EventList'
 import type { Event } from '@/lib/types'
+import { isUpcomingEvent } from '@/lib/event-utils'
 
 interface EventsClientProps {
-  upcomingEvents: Event[]
-  pastEvents: Event[]
+  events: Event[]
+  speakerFormUrl?: string
 }
 
-export function EventsClient({ upcomingEvents, pastEvents }: EventsClientProps) {
+export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
   const [activeFilter, setActiveFilter] = useState<'upcoming' | 'past'>('upcoming')
+
+  // Filter and sort events client-side based on current date
+  const { upcomingEvents, pastEvents } = useMemo(() => {
+    const upcoming = events
+      .filter((event) => isUpcomingEvent(event.date))
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+    const past = events
+      .filter((event) => !isUpcomingEvent(event.date))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+    return { upcomingEvents: upcoming, pastEvents: past }
+  }, [events])
 
   const displayedEvents = activeFilter === 'upcoming' ? upcomingEvents : pastEvents
   const emptyMessage =
@@ -22,7 +36,7 @@ export function EventsClient({ upcomingEvents, pastEvents }: EventsClientProps) 
   return (
     <>
       <EventFilter activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-      <EventList events={displayedEvents} emptyMessage={emptyMessage} />
+      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} speakerFormUrl={speakerFormUrl} />
     </>
   )
 }

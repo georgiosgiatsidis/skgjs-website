@@ -9,6 +9,7 @@ social:
   linkedin: "https://www.linkedin.com/company/skgjs"
 contact:
   email: "organizers@skgjs.gr"
+speakerFormUrl: "https://forms.gle/your-speaker-form-id"
 ---
 
 ## About SKG JS

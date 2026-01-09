@@ -5,6 +5,25 @@ import type { Event, CommunityMember, Sponsor, SiteConfig } from './types'
 
 const contentDir = path.join(process.cwd(), 'content')
 
+const TIMEZONE = 'Europe/Athens'
+
+/**
+ * Server-side check if an event is upcoming based on its date.
+ * Uses Europe/Athens timezone for consistent behavior (Thessaloniki meetup).
+ * An event is considered "upcoming" if the event date is today or in the future.
+ */
+function isUpcomingEventServer(eventDate: string): boolean {
+  const now = new Date()
+  const athensFormatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: TIMEZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  })
+  const todayInAthens = athensFormatter.format(now) // Format: YYYY-MM-DD
+  return eventDate >= todayInAthens
+}
+
 export function getAllEvents(): Event[] {
   const eventsDir = path.join(contentDir, 'events')
 
@@ -31,18 +50,22 @@ export function getAllEvents(): Event[] {
   return events
 }
 
-export function getUpcomingEvents(): Event[] {
+/**
+ * Returns all events sorted by date ascending (earliest first).
+ * Note: Status filtering should be done client-side using isUpcomingEvent() from lib/event-utils.ts
+ */
+export function getEventsSortedAscending(): Event[] {
   const events = getAllEvents()
-  return events
-    .filter((event) => event.status === 'upcoming')
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  return events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 }
 
-export function getPastEvents(): Event[] {
+/**
+ * Returns all events sorted by date descending (most recent first).
+ * Note: Status filtering should be done client-side using isUpcomingEvent() from lib/event-utils.ts
+ */
+export function getEventsSortedDescending(): Event[] {
   const events = getAllEvents()
-  return events
-    .filter((event) => event.status === 'past')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return events.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 export function getEventBySlug(slug: string): Event | null {
@@ -144,13 +167,29 @@ export function getSiteConfig(): SiteConfig {
   } as SiteConfig
 }
 
+/**
+ * Returns the next upcoming event.
+ * Priority:
+ * 1. If site-config has nextEvent.slug set AND that event is upcoming, return it
+ * 2. Otherwise, return the soonest upcoming event
+ * 3. Returns null if no upcoming events exist
+ */
 export function getNextEvent(): Event | null {
   const config = getSiteConfig()
-  if (!config.nextEvent?.slug) {
-    // Return the next upcoming event if not specified
-    const upcomingEvents = getUpcomingEvents()
-    return upcomingEvents[0] || null
+
+  // Check if site-config has a pinned event
+  if (config.nextEvent?.slug) {
+    const pinnedEvent = getEventBySlug(config.nextEvent.slug)
+    // Only use pinned event if it exists and is upcoming
+    if (pinnedEvent && isUpcomingEventServer(pinnedEvent.date)) {
+      return pinnedEvent
+    }
   }
 
-  return getEventBySlug(config.nextEvent.slug)
+  // Get all events sorted by date ascending (earliest first)
+  const events = getEventsSortedAscending()
+
+  // Filter to only upcoming events and return the first (soonest)
+  const upcomingEvents = events.filter((event) => isUpcomingEventServer(event.date))
+  return upcomingEvents[0] || null
 }

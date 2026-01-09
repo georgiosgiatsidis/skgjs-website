@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeAll } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import {
   getAllEvents,
-  getUpcomingEvents,
-  getPastEvents,
+  getEventsSortedAscending,
+  getEventsSortedDescending,
   getNextEvent,
   getAllCommunityMembers,
-  getAllSponsors,
+  getAllPartners,
   getSiteConfig,
 } from '@/lib/content'
 
@@ -27,30 +27,23 @@ describe('Content Loading Utilities', () => {
       expect(event).toHaveProperty('date')
       expect(event).toHaveProperty('time')
       expect(event).toHaveProperty('location')
-      expect(event).toHaveProperty('status')
       expect(event).toHaveProperty('speakers')
       expect(event).toHaveProperty('markdown')
     })
 
-    it('should have valid status values', async () => {
+    it('should have valid date format (YYYY-MM-DD)', async () => {
       const events = await getAllEvents()
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/
       events.forEach((event) => {
-        expect(['upcoming', 'past']).toContain(event.status)
+        expect(event.date).toMatch(dateRegex)
       })
     })
   })
 
-  describe('getUpcomingEvents', () => {
-    it('should return only upcoming events', async () => {
-      const events = await getUpcomingEvents()
+  describe('getEventsSortedAscending', () => {
+    it('should return events sorted by date ascending', async () => {
+      const events = await getEventsSortedAscending()
       expect(Array.isArray(events)).toBe(true)
-      events.forEach((event) => {
-        expect(event.status).toBe('upcoming')
-      })
-    })
-
-    it('should sort upcoming events by date ascending', async () => {
-      const events = await getUpcomingEvents()
       if (events.length > 1) {
         for (let i = 0; i < events.length - 1; i++) {
           const date1 = new Date(events[i].date)
@@ -61,17 +54,10 @@ describe('Content Loading Utilities', () => {
     })
   })
 
-  describe('getPastEvents', () => {
-    it('should return only past events', async () => {
-      const events = await getPastEvents()
+  describe('getEventsSortedDescending', () => {
+    it('should return events sorted by date descending', async () => {
+      const events = await getEventsSortedDescending()
       expect(Array.isArray(events)).toBe(true)
-      events.forEach((event) => {
-        expect(event.status).toBe('past')
-      })
-    })
-
-    it('should sort past events by date descending', async () => {
-      const events = await getPastEvents()
       if (events.length > 1) {
         for (let i = 0; i < events.length - 1; i++) {
           const date1 = new Date(events[i].date)
@@ -83,11 +69,10 @@ describe('Content Loading Utilities', () => {
   })
 
   describe('getNextEvent', () => {
-    it('should return the next upcoming event or null', async () => {
+    it('should return an event or null', async () => {
       const nextEvent = await getNextEvent()
 
       if (nextEvent) {
-        expect(nextEvent.status).toBe('upcoming')
         expect(nextEvent).toHaveProperty('title')
         expect(nextEvent).toHaveProperty('date')
       } else {
@@ -95,12 +80,12 @@ describe('Content Loading Utilities', () => {
       }
     })
 
-    it('should return the earliest upcoming event', async () => {
+    it('should return the earliest event by date', async () => {
       const nextEvent = await getNextEvent()
-      const upcomingEvents = await getUpcomingEvents()
+      const sortedEvents = await getEventsSortedAscending()
 
-      if (upcomingEvents.length > 0) {
-        expect(nextEvent).toEqual(upcomingEvents[0])
+      if (sortedEvents.length > 0) {
+        expect(nextEvent).toEqual(sortedEvents[0])
       }
     })
   })
@@ -131,31 +116,31 @@ describe('Content Loading Utilities', () => {
     })
   })
 
-  describe('getAllSponsors', () => {
-    it('should load all sponsors', async () => {
-      const sponsors = await getAllSponsors()
-      expect(sponsors).toBeDefined()
-      expect(Array.isArray(sponsors)).toBe(true)
+  describe('getAllPartners', () => {
+    it('should load all partners', async () => {
+      const partners = await getAllPartners()
+      expect(partners).toBeDefined()
+      expect(Array.isArray(partners)).toBe(true)
     })
 
-    it('should filter active sponsors when requested', async () => {
-      const activeSponsors = await getAllSponsors(true)
-      activeSponsors.forEach((sponsor) => {
-        expect(sponsor.active).toBe(true)
+    it('should filter active partners when requested', async () => {
+      const activePartners = await getAllPartners(true)
+      activePartners.forEach((partner) => {
+        expect(partner.active).toBe(true)
       })
     })
 
-    it('should have required sponsor fields', async () => {
-      const sponsors = await getAllSponsors()
-      if (sponsors.length > 0) {
-        const sponsor = sponsors[0]
+    it('should have required partner fields', async () => {
+      const partners = await getAllPartners()
+      if (partners.length > 0) {
+        const partner = partners[0]
 
-        expect(sponsor).toHaveProperty('slug')
-        expect(sponsor).toHaveProperty('name')
-        expect(sponsor).toHaveProperty('logo')
-        expect(sponsor).toHaveProperty('website')
-        expect(sponsor).toHaveProperty('active')
-        expect(sponsor).toHaveProperty('description')
+        expect(partner).toHaveProperty('slug')
+        expect(partner).toHaveProperty('name')
+        expect(partner).toHaveProperty('logo')
+        expect(partner).toHaveProperty('website')
+        expect(partner).toHaveProperty('active')
+        expect(partner).toHaveProperty('description')
       }
     })
   })

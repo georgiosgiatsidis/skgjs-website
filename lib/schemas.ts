@@ -18,7 +18,6 @@ export const EventSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   time: z.string().regex(/^\d{2}:\d{2}(-\d{2}:\d{2})?$/),
   location: z.string().min(10),
-  status: z.enum(['upcoming', 'past']),
   rsvpLink: z.string().url().startsWith('https://'),
   speakers: z.array(SpeakerSchema).min(1),
   tags: z.array(z.string()).optional(),
