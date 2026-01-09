@@ -4,6 +4,7 @@ import { Event } from '@/lib/types'
 import { Card } from '@/components/ui/Card'
 import Link from 'next/link'
 import Image from 'next/image'
+import { isUpcomingEvent } from '@/lib/event-utils'
 
 interface EventCardProps {
   event: Event
@@ -16,6 +17,7 @@ export function EventCard({ event }: EventCardProps) {
   const month = eventDate.toLocaleDateString('en-US', { month: 'short' })
   const year = eventDate.getFullYear()
   const weekday = eventDate.toLocaleDateString('en-US', { weekday: 'long' })
+  const isUpcoming = isUpcomingEvent(event.date)
 
   return (
     <Link href={`/events/${event.slug}`} className="block h-full">
@@ -51,12 +53,12 @@ export function EventCard({ event }: EventCardProps) {
           </div>
           <span
             className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${
-              event.status === 'upcoming'
+              isUpcoming
                 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                 : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
             }`}
           >
-            {event.status === 'upcoming' ? 'Upcoming' : 'Past'}
+            {isUpcoming ? 'Upcoming' : 'Past'}
           </span>
         </div>
 

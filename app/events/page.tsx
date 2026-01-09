@@ -1,12 +1,11 @@
 import { Container } from '@/components/layout/Container'
 import { EventsClient } from '@/components/events/EventsClient'
-import { getUpcomingEvents, getPastEvents } from '@/lib/content'
+import { getAllEvents } from '@/lib/content'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { AnimatedText } from '@/components/animations/AnimatedText'
 
 export default function EventsPage() {
-  const upcomingEvents = getUpcomingEvents()
-  const pastEvents = getPastEvents()
+  const allEvents = getAllEvents()
 
   return (
     <>
@@ -46,7 +45,7 @@ export default function EventsPage() {
 
       <section className="relative -mt-8 md:-mt-12">
         <Container>
-          <EventsClient upcomingEvents={upcomingEvents} pastEvents={pastEvents} />
+          <EventsClient events={allEvents} />
         </Container>
       </section>
     </>

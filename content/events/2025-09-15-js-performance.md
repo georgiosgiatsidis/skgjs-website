@@ -3,7 +3,6 @@ title: "JavaScript Performance Optimization"
 date: "2025-09-15"
 time: "18:30-20:30"
 location: "Innovation Hub, 456 Innovation Ave, Thessaloniki"
-status: "past"
 rsvpLink: "https://www.meetup.com/skgjs/events/js-performance/"
 speakers:
   - name: "George Nikolaou"

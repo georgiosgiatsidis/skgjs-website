@@ -2,10 +2,11 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Container } from '@/components/layout/Container'
-import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { getAllEvents, getEventBySlug } from '@/lib/content'
+import { EventStatusBadge } from '@/components/events/EventStatusBadge'
+import { EventRsvpButton } from '@/components/events/EventRsvpButton'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -82,15 +83,7 @@ export default async function EventPage({ params }: EventPageProps) {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl">
               <ScrollReveal delay={0.1}>
-                <span
-                  className={`mb-4 inline-block rounded-full px-4 py-2 text-sm font-semibold ${
-                    event.status === 'upcoming'
-                      ? 'bg-green-500/20 text-green-400'
-                      : 'bg-gray-500/20 text-gray-400'
-                  }`}
-                >
-                  {event.status === 'upcoming' ? 'Upcoming Event' : 'Past Event'}
-                </span>
+                <EventStatusBadge eventDate={event.date} variant="header" />
               </ScrollReveal>
 
               <ScrollReveal delay={0.2}>
@@ -159,21 +152,9 @@ export default async function EventPage({ params }: EventPageProps) {
               </ScrollReveal>
             </div>
 
-            {event.status === 'upcoming' && event.rsvpLink && (
+            {event.rsvpLink && (
               <ScrollReveal delay={0.4}>
-                <a href={event.rsvpLink} target="_blank" rel="noopener noreferrer">
-                  <Button variant="primary" size="lg" className="whitespace-nowrap">
-                    RSVP Now
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </Button>
-                </a>
+                <EventRsvpButton eventDate={event.date} rsvpLink={event.rsvpLink} variant="primary" />
               </ScrollReveal>
             )}
           </div>
@@ -402,33 +383,8 @@ export default async function EventPage({ params }: EventPageProps) {
                     )}
                   </div>
 
-                  {event.status === 'upcoming' && event.rsvpLink && (
-                    <a
-                      href={event.rsvpLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 block"
-                    >
-                      <Button
-                        variant="secondary"
-                        className="w-full bg-js-black text-white hover:bg-js-black/90"
-                      >
-                        RSVP on Meetup
-                        <svg
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
-                        </svg>
-                      </Button>
-                    </a>
+                  {event.rsvpLink && (
+                    <EventRsvpButton eventDate={event.date} rsvpLink={event.rsvpLink} variant="sidebar" />
                   )}
                 </Card>
               </ScrollReveal>

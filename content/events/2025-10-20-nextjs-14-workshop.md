@@ -3,7 +3,6 @@ title: "Next.js 14 App Router Workshop"
 date: "2025-10-20"
 time: "18:30-21:00"
 location: "Tech Hub Thessaloniki, 123 Main St, Thessaloniki"
-status: "past"
 rsvpLink: "https://www.meetup.com/skgjs/events/nextjs-14-workshop/"
 speakers:
   - name: "Sofia Georgiou"

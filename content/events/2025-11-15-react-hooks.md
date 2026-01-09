@@ -3,7 +3,6 @@ title: "React Hooks Deep Dive"
 date: "2025-11-15"
 time: "18:30-21:00"
 location: "Tech Hub Thessaloniki, 123 Main St, Thessaloniki"
-status: "upcoming"
 rsvpLink: "https://www.meetup.com/skgjs/events/react-hooks/"
 speakers:
   - name: "Alex Johnson"

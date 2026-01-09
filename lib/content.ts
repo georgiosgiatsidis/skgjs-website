@@ -31,18 +31,22 @@ export function getAllEvents(): Event[] {
   return events
 }
 
-export function getUpcomingEvents(): Event[] {
+/**
+ * Returns all events sorted by date ascending (earliest first).
+ * Note: Status filtering should be done client-side using isUpcomingEvent() from lib/event-utils.ts
+ */
+export function getEventsSortedAscending(): Event[] {
   const events = getAllEvents()
-  return events
-    .filter((event) => event.status === 'upcoming')
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  return events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 }
 
-export function getPastEvents(): Event[] {
+/**
+ * Returns all events sorted by date descending (most recent first).
+ * Note: Status filtering should be done client-side using isUpcomingEvent() from lib/event-utils.ts
+ */
+export function getEventsSortedDescending(): Event[] {
   const events = getAllEvents()
-  return events
-    .filter((event) => event.status === 'past')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return events.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 export function getEventBySlug(slug: string): Event | null {
@@ -144,12 +148,16 @@ export function getSiteConfig(): SiteConfig {
   } as SiteConfig
 }
 
+/**
+ * Returns the next event based on site config or the first event chronologically.
+ * Note: Client-side code should verify the event is still upcoming using isUpcomingEvent()
+ */
 export function getNextEvent(): Event | null {
   const config = getSiteConfig()
   if (!config.nextEvent?.slug) {
-    // Return the next upcoming event if not specified
-    const upcomingEvents = getUpcomingEvents()
-    return upcomingEvents[0] || null
+    // Return the first event by date (client will determine if it's upcoming)
+    const events = getEventsSortedAscending()
+    return events[0] || null
   }
 
   return getEventBySlug(config.nextEvent.slug)

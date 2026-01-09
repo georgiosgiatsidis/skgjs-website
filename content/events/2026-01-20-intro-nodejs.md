@@ -3,7 +3,6 @@ title: "Introduction to Node.js"
 date: "2026-01-20"
 time: "18:30-21:00"
 location: "Digital Labs, 789 Tech Street, Thessaloniki"
-status: "upcoming"
 rsvpLink: "https://www.meetup.com/skgjs/events/intro-nodejs/"
 speakers:
   - name: "Dimitris Kostopoulos"
