@@ -30,7 +30,7 @@ export default function EventsPage() {
               type="chars"
               animation="slide"
               stagger={0.05}
-              className="mb-6 text-5xl font-black text-white md:text-6xl lg:text-7xl"
+              className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl"
               as="h1"
             />
 

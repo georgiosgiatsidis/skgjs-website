@@ -10,6 +10,37 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { ScrollProgress } from '@/components/animations/ScrollProgress'
 import { ROUTES, SITE_SHORT_NAME } from '@/lib/constants'
 
+const menuVariants = {
+  closed: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      when: 'afterChildren',
+    },
+  },
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      when: 'beforeChildren',
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  closed: {
+    opacity: 0,
+    y: 20,
+    transition: { duration: 0.2 },
+  },
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const },
+  },
+}
+
 const menuItems = [
   {
     label: 'Home',
@@ -42,37 +73,6 @@ const menuItems = [
     showInMobile: true,
   },
 ]
-
-const menuVariants = {
-  closed: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-      when: 'afterChildren',
-    },
-  },
-  open: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      when: 'beforeChildren',
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  closed: {
-    opacity: 0,
-    y: 20,
-    transition: { duration: 0.2 },
-  },
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-}
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
