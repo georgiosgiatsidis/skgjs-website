@@ -5,37 +5,23 @@ date: '2025-12-16'
 time: '19:00'
 location: 'OKThess, 2 Komotinis Street, 54655, Thessaloniki'
 rsvpLink: 'https://www.meetup.com/skg-js/events/312165431/'
-speakers:
-  - name: 'Konstantinos Ziazios'
-    social:
-      linkedin: 'https://gr.linkedin.com/in/ziaziosk'
-  - name: 'Savvas Papageorgiadis'
-    social:
-      linkedin: 'https://gr.linkedin.com/in/papsavas'
+talks:
+  - title: 'Angular: Build with AI'
+    description: 'Learn how Angular developers can develop faster and more efficiently using AI: Angular-focused LLM prompts, AI-powered IDE workflow, and best practices for AI-assisted development.'
+    speaker:
+      - name: 'Konstantinos Ziazios'
+        social:
+          linkedin: 'https://gr.linkedin.com/in/ziaziosk'
+  - title: 'Virtual DOM vs Signals: Two Roads to Reactivity'
+    description: 'Deep dive into two leading paradigms: Virtual DOM diffing (React) and fine-grained signals (Solid.js). Performance trade-offs and how the React Compiler optimizes React.'
+    speaker:
+      - name: 'Savvas Papageorgiadis'
+        social:
+          linkedin: 'https://gr.linkedin.com/in/papsavas'
 tags: ['angular', 'ai', 'reactivity', 'signals', 'virtual-dom']
 image: 'https://secure.meetupstatic.com/photos/event/1/6/e/3/highres_531485859.jpeg'
 ---
 
-**Talk 1: Angular: Build with AI**
-Speaker: Konstantinos Ziazios, Microsoft
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-AI is rapidly transforming how developers build modern applications. Learn how Angular developers can develop faster and more efficiently using AI:
-
-- Angular-focused LLM prompts
-- Setting up an AI-powered IDE workflow
-- Design patterns and best practices for AI-assisted development
-
-**Talk 2: Virtual DOM vs Signals: Two Roads to Reactivity**
-Speaker: Savvas Papageorgiadis, WeAre8
-
-Reactivity is central to every modern UI framework, but how that reactivity is achieved differs greatly. Deep dive into two leading paradigms:
-
-- Virtual DOM diffing (React)
-- Fine-grained signals (Solid.js)
-
-Topics covered:
-
-- How each model handles state and updates
-- Performance trade-offs
-- How the React Compiler optimizes React's model
-- Why mixing these paradigms introduces complexity
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

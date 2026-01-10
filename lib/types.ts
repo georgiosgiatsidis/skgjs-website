@@ -9,6 +9,13 @@ export interface Speaker {
   }
 }
 
+export interface Talk {
+  title: string
+  description?: string
+  presentation?: string
+  speaker: Speaker[]
+}
+
 export interface Event {
   slug: string
   index: number
@@ -18,6 +25,7 @@ export interface Event {
   location: string
   rsvpLink: string
   speakers: Speaker[]
+  talks?: Talk[]
   tags?: string[]
   capacity?: number
   image?: string

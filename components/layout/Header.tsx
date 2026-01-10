@@ -4,7 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
 import { Container } from './Container'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { ScrollProgress } from '@/components/animations/ScrollProgress'
@@ -43,35 +44,103 @@ const menuItems = [
   },
 ]
 
-const menuVariants = {
-  closed: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-      when: 'afterChildren',
-    },
-  },
-  open: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      when: 'beforeChildren',
-      staggerChildren: 0.1,
-    },
-  },
-}
+function MobileMenu({
+  isOpen,
+  onClose,
+  isActive,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  isActive: (href: string) => boolean
+}) {
+  const [mounted, setMounted] = useState(false)
 
-const itemVariants = {
-  closed: {
-    opacity: 0,
-    y: 20,
-    transition: { duration: 0.2 },
-  },
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted || !isOpen) return null
+
+  return createPortal(
+    <div
+      id="mobile-menu"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#1A1A1A',
+        zIndex: 99999,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: '96px',
+      }}
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          width: '48px',
+          height: '48px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+        aria-label="Close menu"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+
+      {/* Menu items */}
+      <nav
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '24px',
+        }}
+      >
+        {menuItems
+          .filter((item) => item.showInMobile)
+          .map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onClose}
+              style={{
+                fontSize: '2.25rem',
+                fontWeight: 900,
+                color: isActive(item.href) ? '#F7DD3E' : '#FFFFFF',
+                textDecoration: 'none',
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
+      </nav>
+    </div>,
+    document.body
+  )
 }
 
 export function Header() {
@@ -214,82 +283,10 @@ export function Header() {
             </div>
           </nav>
         </Container>
-
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="fixed inset-0 z-40 md:hidden"
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-            >
-              <motion.div
-                className="absolute inset-0 bg-js-black"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.98 }}
-                exit={{ opacity: 0 }}
-                onClick={closeMenu}
-              />
-
-              <div className="relative flex h-full flex-col items-center justify-center px-8">
-                <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <motion.div
-                    className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-js-yellow/10 blur-3xl"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.8 }}
-                  />
-                  <motion.div
-                    className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-js-yellow/5 blur-3xl"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1 }}
-                  />
-                </div>
-
-                <nav className="relative z-10 flex flex-col items-center gap-6">
-                  {menuItems
-                    .filter((item) => item.showInMobile)
-                    .map((item) => (
-                      <motion.div key={item.href} variants={itemVariants}>
-                        <Link
-                          href={item.href}
-                          onClick={closeMenu}
-                          className={`group relative block text-4xl font-black transition-colors duration-300 sm:text-5xl ${
-                            isActive(item.href)
-                              ? 'text-js-yellow'
-                              : 'text-white hover:text-js-yellow'
-                          }`}
-                        >
-                          <span className="relative">
-                            {item.label}
-                            <span
-                              className={`absolute -bottom-2 left-0 h-1 bg-js-yellow transition-all duration-300 ${
-                                isActive(item.href)
-                                  ? 'w-full'
-                                  : 'w-0 group-hover:w-full'
-                              }`}
-                            />
-                          </span>
-                        </Link>
-                      </motion.div>
-                    ))}
-                </nav>
-
-                <motion.div
-                  className="absolute bottom-12 flex gap-6"
-                  variants={itemVariants}
-                >
-                  <span className="text-sm text-gray-500">Follow us</span>
-                </motion.div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
+
+      {/* Mobile menu rendered via portal to document.body */}
+      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} isActive={isActive} />
     </>
   )
 }

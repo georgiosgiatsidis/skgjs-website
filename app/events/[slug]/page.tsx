@@ -8,9 +8,14 @@ import { getAllEvents, getEventBySlug } from '@/lib/content'
 import { EventStatusBadge } from '@/components/events/EventStatusBadge'
 import { EventRsvpButton } from '@/components/events/EventRsvpButton'
 import { EventPhotoGallery } from '@/components/events/EventPhotoGallery'
-import { listEventPhotos } from '@/lib/b2'
+import { listEventPhotos, getB2BucketConfig } from '@/lib/b2'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+
+function getPresentationUrl(eventIndex: number, presentationPath: string): string {
+  const { bucketName } = getB2BucketConfig()
+  return `https://f003.backblazeb2.com/file/${bucketName}/events/${eventIndex}/${presentationPath}`
+}
 
 interface EventPageProps {
   params: Promise<{ slug: string }>
@@ -184,9 +189,96 @@ export default async function EventPage({ params }: EventPageProps) {
                     </div>
                   )}
 
-                  <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{event.markdown}</ReactMarkdown>
-                  </div>
+                  {event.markdown && event.markdown.trim() && (
+                    <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{event.markdown}</ReactMarkdown>
+                    </div>
+                  )}
+
+                  {event.talks && event.talks.length > 0 && (
+                    <div className="mt-8 space-y-6">
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Talks</h2>
+                      {event.talks.map((talk, talkIndex) => (
+                        <div
+                          key={talkIndex}
+                          className="rounded-lg border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50"
+                        >
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                            {talk.title}
+                          </h3>
+                          {talk.description && (
+                            <p className="mt-2 text-gray-600 dark:text-gray-300">
+                              {talk.description}
+                            </p>
+                          )}
+                          {talk.speaker && talk.speaker.length > 0 && (
+                            <div className="mt-3 flex flex-wrap gap-4">
+                              {talk.speaker.map((speaker, speakerIndex) => (
+                                <div key={speakerIndex} className="flex items-center gap-3">
+                                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+                                    {speaker.avatar ? (
+                                      <Image
+                                        src={speaker.avatar}
+                                        alt={speaker.name}
+                                        fill
+                                        className="object-cover"
+                                      />
+                                    ) : (
+                                      <div className="flex h-full w-full items-center justify-center text-sm font-bold text-gray-400">
+                                        {speaker.name.charAt(0)}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                      {speaker.name}
+                                    </span>
+                                    {speaker.social?.linkedin && (
+                                      <a
+                                        href={speaker.social.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-400 transition-colors hover:text-js-yellow"
+                                      >
+                                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                      </a>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {talk.presentation && (
+                            <div className="mt-4">
+                              <a
+                                href={getPresentationUrl(event.index, talk.presentation)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-md bg-js-yellow px-4 py-2 text-sm font-medium text-js-black transition-colors hover:bg-yellow-400"
+                              >
+                                <svg
+                                  className="h-4 w-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                  />
+                                </svg>
+                                Download Presentation
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   {event.tags && event.tags.length > 0 && (
                     <div className="mt-8 border-t border-gray-100 pt-6 dark:border-gray-800">

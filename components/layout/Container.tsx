@@ -11,7 +11,7 @@ export function Container({ children, className, size = 'lg' }: ContainerProps) 
   return (
     <div
       className={clsx(
-        'mx-auto px-4 sm:px-6 lg:px-8',
+        'mx-auto px-6 sm:px-6 lg:px-8',
         {
           'max-w-3xl': size === 'sm',
           'max-w-5xl': size === 'md',

@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseMarkdown } from './markdown'
-import type { Event, CommunityMember, Sponsor, SiteConfig } from './types'
+import type { Event, CommunityMember, Sponsor, SiteConfig, Speaker, Talk } from './types'
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -40,11 +40,18 @@ export function getAllEvents(): Event[] {
       const fileContent = fs.readFileSync(filePath, 'utf-8')
       const { frontmatter, markdown } = parseMarkdown(fileContent)
 
-      return {
+      const event = {
         slug: filename.replace('.md', ''),
         ...frontmatter,
         markdown,
       } as Event
+
+      // Derive speakers from talks for backward compatibility
+      if (event.talks && event.talks.length > 0 && (!event.speakers || event.speakers.length === 0)) {
+        event.speakers = event.talks.flatMap((talk: Talk) => talk.speaker) as Speaker[]
+      }
+
+      return event
     })
 
   return events
