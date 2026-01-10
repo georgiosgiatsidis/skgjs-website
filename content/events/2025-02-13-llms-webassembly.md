@@ -5,13 +5,17 @@ date: '2025-02-13'
 time: '19:00'
 location: 'OK!Thess, Komotinis 2, 54655, Thessaloniki'
 rsvpLink: 'https://www.meetup.com/skg-js/events/305900778/'
-speakers:
-  - name: 'Panagiota Mitsopoulou'
-    social:
-      linkedin: 'https://www.linkedin.com/in/mgiota/'
-  - name: 'Georgios Giatsidis'
-    social:
-      linkedin: 'https://www.linkedin.com/in/georgegiatsidis/'
+talks:
+  - title: 'Gen AI and LLMs in Javascript'
+    speaker:
+      - name: 'Panagiota Mitsopoulou'
+        social:
+          linkedin: 'https://www.linkedin.com/in/mgiota/'
+  - title: 'The Power of Web Assembly in Web Performance'
+    speaker:
+      - name: 'Georgios Giatsidis'
+        social:
+          linkedin: 'https://www.linkedin.com/in/georgegiatsidis/'
 tags: ['ai', 'llm', 'webassembly', 'performance']
 image: 'https://secure.meetupstatic.com/photos/event/7/d/b/1/highres_525992177.jpeg'
 ---

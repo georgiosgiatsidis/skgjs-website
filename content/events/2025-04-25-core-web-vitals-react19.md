@@ -5,13 +5,18 @@ date: '2025-04-25'
 time: '19:00'
 location: 'OKThess, 2 Komotinis Street, 54655, Thessaloniki'
 rsvpLink: 'https://www.meetup.com/skg-js/events/307229886/'
-speakers:
-  - name: 'Katerina Patticha'
-    social:
-      linkedin: 'https://www.linkedin.com/in/kpatticha/'
-  - name: 'John Kapantzakis'
-    social:
-      linkedin: 'https://www.linkedin.com/in/johnkapantzakis/'
+talks:
+  - title: 'Thinking Beyond Core Web Vitals'
+    speaker:
+      - name: 'Katerina Patticha'
+        social:
+          linkedin: 'https://www.linkedin.com/in/kpatticha/'
+  - title: 'How React 19 New Features Can Improve Our Apps'
+    presentation: 'react-19/presentation.pptx'
+    speaker:
+      - name: 'John Kapantzakis'
+        social:
+          linkedin: 'https://www.linkedin.com/in/johnkapantzakis/'
 tags: ['performance', 'web-vitals', 'react', 'react-19']
 image: 'https://secure.meetupstatic.com/photos/event/4/5/4/c/highres_527297740.jpeg'
 ---

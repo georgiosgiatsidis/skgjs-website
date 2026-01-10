@@ -5,13 +5,17 @@ date: '2025-12-16'
 time: '19:00'
 location: 'OKThess, 2 Komotinis Street, 54655, Thessaloniki'
 rsvpLink: 'https://www.meetup.com/skg-js/events/312165431/'
-speakers:
-  - name: 'Konstantinos Ziazios'
-    social:
-      linkedin: 'https://gr.linkedin.com/in/ziaziosk'
-  - name: 'Savvas Papageorgiadis'
-    social:
-      linkedin: 'https://gr.linkedin.com/in/papsavas'
+talks:
+  - title: 'Angular: Build with AI'
+    speaker:
+      - name: 'Konstantinos Ziazios'
+        social:
+          linkedin: 'https://gr.linkedin.com/in/ziaziosk'
+  - title: 'Virtual DOM vs Signals: Two Roads to Reactivity'
+    speaker:
+      - name: 'Savvas Papageorgiadis'
+        social:
+          linkedin: 'https://gr.linkedin.com/in/papsavas'
 tags: ['angular', 'ai', 'reactivity', 'signals', 'virtual-dom']
 image: 'https://secure.meetupstatic.com/photos/event/1/6/e/3/highres_531485859.jpeg'
 ---

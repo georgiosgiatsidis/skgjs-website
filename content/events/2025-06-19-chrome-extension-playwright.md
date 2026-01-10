@@ -5,13 +5,17 @@ date: '2025-06-19'
 time: '19:00'
 location: 'OKThess, 2 Komotinis Street, 54655, Thessaloniki'
 rsvpLink: 'https://www.meetup.com/skg-js/events/308275495/'
-speakers:
-  - name: 'Elias Papavasileiou'
-    social:
-      linkedin: 'https://www.linkedin.com/in/elias-papavasileiou/'
-  - name: 'John Pourdanis'
-    social:
-      linkedin: 'https://www.linkedin.com/in/jpourdanis/'
+talks:
+  - title: 'Youtube Share Clip - The Journey of Building an Open Source Chrome Browser Extension with 1000+ Users'
+    speaker:
+      - name: 'Elias Papavasileiou'
+        social:
+          linkedin: 'https://www.linkedin.com/in/elias-papavasileiou/'
+  - title: 'E2E Testing Coverage with Playwright & Istanbul'
+    speaker:
+      - name: 'John Pourdanis'
+        social:
+          linkedin: 'https://www.linkedin.com/in/jpourdanis/'
 tags: ['chrome-extension', 'open-source', 'testing', 'playwright', 'e2e']
 image: 'https://secure.meetupstatic.com/photos/event/b/d/0/d/highres_528348397.jpeg'
 ---
