@@ -7,11 +7,13 @@ location: 'OK!Thess, Komotinis 2, 54655, Thessaloniki'
 rsvpLink: 'https://www.meetup.com/skg-js/events/304635003/'
 talks:
   - title: 'The Evolution of Web Rendering Architectures'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     speaker:
       - name: 'Evangelia Mitsopoulou'
         social:
           linkedin: 'https://www.linkedin.com/in/mgiota/'
   - title: 'Angular Signals'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     speaker:
       - name: 'Konstantinos Ziazios'
         social:
@@ -21,9 +23,3 @@ image: 'https://secure.meetupstatic.com/photos/event/4/e/8/a/highres_524780106.j
 ---
 
 The first inaugural SKG JavaScript community gathering!
-
-**Talk 1: The Evolution of Web Rendering Architectures**
-Speaker: Evangelia Mitsopoulou
-
-**Talk 2: Angular Signals**
-Speaker: Konstantinos Ziazios, Microsoft

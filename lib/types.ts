@@ -11,6 +11,7 @@ export interface Speaker {
 
 export interface Talk {
   title: string
+  description?: string
   presentation?: string
   speaker: Speaker[]
 }

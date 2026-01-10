@@ -189,8 +189,14 @@ export default async function EventPage({ params }: EventPageProps) {
                     </div>
                   )}
 
+                  {event.markdown && event.markdown.trim() && (
+                    <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{event.markdown}</ReactMarkdown>
+                    </div>
+                  )}
+
                   {event.talks && event.talks.length > 0 && (
-                    <div className="space-y-6">
+                    <div className="mt-8 space-y-6">
                       <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Talks</h2>
                       {event.talks.map((talk, talkIndex) => (
                         <div
@@ -200,6 +206,11 @@ export default async function EventPage({ params }: EventPageProps) {
                           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                             {talk.title}
                           </h3>
+                          {talk.description && (
+                            <p className="mt-2 text-gray-600 dark:text-gray-300">
+                              {talk.description}
+                            </p>
+                          )}
                           {talk.speaker && talk.speaker.length > 0 && (
                             <div className="mt-3 flex flex-wrap gap-4">
                               {talk.speaker.map((speaker, speakerIndex) => (
@@ -268,10 +279,6 @@ export default async function EventPage({ params }: EventPageProps) {
                       ))}
                     </div>
                   )}
-
-                  <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{event.markdown}</ReactMarkdown>
-                  </div>
 
                   {event.tags && event.tags.length > 0 && (
                     <div className="mt-8 border-t border-gray-100 pt-6 dark:border-gray-800">
