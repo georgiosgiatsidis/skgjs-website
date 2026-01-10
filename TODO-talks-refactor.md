@@ -47,16 +47,16 @@ talks:
 - `app/events/[slug]/page.tsx` - Currently shows speakers in sidebar
 - Needs refactoring to show talks section with presentation download links
 
-### B2 Bucket URL Pattern
-From `lib/b2.ts` line 117-127:
-- Base URL: `https://f003.backblazeb2.com`
-- Pattern: `${downloadUrl}/file/${bucketName}/${path}`
-- For presentations: `https://f003.backblazeb2.com/file/<bucket_name>/events/<event_index>/<presentation_path>`
+### Tebi Bucket URL Pattern
+From `lib/tebi.ts`:
+- Base URL: `https://<bucket_name>.s3.tebi.io`
+- Pattern: `https://<bucket_name>.s3.tebi.io/<path>`
+- For presentations: `https://skg-website.s3.tebi.io/events/<event_index>/<presentation_path>`
 
 ## User Made Decisions
 - Structure: Use `talks` array with embedded `speaker` array per talk
 - Presentation attribute: Optional `presentation` field per talk
-- URL format: `https://f003.backblazeb2.com/file/<bucket_name>/events/<event_index>/<talk_presentation_path>`
+- URL format: `https://skg-website.s3.tebi.io/events/<event_index>/<talk_presentation_path>`
 
 ## Pending Decisions
 
