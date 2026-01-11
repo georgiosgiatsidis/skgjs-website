@@ -90,21 +90,3 @@ export interface SiteConfig {
   aboutMarkdown: string
 }
 
-// B2 Storage Types
-export interface B2File {
-  fileId: string
-  fileName: string
-  contentLength: number
-  contentType: string
-  uploadTimestamp: number
-}
-
-export interface B2FileListResponse {
-  files: B2File[]
-  nextFileName: string | null
-}
-
-export interface B2SignedUrl {
-  url: string
-  expiresAt: number
-}
