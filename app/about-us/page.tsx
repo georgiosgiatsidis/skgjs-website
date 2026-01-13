@@ -15,6 +15,34 @@ export const metadata = {
     'Learn about the Thessaloniki JavaScript Meetup community, our mission, and what we do.',
 }
 
+const teamMembers = [
+  {
+    name: 'Alex Papadopoulos',
+    role: 'Organizer',
+    bio: 'Full-stack developer passionate about JavaScript and building developer communities. Loves sharing knowledge and connecting people.',
+  },
+  {
+    name: 'Maria Konstantinou',
+    role: 'Co-Organizer',
+    bio: 'Frontend engineer focused on React and modern web technologies. Believes in the power of open source and continuous learning.',
+  },
+  {
+    name: 'Nikos Georgiou',
+    role: 'Tech Lead',
+    bio: 'Senior software architect with a focus on Node.js and cloud infrastructure. Enjoys mentoring developers and speaking at meetups.',
+  },
+  {
+    name: 'Elena Dimitriou',
+    role: 'Community Manager',
+    bio: 'Developer advocate bridging the gap between technical and community aspects. Passionate about inclusive tech communities.',
+  },
+  {
+    name: 'Dimitris Alexandrou',
+    role: 'Content Creator',
+    bio: 'JavaScript enthusiast documenting the journey of the community. Creates tutorials and shares insights about modern web development.',
+  },
+]
+
 const values = [
   {
     title: 'Inclusivity',
@@ -138,6 +166,61 @@ export default async function AboutUsPage() {
                 <div className="h-2 bg-gradient-to-r from-js-yellow via-yellow-400 to-js-yellow" />
               </Card>
             </ScrollReveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* Team Members Section */}
+      <section className="py-24">
+        <Container>
+          <ScrollReveal>
+            <div className="mb-16 text-center">
+              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow dark:bg-js-yellow/20">
+                The People Behind SKG JS
+              </span>
+              <h2 className="text-4xl font-black text-gray-900 dark:text-white md:text-5xl">
+                Meet the Team
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {teamMembers.map((member, index) => {
+              const initials = member.name
+                .split(' ')
+                .map((n) => n[0])
+                .join('')
+                .toUpperCase()
+
+              return (
+                <ScrollReveal key={member.name} delay={index * 0.1}>
+                  <div className="group text-center">
+                    {/* Avatar */}
+                    <div className="relative mx-auto mb-6 h-32 w-32">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-500 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-50" />
+                      <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400 ring-4 ring-white shadow-lg transition-transform duration-300 group-hover:scale-105 dark:ring-gray-800">
+                        <span className="text-3xl font-bold text-js-black">{initials}</span>
+                      </div>
+                    </div>
+
+                    {/* Name */}
+                    <h3 className="mb-1 text-xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white">
+                      {member.name}
+                    </h3>
+
+                    {/* Role Badge */}
+                    <span className="mb-4 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                      {member.role}
+                    </span>
+
+                    {/* Bio */}
+                    <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                      {member.bio}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              )
+            })}
           </div>
         </Container>
       </section>
