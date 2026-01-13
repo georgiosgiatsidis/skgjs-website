@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { Container } from './Container'
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { ScrollProgress } from '@/components/animations/ScrollProgress'
 import { ROUTES, SITE_SHORT_NAME } from '@/lib/constants'
 
@@ -241,12 +240,9 @@ export function Header() {
                     </li>
                   ))}
               </ul>
-              <div className="h-6 w-px bg-gray-200 dark:bg-gray-700" />
-              <ThemeToggle />
             </div>
 
-            <div className="z-50 flex items-center gap-4 md:hidden">
-              <ThemeToggle />
+            <div className="z-50 flex items-center md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="group relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-js-yellow dark:hover:bg-gray-800"

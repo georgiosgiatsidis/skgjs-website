@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Ubuntu, JetBrains_Mono } from 'next/font/google'
-import { ThemeProvider } from 'next-themes'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GoogleAnalytics } from '@/components/ui/GoogleAnalytics'
@@ -58,23 +57,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`${ubuntu.variable} ${jetbrainsMono.variable}`}
+      className={`dark ${ubuntu.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <SmoothScroll>
-            <Header />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer social={siteConfig.social} email={siteConfig.contact.email} />
-          </SmoothScroll>
-        </ThemeProvider>
+        <SmoothScroll>
+          <Header />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer social={siteConfig.social} email={siteConfig.contact.email} />
+        </SmoothScroll>
       </body>
     </html>
   )
