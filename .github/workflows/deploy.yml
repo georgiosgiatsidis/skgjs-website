@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
 
       - name: Setup Pages
@@ -47,6 +47,10 @@ jobs:
 
       - name: Build with Next.js
         run: npm run build
+        env:
+          TEBI_ACCESS_KEY_ID: ${{ secrets.TEBI_ACCESS_KEY_ID }}
+          TEBI_SECRET_ACCESS_KEY: ${{ secrets.TEBI_SECRET_ACCESS_KEY }}
+          TEBI_BUCKET_NAME: ${{ secrets.TEBI_BUCKET_NAME }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
