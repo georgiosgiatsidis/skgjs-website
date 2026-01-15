@@ -18,14 +18,12 @@ export function CountUp({
   duration = 2,
   prefix = '',
   suffix = '',
-  decimals = 0,
-  separator = ',',
   className = '',
 }: CountUpProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.5 })
+  const isInView = useInView(ref, { once: true })
   const [count, setCount] = useState(0)
-  const [hasAnimated, setHasAnimated] = useState(false)
+  const hasAnimatedRef = useRef(false)
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -35,8 +33,8 @@ export function CountUp({
       return
     }
 
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true)
+    if (isInView && !hasAnimatedRef.current) {
+      hasAnimatedRef.current = true
       let startTime: number
       let animationFrame: number
 
@@ -52,6 +50,8 @@ export function CountUp({
 
         if (progress < 1) {
           animationFrame = requestAnimationFrame(animate)
+        } else {
+          setCount(end)
         }
       }
 
@@ -63,19 +63,12 @@ export function CountUp({
         }
       }
     }
-  }, [isInView, end, duration, hasAnimated])
-
-  const formatNumber = (num: number): string => {
-    const fixed = num.toFixed(decimals)
-    const parts = fixed.split('.')
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separator)
-    return parts.join('.')
-  }
+  }, [isInView, end, duration])
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {formatNumber(count)}
+      {count.toFixed(0)}
       {suffix}
     </span>
   )
