@@ -53,10 +53,9 @@ export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
       : 'Event history coming soon.'
 
   useEffect(() => {
-    if (window === undefined) return
     const filter = getFilterFromURL()
     setFilter(filter)
-  }, [window?.location?.search])
+  }, [])
 
   return (
     <>
