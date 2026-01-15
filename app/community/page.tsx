@@ -3,7 +3,6 @@ import { Container } from '@/components/layout/Container'
 import { MemberGrid } from '@/components/community/MemberGrid'
 import { PhotoGallery } from '@/components/community/PhotoGallery'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
-import { AnimatedText } from '@/components/animations/AnimatedText'
 import { CountUp } from '@/components/animations/CountUp'
 
 export const metadata = {
@@ -71,14 +70,9 @@ export default async function CommunityPage() {
               </span>
             </ScrollReveal>
 
-            <AnimatedText
-              text="Our Community"
-              type="chars"
-              animation="slide"
-              stagger={0.04}
-              className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl"
-              as="h1"
-            />
+            <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Our Community
+            </h1>
 
             <ScrollReveal delay={0.3}>
               <p className="mb-12 text-lg text-gray-300 md:text-xl">

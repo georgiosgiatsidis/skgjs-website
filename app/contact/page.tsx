@@ -2,7 +2,6 @@ import { Container } from '@/components/layout/Container'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { getSiteConfig } from '@/lib/content'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
-import { AnimatedText } from '@/components/animations/AnimatedText'
 
 const socialLinks = [
   {
@@ -64,14 +63,9 @@ export default function ContactPage() {
               </span>
             </ScrollReveal>
 
-            <AnimatedText
-              text="Get in Touch"
-              type="chars"
-              animation="slide"
-              stagger={0.04}
-              className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl"
-              as="h1"
-            />
+            <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Get in Touch
+            </h1>
 
             <ScrollReveal delay={0.3}>
               <p className="text-lg text-gray-300 md:text-xl">

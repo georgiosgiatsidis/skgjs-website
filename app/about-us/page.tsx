@@ -1,7 +1,6 @@
 import { getSiteConfig } from '@/lib/content'
 import { Container } from '@/components/layout/Container'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
-import { AnimatedText } from '@/components/animations/AnimatedText'
 import { CountUp } from '@/components/animations/CountUp'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -113,14 +112,9 @@ export default async function AboutUsPage() {
               </span>
             </ScrollReveal>
 
-            <AnimatedText
-              text="About SKG JS"
-              type="chars"
-              animation="slide"
-              stagger={0.04}
-              className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl"
-              as="h1"
-            />
+            <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              About SKG JS
+            </h1>
 
             <ScrollReveal delay={0.3}>
               <p className="text-lg text-gray-300 md:text-xl">{siteConfig.description}</p>
