@@ -81,21 +81,19 @@ export default async function CommunityPage() {
               </p>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.5}>
-              <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-                  >
-                    <div className="mb-1 text-3xl font-black text-js-yellow md:text-4xl">
-                      <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
-                    </div>
-                    <div className="text-sm text-gray-400">{stat.label}</div>
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                >
+                  <div className="mb-1 text-3xl font-black text-js-yellow md:text-4xl">
+                    <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
                   </div>
-                ))}
-              </div>
-            </ScrollReveal>
+                  <div className="text-sm text-gray-400">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>

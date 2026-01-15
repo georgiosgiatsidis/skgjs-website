@@ -6,7 +6,6 @@ import { Event } from '@/lib/types'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Countdown } from '@/components/ui/Countdown'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 
 interface NextEventPreviewProps {
   event: Event | null
@@ -23,9 +22,8 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
           <div className="absolute -right-20 bottom-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
         </div>
         <div className="container relative mx-auto px-4">
-          <ScrollReveal>
-            <div className="mx-auto max-w-4xl">
-              <div className="mb-12 text-center">
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-12 text-center">
                 <div className="mb-4 inline-flex items-center gap-3">
                   <motion.div
                     className="h-px w-12 bg-gradient-to-r from-transparent to-js-yellow"
@@ -197,8 +195,7 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
                   </motion.div>
                 </div>
               </Card>
-            </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
     )
@@ -226,47 +223,42 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="mx-auto max-w-5xl">
-          <ScrollReveal>
-            <div className="mb-12 text-center">
-              <div className="mb-4 inline-flex items-center gap-3">
-                <motion.div
-                  className="h-px w-12 bg-gradient-to-r from-transparent to-js-yellow"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                />
-                <span className="text-sm font-semibold uppercase tracking-widest text-js-yellow">
-                  Coming Up
-                </span>
-                <motion.div
-                  className="h-px w-12 bg-gradient-to-l from-transparent to-js-yellow"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                />
-              </div>
-              <h2 className="bg-gradient-to-r from-js-black to-gray-600 bg-clip-text text-4xl font-bold text-transparent dark:from-white dark:to-gray-300 md:text-5xl">
-                Next Event
-              </h2>
+          <div className="mb-12 text-center">
+            <div className="mb-4 inline-flex items-center gap-3">
+              <motion.div
+                className="h-px w-12 bg-gradient-to-r from-transparent to-js-yellow"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              />
+              <span className="text-sm font-semibold uppercase tracking-widest text-js-yellow">
+                Coming Up
+              </span>
+              <motion.div
+                className="h-px w-12 bg-gradient-to-l from-transparent to-js-yellow"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              />
             </div>
-          </ScrollReveal>
+            <h2 className="bg-gradient-to-r from-js-black to-gray-600 bg-clip-text text-4xl font-bold text-transparent dark:from-white dark:to-gray-300 md:text-5xl">
+              Next Event
+            </h2>
+          </div>
 
-          <ScrollReveal delay={0.1}>
-            <div className="mb-10">
-              <Countdown targetDate={eventDate} />
-            </div>
-          </ScrollReveal>
+          <div className="mb-10">
+            <Countdown targetDate={eventDate} />
+          </div>
 
-          <ScrollReveal delay={0.2}>
-            <Card
-              className="overflow-hidden border-2 border-gray-200 bg-white/90 shadow-2xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/90"
-              hover
-              glowOnHover
-            >
-              <div className="relative md:flex">
-                <motion.div
+          <Card
+            className="overflow-hidden border-2 border-gray-200 bg-white/90 shadow-2xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/90"
+            hover
+            glowOnHover
+          >
+            <div className="relative md:flex">
+              <motion.div
                   className="relative overflow-hidden bg-gradient-to-br from-js-yellow via-js-yellow to-yellow-500 md:w-56"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
@@ -472,10 +464,9 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
                       </Link>
                     </div>
                   </div>
-                </div>
               </div>
-            </Card>
-          </ScrollReveal>
+            </div>
+          </Card>
         </div>
       </div>
     </section>

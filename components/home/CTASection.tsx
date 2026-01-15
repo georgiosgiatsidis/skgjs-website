@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 
 export function CTASection() {
   return (
@@ -38,9 +37,8 @@ export function CTASection() {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <ScrollReveal>
-          <div className="mx-auto max-w-4xl text-center">
-            <motion.span
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.span
               className="mb-6 inline-block text-sm font-semibold uppercase tracking-widest text-js-yellow"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -113,9 +111,8 @@ export function CTASection() {
                   Get in Touch
                 </Button>
               </Link>
-            </motion.div>
-          </div>
-        </ScrollReveal>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -72,36 +72,34 @@ export default async function EventPage({ params }: EventPageProps) {
         </div>
 
         <Container className="relative z-10">
-          <ScrollReveal>
-            <Link
-              href="/events"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-colors hover:text-js-yellow"
-            >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Back to all events
-            </Link>
-          </ScrollReveal>
+          <Link
+            href="/events"
+            className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-colors hover:text-js-yellow"
+          >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to all events
+          </Link>
 
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl">
-              <ScrollReveal delay={0.1}>
+              <ScrollReveal>
                 <EventStatusBadge eventDate={event.date} variant="header" />
               </ScrollReveal>
 
-              <ScrollReveal delay={0.2}>
+              <ScrollReveal delay={0.1}>
                 <h1 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
                   {event.title}
                 </h1>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.3}>
+              <ScrollReveal delay={0.2}>
                 <div className="flex flex-wrap gap-6 text-gray-300">
                   <div className="flex items-center gap-2">
                     <svg
@@ -162,13 +160,11 @@ export default async function EventPage({ params }: EventPageProps) {
             </div>
 
             {event.rsvpLink && (
-              <ScrollReveal delay={0.4}>
-                <EventRsvpButton
-                  eventDate={event.date}
-                  rsvpLink={event.rsvpLink}
-                  variant="primary"
-                />
-              </ScrollReveal>
+              <EventRsvpButton
+                eventDate={event.date}
+                rsvpLink={event.rsvpLink}
+                variant="primary"
+              />
             )}
           </div>
         </Container>
@@ -178,8 +174,7 @@ export default async function EventPage({ params }: EventPageProps) {
         <Container>
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <ScrollReveal>
-                <Card className="overflow-hidden">
+              <Card className="overflow-hidden">
                   {event.image && (
                     <div className="relative -mx-6 -mt-6 mb-6 h-64 md:h-80">
                       <Image
@@ -305,13 +300,11 @@ export default async function EventPage({ params }: EventPageProps) {
                     </div>
                   )}
                 </Card>
-              </ScrollReveal>
             </div>
 
             <div className="space-y-6">
               {event.speakers && event.speakers.length > 0 && (
-                <ScrollReveal delay={0.1}>
-                  <Card>
+                <Card>
                     <h3 className="mb-6 text-lg font-bold text-gray-900 dark:text-white">
                       Speaker{event.speakers.length > 1 ? 's' : ''}
                     </h3>
@@ -398,11 +391,9 @@ export default async function EventPage({ params }: EventPageProps) {
                       ))}
                     </div>
                   </Card>
-                </ScrollReveal>
               )}
 
-              <ScrollReveal delay={0.2}>
-                <Card className="bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400">
+              <Card className="bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400">
                   <h3 className="mb-4 text-lg font-bold text-js-black">Event Details</h3>
                   <div className="space-y-4 text-js-black/80">
                     <div className="flex items-start gap-3">
@@ -507,7 +498,6 @@ export default async function EventPage({ params }: EventPageProps) {
                     />
                   )}
                 </Card>
-              </ScrollReveal>
             </div>
           </div>
         </Container>
@@ -516,33 +506,29 @@ export default async function EventPage({ params }: EventPageProps) {
       {photos.length > 0 && (
         <section className="py-16">
           <Container>
-            <ScrollReveal>
-              <EventPhotoGallery photos={photos} eventTitle={event.title} />
-            </ScrollReveal>
+            <EventPhotoGallery photos={photos} eventTitle={event.title} />
           </Container>
         </section>
       )}
 
       <section className="py-16">
         <Container>
-          <ScrollReveal>
-            <div className="text-center">
-              <Link
-                href="/events"
-                className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-js-yellow dark:text-gray-400"
-              >
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                Back to all events
-              </Link>
-            </div>
-          </ScrollReveal>
+          <div className="text-center">
+            <Link
+              href="/events"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-js-yellow dark:text-gray-400"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Back to all events
+            </Link>
+          </div>
         </Container>
       </section>
     </>

@@ -125,41 +125,37 @@ export default async function AboutUsPage() {
 
       <section className="relative -mt-16 z-20">
         <Container>
-          <ScrollReveal>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-xl dark:border-gray-800 dark:bg-gray-900"
-                >
-                  <div className="mb-2 text-4xl font-black text-js-yellow">
-                    <CountUp end={stat.value} duration={2} suffix={stat.suffix || ''} />
-                  </div>
-                  <div className="text-sm font-semibold uppercase tracking-wider text-gray-500">
-                    {stat.label}
-                  </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-xl dark:border-gray-800 dark:bg-gray-900"
+              >
+                <div className="mb-2 text-4xl font-black text-js-yellow">
+                  <CountUp end={stat.value} duration={2} suffix={stat.suffix || ''} />
                 </div>
-              ))}
-            </div>
-          </ScrollReveal>
+                <div className="text-sm font-semibold uppercase tracking-wider text-gray-500">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
       <section className="py-24">
         <Container>
           <div className="mx-auto max-w-4xl">
-            <ScrollReveal>
-              <Card className="overflow-hidden p-0">
-                <div className="p-8 md:p-12">
-                  <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                      {siteConfig.aboutMarkdown}
-                    </ReactMarkdown>
-                  </div>
+            <Card className="overflow-hidden p-0">
+              <div className="p-8 md:p-12">
+                <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {siteConfig.aboutMarkdown}
+                  </ReactMarkdown>
                 </div>
-                <div className="h-2 bg-gradient-to-r from-js-yellow via-yellow-400 to-js-yellow" />
-              </Card>
-            </ScrollReveal>
+              </div>
+              <div className="h-2 bg-gradient-to-r from-js-yellow via-yellow-400 to-js-yellow" />
+            </Card>
           </div>
         </Container>
       </section>
@@ -167,19 +163,17 @@ export default async function AboutUsPage() {
       {/* Team Members Section */}
       <section className="py-24">
         <Container>
-          <ScrollReveal>
-            <div className="mb-16 text-center">
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow dark:bg-js-yellow/20">
-                The People Behind SKG JS
-              </span>
-              <h2 className="text-4xl font-black text-gray-900 dark:text-white md:text-5xl">
-                Meet the Team
-              </h2>
-            </div>
-          </ScrollReveal>
+          <div className="mb-16 text-center">
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow dark:bg-js-yellow/20">
+              The People Behind SKG JS
+            </span>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white md:text-5xl">
+              Meet the Team
+            </h2>
+          </div>
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {teamMembers.map((member, index) => {
+            {teamMembers.map((member) => {
               const initials = member.name
                 .split(' ')
                 .map((n) => n[0])
@@ -187,32 +181,30 @@ export default async function AboutUsPage() {
                 .toUpperCase()
 
               return (
-                <ScrollReveal key={member.name} delay={index * 0.1}>
-                  <div className="group text-center">
-                    {/* Avatar */}
-                    <div className="relative mx-auto mb-6 h-32 w-32">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-500 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-50" />
-                      <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400 ring-4 ring-white shadow-lg transition-transform duration-300 group-hover:scale-105 dark:ring-gray-800">
-                        <span className="text-3xl font-bold text-js-black">{initials}</span>
-                      </div>
+                <div key={member.name} className="group text-center">
+                  {/* Avatar */}
+                  <div className="relative mx-auto mb-6 h-32 w-32">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-500 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-50" />
+                    <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400 ring-4 ring-white shadow-lg transition-transform duration-300 group-hover:scale-105 dark:ring-gray-800">
+                      <span className="text-3xl font-bold text-js-black">{initials}</span>
                     </div>
-
-                    {/* Name */}
-                    <h3 className="mb-1 text-xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white">
-                      {member.name}
-                    </h3>
-
-                    {/* Role Badge */}
-                    <span className="mb-4 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-                      {member.role}
-                    </span>
-
-                    {/* Bio */}
-                    <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-                      {member.bio}
-                    </p>
                   </div>
-                </ScrollReveal>
+
+                  {/* Name */}
+                  <h3 className="mb-1 text-xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white">
+                    {member.name}
+                  </h3>
+
+                  {/* Role Badge */}
+                  <span className="mb-4 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                    {member.role}
+                  </span>
+
+                  {/* Bio */}
+                  <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    {member.bio}
+                  </p>
+                </div>
               )
             })}
           </div>
@@ -221,30 +213,26 @@ export default async function AboutUsPage() {
 
       <section className="bg-gray-50 py-24 dark:bg-gray-900/50">
         <Container>
-          <ScrollReveal>
-            <div className="mb-16 text-center">
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow dark:bg-js-yellow/20">
-                What We Stand For
-              </span>
-              <h2 className="text-4xl font-black text-gray-900 dark:text-white md:text-5xl">
-                Our Values
-              </h2>
-            </div>
-          </ScrollReveal>
+          <div className="mb-16 text-center">
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow dark:bg-js-yellow/20">
+              What We Stand For
+            </span>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white md:text-5xl">
+              Our Values
+            </h2>
+          </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-            {values.map((value, index) => (
-              <ScrollReveal key={value.title} delay={index * 0.1}>
-                <Card hover tilt glowOnHover className="group h-full p-8">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-js-yellow/10 text-js-yellow transition-colors group-hover:bg-js-yellow group-hover:text-js-black">
-                    {value.icon}
-                  </div>
-                  <h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">{value.description}</p>
-                </Card>
-              </ScrollReveal>
+            {values.map((value) => (
+              <Card key={value.title} hover tilt glowOnHover className="group h-full p-8">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-js-yellow/10 text-js-yellow transition-colors group-hover:bg-js-yellow group-hover:text-js-black">
+                  {value.icon}
+                </div>
+                <h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
+                  {value.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{value.description}</p>
+              </Card>
             ))}
           </div>
         </Container>
@@ -252,43 +240,41 @@ export default async function AboutUsPage() {
 
       <section className="py-24">
         <Container>
-          <ScrollReveal>
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400 p-12 text-center shadow-2xl md:p-16">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/20 blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-white/20 blur-3xl" />
-              </div>
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-js-yellow via-yellow-400 to-amber-400 p-12 text-center shadow-2xl md:p-16">
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/20 blur-3xl" />
+              <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-white/20 blur-3xl" />
+            </div>
 
-              <div className="relative z-10">
-                <h2 className="mb-4 text-4xl font-black text-js-black md:text-5xl">
-                  Join Our Community
-                </h2>
-                <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-800">
-                  Interested in speaking, sponsoring, or just attending? We&apos;d love to hear from
-                  you!
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <a
-                    href={siteConfig.social.meetup}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button variant="secondary" size="lg" glowOnHover>
-                      Join on Meetup
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </Button>
-                  </a>
-                  <Link href="/contact">
-                    <Button variant="secondary" size="lg">
-                      Contact Us
-                    </Button>
-                  </Link>
-                </div>
+            <div className="relative z-10">
+              <h2 className="mb-4 text-4xl font-black text-js-black md:text-5xl">
+                Join Our Community
+              </h2>
+              <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-800">
+                Interested in speaking, sponsoring, or just attending? We&apos;d love to hear from
+                you!
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href={siteConfig.social.meetup}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary" size="lg" glowOnHover>
+                    Join on Meetup
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </Button>
+                </a>
+                <Link href="/contact">
+                  <Button variant="secondary" size="lg">
+                    Contact Us
+                  </Button>
+                </Link>
               </div>
             </div>
-          </ScrollReveal>
+          </div>
         </Container>
       </section>
     </>
