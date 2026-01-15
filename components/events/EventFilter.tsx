@@ -30,12 +30,19 @@ export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) 
           onClick={() => onFilterChange('upcoming')}
           className={clsx(
             'relative z-10 rounded-xl px-8 py-3 text-sm font-semibold transition-colors duration-200',
-            activeFilter === 'upcoming' ? 'text-js-black' : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+            activeFilter === 'upcoming'
+              ? 'text-js-black'
+              : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
           )}
         >
           <span className="flex items-center gap-2">
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
             Upcoming
           </span>
@@ -44,12 +51,19 @@ export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) 
           onClick={() => onFilterChange('past')}
           className={clsx(
             'relative z-10 rounded-xl px-8 py-3 text-sm font-semibold transition-colors duration-200',
-            activeFilter === 'past' ? 'text-js-black' : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+            activeFilter === 'past'
+              ? 'text-js-black'
+              : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
           )}
         >
           <span className="flex items-center gap-2">
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             Past
           </span>

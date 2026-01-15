@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { EventFilter } from './EventFilter'
 import { EventList } from './EventList'
 import type { Event } from '@/lib/types'
@@ -11,8 +11,27 @@ interface EventsClientProps {
   speakerFormUrl?: string
 }
 
+const defaultFilter = 'upcoming'
+
+function getFilterFromURL() {
+  if (typeof window === 'undefined') return defaultFilter
+  const params = new URLSearchParams(window.location.search)
+  const filter = params.get('filter')
+  return filter === 'past' ? 'past' : defaultFilter
+}
+
 export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
-  const [activeFilter, setActiveFilter] = useState<'upcoming' | 'past'>('upcoming')
+  const [activeFilter, setActiveFilter] = useState<'upcoming' | 'past'>(defaultFilter)
+
+  const setFilter = useCallback((filter: 'upcoming' | 'past') => {
+    setActiveFilter(filter)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      params.set('filter', filter)
+      const newUrl = `${window.location.pathname}?${params.toString()}`
+      window.history.replaceState({}, '', newUrl)
+    }
+  }, [])
 
   // Filter and sort events client-side based on current date
   const { upcomingEvents, pastEvents } = useMemo(() => {
@@ -33,10 +52,21 @@ export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
       ? 'No upcoming events scheduled. Check back soon!'
       : 'Event history coming soon.'
 
+  useEffect(() => {
+    if (window === undefined) return
+    const filter = getFilterFromURL()
+    setFilter(filter)
+  }, [window?.location?.search])
+
   return (
     <>
-      <EventFilter activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} speakerFormUrl={speakerFormUrl} />
+      <EventFilter activeFilter={activeFilter} onFilterChange={setFilter} />
+      <EventList
+        events={displayedEvents}
+        emptyMessage={emptyMessage}
+        filterType={activeFilter}
+        speakerFormUrl={speakerFormUrl}
+      />
     </>
   )
 }
