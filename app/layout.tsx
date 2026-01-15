@@ -3,7 +3,6 @@ import { Ubuntu, JetBrains_Mono } from 'next/font/google'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GoogleAnalytics } from '@/components/ui/GoogleAnalytics'
-import { SmoothScroll } from '@/components/animations/SmoothScroll'
 import { getSiteConfig } from '@/lib/content'
 import '@/styles/globals.css'
 
@@ -64,13 +63,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        <SmoothScroll>
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer social={siteConfig.social} email={siteConfig.contact.email} />
-        </SmoothScroll>
+        <Header />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer social={siteConfig.social} email={siteConfig.contact.email} />
       </body>
     </html>
   )
