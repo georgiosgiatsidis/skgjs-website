@@ -2,7 +2,6 @@
 
 import { CommunityMember } from '@/lib/types'
 import { MemberCard } from './MemberCard'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { motion } from 'framer-motion'
 
 interface MemberGridProps {
@@ -40,14 +39,12 @@ export function MemberGrid({ members, title }: MemberGridProps) {
   return (
     <div className="mb-20">
       {title && (
-        <ScrollReveal>
-          <div className="mb-10 flex items-center gap-4">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
-              {title}
-            </h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent dark:from-gray-800" />
-          </div>
-        </ScrollReveal>
+        <div className="mb-10 flex items-center gap-4">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
+            {title}
+          </h2>
+          <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent dark:from-gray-800" />
+        </div>
       )}
       <motion.div
         className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"

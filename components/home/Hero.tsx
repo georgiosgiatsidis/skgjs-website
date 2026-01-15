@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
-import { AnimatedText } from '@/components/animations/AnimatedText'
 import { CountUp } from '@/components/animations/CountUp'
 import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
 
@@ -117,28 +116,19 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <AnimatedText
-              text="Thessaloniki"
-              type="chars"
-              animation="slide"
-              stagger={0.03}
-              className="mb-2 text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl"
-              as="h1"
-            />
-          </motion.div>
+          <motion.h1
+            className="mb-2 text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl"
+            variants={itemVariants}
+          >
+            Thessaloniki
+          </motion.h1>
 
-          <motion.div variants={itemVariants}>
-            <AnimatedText
-              text="JavaScript Meetup"
-              type="words"
-              animation="blur"
-              stagger={0.1}
-              delay={0.5}
-              className="mb-8 text-4xl font-black text-js-yellow md:text-6xl lg:text-7xl"
-              as="span"
-            />
-          </motion.div>
+          <motion.span
+            className="mb-8 block text-4xl font-black text-js-yellow md:text-6xl lg:text-7xl"
+            variants={itemVariants}
+          >
+            JavaScript Meetup
+          </motion.span>
 
           <motion.p
             className="mx-auto mb-10 max-w-2xl text-lg text-gray-300 md:text-xl lg:text-2xl"

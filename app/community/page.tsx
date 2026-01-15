@@ -3,7 +3,6 @@ import { Container } from '@/components/layout/Container'
 import { MemberGrid } from '@/components/community/MemberGrid'
 import { PhotoGallery } from '@/components/community/PhotoGallery'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
-import { AnimatedText } from '@/components/animations/AnimatedText'
 import { CountUp } from '@/components/animations/CountUp'
 
 export const metadata = {
@@ -71,14 +70,9 @@ export default async function CommunityPage() {
               </span>
             </ScrollReveal>
 
-            <AnimatedText
-              text="Our Community"
-              type="chars"
-              animation="slide"
-              stagger={0.04}
-              className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl"
-              as="h1"
-            />
+            <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Our Community
+            </h1>
 
             <ScrollReveal delay={0.3}>
               <p className="mb-12 text-lg text-gray-300 md:text-xl">
@@ -87,21 +81,19 @@ export default async function CommunityPage() {
               </p>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.5}>
-              <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-                  >
-                    <div className="mb-1 text-3xl font-black text-js-yellow md:text-4xl">
-                      <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
-                    </div>
-                    <div className="text-sm text-gray-400">{stat.label}</div>
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                >
+                  <div className="mb-1 text-3xl font-black text-js-yellow md:text-4xl">
+                    <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
                   </div>
-                ))}
-              </div>
-            </ScrollReveal>
+                  <div className="text-sm text-gray-400">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>

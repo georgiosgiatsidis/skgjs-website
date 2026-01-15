@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Container } from './Container'
 import { ROUTES, SITE_SHORT_NAME } from '@/lib/constants'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 
 interface FooterProps {
   social?: {
@@ -58,9 +57,8 @@ export function Footer({ social = {}, email = 'hello@skgjs.gr' }: FooterProps) {
 
       <Container>
         <div className="relative py-16">
-          <ScrollReveal>
-            <div className="grid gap-12 md:grid-cols-3 md:gap-8">
-              <div className="space-y-6">
+          <div className="grid gap-12 md:grid-cols-3 md:gap-8">
+            <div className="space-y-6">
                 <Link href={ROUTES.home} className="group inline-flex items-center gap-3">
                   <motion.div
                     whileHover={{ rotate: 12, scale: 1.1 }}
@@ -136,28 +134,25 @@ export function Footer({ social = {}, email = 'hello@skgjs.gr' }: FooterProps) {
                     {email}
                   </a>
                 </p>
-              </div>
             </div>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={0.2}>
-            <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 dark:border-gray-800 md:flex-row">
-              <p className="text-sm text-gray-500 dark:text-gray-500">
-                {new Date().getFullYear()} Thessaloniki JavaScript Meetup. All rights reserved.
-              </p>
-              <p className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-500">
-                Made with
-                <motion.span
-                  className="inline-block text-red-500"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
-                >
-                  &hearts;
-                </motion.span>
-                in Thessaloniki
-              </p>
-            </div>
-          </ScrollReveal>
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 dark:border-gray-800 md:flex-row">
+            <p className="text-sm text-gray-500 dark:text-gray-500">
+              {new Date().getFullYear()} Thessaloniki JavaScript Meetup. All rights reserved.
+            </p>
+            <p className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-500">
+              Made with
+              <motion.span
+                className="inline-block text-red-500"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+              >
+                &hearts;
+              </motion.span>
+              in Thessaloniki
+            </p>
+          </div>
         </div>
       </Container>
     </footer>

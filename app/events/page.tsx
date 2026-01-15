@@ -2,7 +2,6 @@ import { Container } from '@/components/layout/Container'
 import { EventsClient } from '@/components/events/EventsClient'
 import { getAllEvents, getSiteConfig } from '@/lib/content'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
-import { AnimatedText } from '@/components/animations/AnimatedText'
 
 export default function EventsPage() {
   const allEvents = getAllEvents()
@@ -25,14 +24,9 @@ export default function EventsPage() {
               </span>
             </ScrollReveal>
 
-            <AnimatedText
-              text="Events"
-              type="chars"
-              animation="slide"
-              stagger={0.05}
-              className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl"
-              as="h1"
-            />
+            <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Events
+            </h1>
 
             <ScrollReveal delay={0.3}>
               <p className="text-lg text-gray-300 md:text-xl">
