@@ -1,15 +1,14 @@
 ---
-siteName: "Thessaloniki JavaScript Meetup"
-tagline: "JavaScript community in Thessaloniki"
-description: "Join the Thessaloniki JavaScript community for monthly meetups, talks, and networking with local developers."
+siteName: 'Thessaloniki JavaScript Meetup'
+tagline: 'JavaScript community in Thessaloniki'
+description: 'Join the Thessaloniki JavaScript community for monthly meetups, talks, and networking with local developers.'
 social:
-  meetup: "https://www.meetup.com/skgjs/"
-  github: "https://github.com/skgjs"
-  instagram: "https://instagram.com/skgjs"
-  linkedin: "https://www.linkedin.com/company/skgjs"
+  meetup: 'https://www.meetup.com/skg-js/'
+  instagram: 'https://www.instagram.com/skgjs.gr/'
+  # linkedin: 'https://www.linkedin.com/company/skgjs'
 contact:
-  email: "organizers@skgjs.gr"
-speakerFormUrl: "https://forms.gle/your-speaker-form-id"
+  email: 'organizers@skgjs.gr'
+speakerFormUrl: 'https://forms.gle/your-speaker-form-id'
 ---
 
 ## About SKG JS
@@ -19,6 +18,7 @@ We're a community of JavaScript enthusiasts in Thessaloniki, Greece. Founded in 
 **Our Mission**: Foster a welcoming, inclusive community where developers of all skill levels can learn, share, and grow together.
 
 **What We Do**:
+
 - Monthly technical talks and workshops
 - Networking events
 - Code challenges and hackathons
