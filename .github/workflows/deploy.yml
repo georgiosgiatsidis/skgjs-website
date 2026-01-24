@@ -48,9 +48,10 @@ jobs:
       - name: Build with Next.js
         run: npm run build
         env:
-          TEBI_ACCESS_KEY_ID: ${{ secrets.TEBI_ACCESS_KEY_ID }}
-          TEBI_SECRET_ACCESS_KEY: ${{ secrets.TEBI_SECRET_ACCESS_KEY }}
-          TEBI_BUCKET_NAME: ${{ secrets.TEBI_BUCKET_NAME }}
+          B2_ACCESS_KEY_ID: ${{ secrets.B2_ACCESS_KEY_ID }}
+          B2_SECRET_ACCESS_KEY: ${{ secrets.B2_SECRET_ACCESS_KEY }}
+          B2_BUCKET_NAME: ${{ secrets.B2_BUCKET_NAME }}
+          B2_REGION: ${{ secrets.B2_REGION }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
