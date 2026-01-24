@@ -8,6 +8,7 @@ joinedDate: '2023-03-20'
 social:
   github: https://github.com/kapantzak
   linkedin: https://www.linkedin.com/in/johnkapantzakis/
+  website: https://kapantzakis.gr/
 skills:
   - JavaScript
   - React
