@@ -1,47 +1,48 @@
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 
-// Tebi S3-compatible client - lazy initialization to avoid errors during build
+// Backblaze B2 S3-compatible client - lazy initialization to avoid errors during build
 let s3ClientInstance: S3Client | null = null
 
 function getS3Client(): S3Client {
   if (!s3ClientInstance) {
-    const accessKeyId = process.env.TEBI_ACCESS_KEY_ID
-    const secretAccessKey = process.env.TEBI_SECRET_ACCESS_KEY
+    const accessKeyId = process.env.B2_ACCESS_KEY_ID
+    const secretAccessKey = process.env.B2_SECRET_ACCESS_KEY
+    const region = process.env.B2_REGION
 
-    if (!accessKeyId || !secretAccessKey) {
+    if (!accessKeyId || !secretAccessKey || !region) {
       throw new Error(
-        'TEBI_ACCESS_KEY_ID and TEBI_SECRET_ACCESS_KEY must be set in environment variables'
+        'B2_ACCESS_KEY_ID, B2_SECRET_ACCESS_KEY, and B2_REGION must be set in environment variables'
       )
     }
 
     s3ClientInstance = new S3Client({
-      endpoint: 'https://s3.tebi.io',
+      endpoint: `https://s3.${region}.backblazeb2.com`,
       credentials: {
         accessKeyId,
         secretAccessKey,
       },
-      region: 'global',
+      region,
     })
   }
   return s3ClientInstance
 }
 
 // Helper to get bucket config from env
-export function getTebiBucketConfig() {
-  const bucketName = process.env.TEBI_BUCKET_NAME
+export function getB2BucketConfig() {
+  const bucketName = process.env.B2_BUCKET_NAME
+  const region = process.env.B2_REGION
 
-  if (!bucketName) {
-    throw new Error('TEBI_BUCKET_NAME must be set in environment variables')
+  if (!bucketName || !region) {
+    throw new Error('B2_BUCKET_NAME and B2_REGION must be set in environment variables')
   }
 
-  return { bucketName }
+  return { bucketName, region }
 }
 
-// Generate public URL for a file in Tebi bucket
-export function getTebiPublicUrl(key: string): string {
-  const { bucketName } = getTebiBucketConfig()
-  // Using virtual-hosted style URL
-  return `https://${bucketName}.s3.tebi.io/${key}`
+// Generate public URL for a file in B2 bucket (S3-style URL)
+export function getB2PublicUrl(key: string): string {
+  const { bucketName, region } = getB2BucketConfig()
+  return `https://${bucketName}.s3.${region}.backblazeb2.com/${key}`
 }
 
 // Supported image extensions for photo gallery
@@ -58,14 +59,14 @@ export interface EventPhoto {
 }
 
 /**
- * Lists all photos for a specific event from Tebi bucket.
+ * Lists all photos for a specific event from B2 bucket.
  * Photos are expected at: events/<eventIndex>/photos/
  * Returns public URLs for the bucket.
  */
 export async function listEventPhotos(eventIndex: number): Promise<EventPhoto[]> {
   try {
     const client = getS3Client()
-    const { bucketName } = getTebiBucketConfig()
+    const { bucketName } = getB2BucketConfig()
 
     const prefix = `events/event-${eventIndex}/photos/`
 
@@ -83,7 +84,7 @@ export async function listEventPhotos(eventIndex: number): Promise<EventPhoto[]>
       .filter((obj) => obj.Key && isImageFile(obj.Key))
       .map((obj) => ({
         fileName: obj.Key!.split('/').pop() || obj.Key!,
-        url: getTebiPublicUrl(obj.Key!),
+        url: getB2PublicUrl(obj.Key!),
       }))
 
     return photos

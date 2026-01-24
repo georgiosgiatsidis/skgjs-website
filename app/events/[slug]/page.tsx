@@ -8,12 +8,12 @@ import { getAllEvents, getEventBySlug } from '@/lib/content'
 import { EventStatusBadge } from '@/components/events/EventStatusBadge'
 import { EventRsvpButton } from '@/components/events/EventRsvpButton'
 import { EventPhotoGallery } from '@/components/events/EventPhotoGallery'
-import { listEventPhotos, getTebiPublicUrl } from '@/lib/tebi'
+import { listEventPhotos, getB2PublicUrl } from '@/lib/b2'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
 function getPresentationUrl(eventIndex: number, presentationPath: string): string {
-  return getTebiPublicUrl(`events/event-${eventIndex}/${presentationPath}`)
+  return getB2PublicUrl(`events/event-${eventIndex}/${presentationPath}`)
 }
 
 interface EventPageProps {
