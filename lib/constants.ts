@@ -7,14 +7,6 @@ export const COLORS = {
   jsBlack: '#1A1A1A',
 }
 
-export const SOCIAL_PLATFORMS = {
-  meetup: 'Meetup',
-  github: 'GitHub',
-  instagram: 'Instagram',
-  linkedin: 'LinkedIn',
-  twitter: 'Twitter',
-}
-
 export const ROUTES = {
   home: '/',
   aboutUs: '/about-us/',
