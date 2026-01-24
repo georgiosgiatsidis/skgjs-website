@@ -80,7 +80,7 @@ export function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto mb-6 max-w-5xl text-center">
           <motion.div className="mb-8 flex justify-center" variants={itemVariants}>
             <motion.div
               className="relative"
