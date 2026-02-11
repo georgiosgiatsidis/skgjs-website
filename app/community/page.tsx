@@ -15,8 +15,10 @@ export default async function CommunityPage() {
   const allMembers = await getAllCommunityMembers()
 
   // Separate members by role
-  const organizers = allMembers.filter((m) => m.role === 'organizer')
-  const speakers = allMembers.filter((m) => m.role === 'speaker')
+  const organizers = allMembers
+    .filter((m) => m.role === 'organizer')
+    .sort((a, b) => a.index - b.index)
+  const speakers = allMembers.filter((m) => m.role === 'speaker').sort((a, b) => a.index - b.index)
 
   // Photo gallery data
   const photos = [

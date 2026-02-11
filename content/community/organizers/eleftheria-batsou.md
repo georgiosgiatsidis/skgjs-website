@@ -1,4 +1,5 @@
 ---
+index: 3
 name: Eleftheria Batsou
 role: organizer
 title: Community manager

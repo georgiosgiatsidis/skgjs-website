@@ -1,4 +1,5 @@
 ---
+index: 1
 name: Evangelia Mitsopoulou
 role: organizer
 title: Founder & CTO

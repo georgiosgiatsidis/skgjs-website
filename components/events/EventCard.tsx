@@ -21,7 +21,7 @@ export function EventCard({ event }: EventCardProps) {
   return (
     <Link href={`/events/${event.slug}`} className="block h-full">
       <Card hover glowOnHover className="group flex h-full flex-col overflow-hidden">
-        <div className="relative">
+        <div data-testid="event-card-image-container" className="relative">
           {event.image && (
             <div className="relative -mx-6 -mt-6 mb-6 h-48 overflow-hidden">
               <Image
@@ -40,7 +40,10 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         </div>
 
-        <div className={`flex-1 ${event.image ? 'pt-6' : ''}`}>
+        <div
+          data-testid="event-card-content-container"
+          className={`flex-1 ${event.image ? 'pt-6' : ''}`}
+        >
           <div className="mb-4 flex items-start justify-between gap-3">
             <div>
               <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white dark:group-hover:text-js-yellow">
@@ -101,6 +104,12 @@ export function EventCard({ event }: EventCardProps) {
               <span className="truncate">{event.location}</span>
             </div>
           </div>
+
+          {event.description && (
+            <div className="mb-4">
+              <span>{event.description}</span>
+            </div>
+          )}
 
           {event.speakers && event.speakers.length > 0 && (
             <div className="mb-4">

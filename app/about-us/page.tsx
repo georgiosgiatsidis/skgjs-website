@@ -106,8 +106,8 @@ const values = [
 ]
 
 const stats = [
-  { value: 2022, label: 'Founded' },
-  { value: 300, suffix: '+', label: 'Members' },
+  { value: 2024, label: 'Founded' },
+  { value: 380, suffix: '+', label: 'Members' },
   { value: 5, suffix: '+', label: 'Meetups' },
   { value: 10, suffix: '+', label: 'Speakers' },
 ]
@@ -181,7 +181,7 @@ export default async function AboutUsPage() {
       </section>
 
       {/* Team Members Section */}
-      <section className="py-24">
+      <section className="hidden py-24">
         <Container>
           <div className="mb-16 text-center">
             <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow dark:bg-js-yellow/20">

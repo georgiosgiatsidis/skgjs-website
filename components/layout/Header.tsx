@@ -14,7 +14,7 @@ const menuItems = [
   {
     label: 'Home',
     href: ROUTES.home,
-    showInDesktop: false,
+    showInDesktop: true,
     showInMobile: true,
   },
   {
@@ -232,7 +232,9 @@ export function Header() {
                         <span className="relative z-10">{item.label}</span>
                         <span
                           className={`absolute bottom-1 left-4 right-4 h-0.5 origin-left bg-js-yellow transition-transform duration-300 ease-out-expo ${
-                            isActive(item.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                            isActive(item.href)
+                              ? 'scale-x-100'
+                              : 'scale-x-0 group-hover:scale-x-100'
                           }`}
                         />
                         <span className="absolute inset-0 -z-10 rounded-lg bg-js-yellow/0 transition-colors duration-300 group-hover:bg-js-yellow/5" />

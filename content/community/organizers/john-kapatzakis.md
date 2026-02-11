@@ -1,4 +1,5 @@
 ---
+index: 4
 name: John Kapantzakis
 role: organizer
 title: Senior Frontend Developer

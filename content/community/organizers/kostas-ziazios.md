@@ -1,4 +1,5 @@
 ---
+index: 5
 name: Konstantinos Ziazios
 role: organizer
 title: Senior Technical Consultant

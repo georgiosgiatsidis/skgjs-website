@@ -1,9 +1,10 @@
 ---
+index: 1
 name: Elena Georgiou
 role: speaker
 title: JavaScript Architect
 company: Innovation Labs
-joinedDate: "2023-06-10"
+joinedDate: '2023-06-10'
 social:
   github: https://github.com/elenageorgiou
   linkedin: https://linkedin.com/in/elenageorgiou

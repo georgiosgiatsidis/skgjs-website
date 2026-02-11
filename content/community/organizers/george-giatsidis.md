@@ -1,4 +1,5 @@
 ---
+index: 2
 name: George Giatsidis
 role: organizer
 title: Software Engineering Team Lead
