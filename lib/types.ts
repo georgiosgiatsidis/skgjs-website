@@ -40,6 +40,7 @@ export interface SocialLinks {
 }
 
 export interface CommunityMember {
+  index: number
   slug: string
   name: string
   role: 'organizer' | 'member' | 'speaker'
@@ -89,4 +90,3 @@ export interface SiteConfig {
   speakerFormUrl?: string
   aboutMarkdown: string
 }
-
