@@ -285,7 +285,20 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
                   <div className="text-base font-semibold text-js-black/70">
                     {eventDate.getFullYear()}
                   </div>
-                  <div className="mt-4 rounded-full bg-js-black/10 px-4 py-1.5 backdrop-blur-sm">
+                  <div className="mt-4 flex items-center gap-1.5 rounded-full bg-js-black/10 px-4 py-1.5 backdrop-blur-sm">
+                    <svg
+                      className="h-3.5 w-3.5 text-js-black"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                     <span className="text-xs font-bold text-js-black">{event.time}</span>
                   </div>
                 </div>
