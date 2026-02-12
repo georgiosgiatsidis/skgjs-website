@@ -54,7 +54,10 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
               glowOnHover
             >
               {/* Illustration area */}
-              <div className="relative flex h-72 items-center justify-center bg-gradient-to-br from-js-yellow/10 via-js-yellow/5 to-transparent">
+              <div
+                data-testid="home-page-no-event-container"
+                className="relative flex h-72 items-center justify-center bg-gradient-to-br from-js-yellow/10 via-js-yellow/5 to-transparent"
+              >
                 {/* Decorative elements */}
                 <div className="absolute inset-0 overflow-hidden">
                   <div className="absolute -left-10 -top-10 h-48 w-48 rounded-full bg-js-yellow/20 blur-3xl" />
@@ -208,13 +211,12 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
     month: 'long',
     day: 'numeric',
   })
-  const formattedTime = eventDate.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-  })
 
   return (
-    <section className="relative overflow-hidden py-24">
+    <section
+      data-testid="home-page-next-event-preview-container"
+      className="relative overflow-hidden py-24"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-js-yellow/5 via-transparent to-purple-500/5 dark:from-js-yellow/10 dark:via-transparent dark:to-purple-900/10" />
         <div className="absolute -left-20 top-1/4 h-96 w-96 rounded-full bg-js-yellow/10 blur-3xl" />
@@ -284,7 +286,7 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
                     {eventDate.getFullYear()}
                   </div>
                   <div className="mt-4 rounded-full bg-js-black/10 px-4 py-1.5 backdrop-blur-sm">
-                    <span className="text-xs font-bold text-js-black">{formattedTime}</span>
+                    <span className="text-xs font-bold text-js-black">{event.time}</span>
                   </div>
                 </div>
               </motion.div>
