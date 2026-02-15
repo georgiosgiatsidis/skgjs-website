@@ -1,7 +1,7 @@
 ---
 siteName: 'Thessaloniki JavaScript Meetup'
 tagline: 'JavaScript community in Thessaloniki'
-description: 'Join the Thessaloniki JavaScript community for monthly meetups, talks, and networking with local developers.'
+description: 'Join the Thessaloniki JavaScript community for meetups, talks, and networking with local developers.'
 social:
   meetup: 'https://www.meetup.com/skg-js/'
   instagram: 'https://www.instagram.com/skgjs.gr/'
