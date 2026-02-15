@@ -6,13 +6,20 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { CountUp } from '@/components/animations/CountUp'
 import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
+import type { SiteStats } from '@/lib/stats'
 
-const stats = [
-  { value: 5, suffix: '+', label: 'Meetups' },
-  { value: 300, suffix: '+', label: 'Members' },
-  { value: 10, suffix: '+', label: 'Speakers' },
-  { value: 1, suffix: '+', label: 'Years' },
-]
+interface HeroProps {
+  stats: SiteStats
+}
+
+function buildStats(s: SiteStats) {
+  return [
+    { value: s.meetups, suffix: '', label: 'Meetups' },
+    { value: s.members, suffix: '+', label: 'Members' },
+    { value: s.speakers, suffix: '', label: 'Speakers' },
+    { value: s.founded, suffix: '', label: 'Founded' },
+  ]
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -37,7 +44,8 @@ const itemVariants = {
   },
 }
 
-export function Hero() {
+export function Hero({ stats: siteStats }: HeroProps) {
+  const stats = buildStats(siteStats)
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0 z-10 opacity-30">
