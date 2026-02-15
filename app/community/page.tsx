@@ -49,9 +49,9 @@ export default async function CommunityPage() {
   ]
 
   const stats = [
-    { value: 300, suffix: '+', label: 'Members' },
+    { value: 380, suffix: '+', label: 'Members' },
     { value: organizers.length, suffix: '', label: 'Organizers' },
-    { value: speakers.length, suffix: '+', label: 'Speakers' },
+    { value: speakers.length, suffix: '', label: 'Speakers' },
     { value: 5, suffix: '+', label: 'Meetups' },
   ]
 
