@@ -59,81 +59,78 @@ export function Footer({ social = {}, email = 'hello@skgjs.gr' }: FooterProps) {
         <div className="relative py-16">
           <div className="grid gap-12 md:grid-cols-3 md:gap-8">
             <div className="space-y-6">
-                <Link href={ROUTES.home} className="group inline-flex items-center gap-3">
-                  <motion.div
-                    whileHover={{ rotate: 12, scale: 1.1 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                  >
-                    <Image
-                      src="/images/logo.svg"
-                      alt={`${SITE_SHORT_NAME} Logo`}
-                      width={48}
-                      height={48}
-                      className="h-12 w-12"
-                    />
-                  </motion.div>
-                  <span className="text-2xl font-bold text-js-black dark:text-white">
-                    {SITE_SHORT_NAME}
-                  </span>
-                </Link>
-                <p className="max-w-xs text-gray-600 dark:text-gray-400">
-                  The JavaScript community in Thessaloniki. Join us for monthly meetups, talks, and
-                  networking with local developers.
-                </p>
-              </div>
+              <Link href={ROUTES.home} className="group inline-flex items-center gap-3">
+                <motion.div
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                >
+                  <Image
+                    src="/images/logo.svg"
+                    alt={`${SITE_SHORT_NAME} Logo`}
+                    width={48}
+                    height={48}
+                    className="h-12 w-12"
+                  />
+                </motion.div>
+                <span className="text-2xl font-bold text-js-black dark:text-white">
+                  {SITE_SHORT_NAME}
+                </span>
+              </Link>
+              <p className="max-w-xs text-gray-600 dark:text-gray-400">
+                The JavaScript community in Thessaloniki. Join us for meetups, talks, and networking
+                with local developers.
+              </p>
+            </div>
 
-              <div className="space-y-6">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                  Navigation
-                </h3>
-                <ul className="grid grid-cols-2 gap-3 sm:grid-cols-1">
-                  {footerLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="group inline-flex items-center text-gray-600 transition-colors duration-300 hover:text-js-yellow dark:text-gray-400 dark:hover:text-js-yellow"
-                      >
-                        <span className="relative">
-                          {link.label}
-                          <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-js-yellow transition-all duration-300 group-hover:w-full" />
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="space-y-6">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                Navigation
+              </h3>
+              <ul className="grid grid-cols-2 gap-3 sm:grid-cols-1">
+                {footerLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="group inline-flex items-center text-gray-600 transition-colors duration-300 hover:text-js-yellow dark:text-gray-400 dark:hover:text-js-yellow"
+                    >
+                      <span className="relative">
+                        {link.label}
+                        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-js-yellow transition-all duration-300 group-hover:w-full" />
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div className="space-y-6">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                  Connect with us
-                </h3>
-                <div className="flex gap-4">
-                  {Object.entries(social).map(([platform, url]) => {
-                    if (!url || !socialIcons[platform as keyof typeof socialIcons]) return null
-                    return (
-                      <motion.a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-all duration-300 hover:bg-js-yellow hover:text-js-black dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-js-yellow dark:hover:text-js-black"
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        whileTap={{ scale: 0.95 }}
-                        aria-label={platform}
-                      >
-                        {socialIcons[platform as keyof typeof socialIcons]}
-                      </motion.a>
-                    )
-                  })}
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500">
-                  <a
-                    href={`mailto:${email}`}
-                    className="transition-colors hover:text-js-yellow"
-                  >
-                    {email}
-                  </a>
-                </p>
+            <div className="space-y-6">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                Connect with us
+              </h3>
+              <div className="flex gap-4">
+                {Object.entries(social).map(([platform, url]) => {
+                  if (!url || !socialIcons[platform as keyof typeof socialIcons]) return null
+                  return (
+                    <motion.a
+                      key={platform}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-all duration-300 hover:bg-js-yellow hover:text-js-black dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-js-yellow dark:hover:text-js-black"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={platform}
+                    >
+                      {socialIcons[platform as keyof typeof socialIcons]}
+                    </motion.a>
+                  )
+                })}
+              </div>
+              <p className="text-sm text-gray-500 dark:text-gray-500">
+                <a href={`mailto:${email}`} className="transition-colors hover:text-js-yellow">
+                  {email}
+                </a>
+              </p>
             </div>
           </div>
 
