@@ -325,11 +325,6 @@ export default async function EventPage({ params }: EventPageProps) {
                           <h4 className="font-semibold text-gray-900 dark:text-white">
                             {speaker.name}
                           </h4>
-                          {speaker.bio && (
-                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                              {speaker.bio}
-                            </p>
-                          )}
                           {speaker.social && (
                             <div className="mt-2 flex gap-3">
                               {speaker.social.github && (
