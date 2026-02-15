@@ -46,7 +46,7 @@ export function AboutSection({ content }: AboutSectionProps) {
             transition={{ duration: 0.3 }}
           >
             <div className="p-8 md:p-12">
-              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-js-black prose-p:text-gray-600 prose-strong:text-js-black prose-ul:text-gray-600 dark:prose-headings:text-white dark:prose-p:text-gray-300 dark:prose-strong:text-white dark:prose-ul:text-gray-300">
+              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-js-black prose-p:my-6 prose-p:text-gray-600 prose-strong:text-js-black prose-ul:text-gray-600 dark:prose-headings:text-white dark:prose-p:text-gray-300 dark:prose-strong:text-white dark:prose-ul:text-gray-300">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
               </div>
             </div>

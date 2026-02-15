@@ -22,6 +22,12 @@ tags: ['microfrontends', 'architecture', 'ai', 'ux', 'haii']
 image: 'https://secure.meetupstatic.com/photos/event/1/d/0/3/highres_530347427.jpeg'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Hey folks!
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Here we go again,
+
+The time for our 1st Meetup for the Academic Year 2025/26 and the 5th overall is just around the corner.
+
+Time to catch-up with both familiar and new faces. We are happy to announce that it will take place on October 7, at 19.00 sharp at OKThess.
+
+Our agenda is once again packed with two interesting talks.
