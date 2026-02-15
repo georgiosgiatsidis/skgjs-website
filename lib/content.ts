@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseMarkdown } from './markdown'
-import type { Event, CommunityMember, Sponsor, SiteConfig, Speaker, Talk } from './types'
+import type { Event, CommunityMember, Sponsor, SiteConfig, Speaker, SpeakerRef, Talk } from './types'
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -22,6 +22,29 @@ function isUpcomingEventServer(eventDate: string): boolean {
   })
   const todayInAthens = athensFormatter.format(now) // Format: YYYY-MM-DD
   return eventDate >= todayInAthens
+}
+
+/**
+ * Resolves a speaker reference (path) into a full Speaker object
+ * by reading the corresponding community member file.
+ */
+function resolveSpeaker(ref: SpeakerRef): Speaker {
+  const filePath = path.join(process.cwd(), `${ref.path}.md`)
+
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Speaker file not found: ${filePath}`)
+  }
+
+  const fileContent = fs.readFileSync(filePath, 'utf-8')
+  const { frontmatter, markdown } = parseMarkdown(fileContent)
+  const member = frontmatter as Record<string, unknown>
+
+  return {
+    name: member.name as string,
+    bio: markdown || undefined,
+    avatar: member.avatar as string | undefined,
+    social: member.social as Speaker['social'],
+  }
 }
 
 export function getAllEvents(): Event[] {
@@ -46,9 +69,19 @@ export function getAllEvents(): Event[] {
         markdown,
       } as Event
 
-      // Derive speakers from talks for backward compatibility
-      if (event.talks && event.talks.length > 0 && (!event.speakers || event.speakers.length === 0)) {
-        event.speakers = event.talks.flatMap((talk: Talk) => talk.speaker) as Speaker[]
+      // Resolve speaker path references into full Speaker objects
+      if (event.talks && event.talks.length > 0) {
+        const resolvedTalks = event.talks.map((talk: Talk) => {
+          const rawSpeakers = talk.speaker as unknown as (SpeakerRef | Speaker)[]
+          return {
+            ...talk,
+            speaker: rawSpeakers.map((ref) =>
+              'path' in ref ? resolveSpeaker(ref as SpeakerRef) : ref as Speaker
+            ),
+          }
+        })
+        event.talks = resolvedTalks
+        event.speakers = resolvedTalks.flatMap((talk) => talk.speaker)
       }
 
       return event

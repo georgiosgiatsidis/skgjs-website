@@ -9,15 +9,11 @@ talks:
   - title: 'Youtube Share Clip - The Journey of Building an Open Source Chrome Browser Extension with 1000+ Users'
     description: 'The behind-the-scenes developer story of Youtube Share Clip: Building an open source extension for Chrome, technologies used, promotion strategies, and business side lessons.'
     speaker:
-      - name: 'Elias Papavasileiou'
-        social:
-          linkedin: 'https://www.linkedin.com/in/elias-papavasileiou/'
+      - path: 'content/community/speakers/elias-papavasileiou'
   - title: 'E2E Testing Coverage with Playwright & Istanbul'
     description: 'Integration of Playwright for end-to-end testing with Istanbul code coverage capabilities. Setting up a robust testing environment that automates user interactions.'
     speaker:
-      - name: 'John Pourdanis'
-        social:
-          linkedin: 'https://www.linkedin.com/in/jpourdanis/'
+      - path: 'content/community/speakers/john-pourdanis'
 tags: ['chrome-extension', 'open-source', 'testing', 'playwright', 'e2e']
 image: 'https://secure.meetupstatic.com/photos/event/b/d/0/d/highres_528348397.jpeg'
 ---

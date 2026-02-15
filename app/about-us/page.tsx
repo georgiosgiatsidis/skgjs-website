@@ -1,4 +1,5 @@
 import { getSiteConfig } from '@/lib/content'
+import { getStats } from '@/lib/stats'
 import { Container } from '@/components/layout/Container'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { CountUp } from '@/components/animations/CountUp'
@@ -105,15 +106,16 @@ const values = [
   },
 ]
 
-const stats = [
-  { value: 2024, label: 'Founded' },
-  { value: 380, suffix: '+', label: 'Members' },
-  { value: 5, suffix: '+', label: 'Meetups' },
-  { value: 10, suffix: '+', label: 'Speakers' },
-]
-
 export default async function AboutUsPage() {
   const siteConfig = await getSiteConfig()
+  const siteStats = getStats()
+
+  const stats = [
+    { value: siteStats.founded, label: 'Founded' },
+    { value: siteStats.members, suffix: '+', label: 'Members' },
+    { value: siteStats.meetups, suffix: '', label: 'Meetups' },
+    { value: siteStats.speakers, suffix: '', label: 'Speakers' },
+  ]
 
   return (
     <>
@@ -168,7 +170,7 @@ export default async function AboutUsPage() {
           <div className="mx-auto max-w-4xl">
             <Card className="overflow-hidden p-0">
               <div className="p-8 md:p-12">
-                <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:my-6 prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
+                <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-js-black prose-p:my-6 prose-p:text-gray-600 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline prose-strong:text-js-black prose-ul:text-gray-600 dark:prose-headings:text-white dark:prose-p:text-gray-300 dark:prose-strong:text-white dark:prose-ul:text-gray-300">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {siteConfig.aboutMarkdown}
                   </ReactMarkdown>

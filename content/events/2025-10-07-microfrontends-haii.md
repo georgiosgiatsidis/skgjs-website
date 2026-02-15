@@ -9,15 +9,11 @@ talks:
   - title: 'Microfrontends in Practice'
     description: 'Explore what problems microfrontends solve and what to consider before adopting this approach. Deep dive into Module Federation, Single-SPA, and Web Components.'
     speaker:
-      - name: 'Alexandros Tsichouridis'
-        social:
-          linkedin: 'https://www.linkedin.com/in/alexandros-tsichouridis-80771415a/'
+      - path: 'content/community/speakers/alexandros-tsichouridis'
   - title: 'Human-AI Interaction (HAII)'
     description: 'Designing interactions with AI is different from traditional HCI. Human-AI Interaction is probabilistic, dynamic, and sometimes unpredictable. Practical takeaways for building AI features.'
     speaker:
-      - name: 'Eleftheria Batsou'
-        social:
-          linkedin: 'https://www.linkedin.com/in/eleftheriabatsou/'
+      - path: 'content/community/organizers/eleftheria-batsou'
 tags: ['microfrontends', 'architecture', 'ai', 'ux', 'haii']
 image: 'https://secure.meetupstatic.com/photos/event/1/d/0/3/highres_530347427.jpeg'
 ---

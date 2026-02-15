@@ -9,15 +9,11 @@ talks:
   - title: 'Gen AI and LLMs in Javascript'
     description: 'An introduction to Generative AI and Large Language Models (LLMs) using Javascript. Practical demonstrations on how to setup and use OpenAI API within Jupyter Notebooks.'
     speaker:
-      - name: 'Panagiota Mitsopoulou'
-        social:
-          linkedin: 'https://www.linkedin.com/in/mgiota/'
+      - path: 'content/community/speakers/panagiota-mitsopoulou'
   - title: 'The Power of Web Assembly in Web Performance'
     description: 'Explore why WebAssembly is a game-changer for JavaScript developers, its practical use cases, and walk through a hands-on example.'
     speaker:
-      - name: 'Georgios Giatsidis'
-        social:
-          linkedin: 'https://www.linkedin.com/in/georgegiatsidis/'
+      - path: 'content/community/organizers/george-giatsidis'
 tags: ['ai', 'llm', 'webassembly', 'performance']
 image: 'https://secure.meetupstatic.com/photos/event/7/d/b/1/highres_525992177.jpeg'
 ---

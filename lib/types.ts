@@ -9,6 +9,10 @@ export interface Speaker {
   }
 }
 
+export interface SpeakerRef {
+  path: string
+}
+
 export interface Talk {
   title: string
   description?: string

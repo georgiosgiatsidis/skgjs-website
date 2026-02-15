@@ -1,4 +1,5 @@
 import { getAllCommunityMembers } from '@/lib/content'
+import { getStats } from '@/lib/stats'
 import { Container } from '@/components/layout/Container'
 import { MemberGrid } from '@/components/community/MemberGrid'
 import { PhotoGallery } from '@/components/community/PhotoGallery'
@@ -48,11 +49,13 @@ export default async function CommunityPage() {
     },
   ]
 
+  const siteStats = getStats()
+
   const stats = [
-    { value: 300, suffix: '+', label: 'Members' },
-    { value: organizers.length, suffix: '', label: 'Organizers' },
-    { value: speakers.length, suffix: '+', label: 'Speakers' },
-    { value: 5, suffix: '+', label: 'Meetups' },
+    { value: siteStats.members, suffix: '+', label: 'Members' },
+    { value: siteStats.organizers, suffix: '', label: 'Organizers' },
+    { value: siteStats.speakers, suffix: '', label: 'Speakers' },
+    { value: siteStats.meetups, suffix: '', label: 'Meetups' },
   ]
 
   return (
