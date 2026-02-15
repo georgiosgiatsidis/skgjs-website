@@ -168,7 +168,7 @@ export default async function AboutUsPage() {
           <div className="mx-auto max-w-4xl">
             <Card className="overflow-hidden p-0">
               <div className="p-8 md:p-12">
-                <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
+                <div className="prose prose-lg dark:prose-invert prose-headings:text-js-black dark:prose-headings:text-white prose-p:my-6 prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-strong:text-js-black dark:prose-strong:text-white prose-ul:text-gray-600 dark:prose-ul:text-gray-300 prose-a:text-js-yellow prose-a:no-underline hover:prose-a:underline max-w-none">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {siteConfig.aboutMarkdown}
                   </ReactMarkdown>
