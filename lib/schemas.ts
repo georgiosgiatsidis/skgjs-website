@@ -13,13 +13,16 @@ export const SpeakerSchema = z.object({
     .optional(),
 })
 
+export const SpeakerRefSchema = z.object({
+  path: z.string().min(1),
+})
+
 export const EventSchema = z.object({
   title: z.string().min(5).max(100),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   time: z.string().regex(/^\d{2}:\d{2}(-\d{2}:\d{2})?$/),
   location: z.string().min(10),
   rsvpLink: z.string().url().startsWith('https://'),
-  speakers: z.array(SpeakerSchema).min(1),
   tags: z.array(z.string()).optional(),
   capacity: z.number().positive().optional(),
   image: z.string().optional(),

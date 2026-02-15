@@ -9,15 +9,11 @@ talks:
   - title: 'Bridging Web2 and Web3: Interact with Smart Wallets in React Applications'
     description: 'Web3 often feels like a steep learning curve involving Solidity and smart contracts. This talk demonstrates how to enable a standard React application to interact directly with the blockchain using TypeScript, Wagmi, and Viem, no smart contracts required.'
     speaker:
-      - name: 'Georgios Michoulis'
-        social:
-          linkedin: 'https://www.linkedin.com/in/george-michoulis/'
+      - path: 'content/community/speakers/georgios-michoulis'
   - title: 'Predictive Streaming UIs with local LLMs: Impact on React State'
     description: 'Modern user interfaces are evolving beyond simple request-and-response interactions. In this talk, we’ll build predictive streaming UIs in React powered by local LLMs using Ollama and a Llama model. Instead of relying on loading spinners, the UI progressively reveals intermediate steps in real time.'
     speaker:
-      - name: 'Evangelia Mitsopoulou'
-        social:
-          linkedin: 'https://www.linkedin.com/in/evangelia-mitsopoulou/'
+      - path: 'content/community/organizers/evangelia-mitsopoulou'
 tags: ['web3', 'react', 'LLM']
 image: 'https://secure.meetupstatic.com/photos/event/c/c/3/a/highres_532492282.webp'
 ---

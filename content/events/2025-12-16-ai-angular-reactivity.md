@@ -9,15 +9,11 @@ talks:
   - title: 'Angular: Build with AI'
     description: 'Learn how Angular developers can develop faster and more efficiently using AI: Angular-focused LLM prompts, AI-powered IDE workflow, and best practices for AI-assisted development.'
     speaker:
-      - name: 'Konstantinos Ziazios'
-        social:
-          linkedin: 'https://gr.linkedin.com/in/ziaziosk'
+      - path: 'content/community/organizers/kostas-ziazios'
   - title: 'Virtual DOM vs Signals: Two Roads to Reactivity'
     description: 'Deep dive into two leading paradigms: Virtual DOM diffing (React) and fine-grained signals (Solid.js). Performance trade-offs and how the React Compiler optimizes React.'
     speaker:
-      - name: 'Savvas Papageorgiadis'
-        social:
-          linkedin: 'https://gr.linkedin.com/in/papsavas'
+      - path: 'content/community/speakers/savvas-papageorgiadis'
 tags: ['angular', 'ai', 'reactivity', 'signals', 'virtual-dom']
 image: 'https://secure.meetupstatic.com/photos/event/1/6/e/3/highres_531485859.jpeg'
 ---

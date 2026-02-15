@@ -9,15 +9,11 @@ talks:
   - title: 'The Evolution of Web Rendering Architectures'
     description: 'From Server to Client and Back Again – A deep dive into how web rendering architectures have evolved and their impact on today’s web.'
     speaker:
-      - name: 'Evangelia Mitsopoulou'
-        social:
-          linkedin: 'https://www.linkedin.com/in/mgiota/'
+      - path: 'content/community/organizers/evangelia-mitsopoulou'
   - title: 'Angular Signals'
     description: 'Explore the exciting world of Angular Signals and their role in reactivity for modern Angular applications.'
     speaker:
-      - name: 'Konstantinos Ziazios'
-        social:
-          linkedin: 'https://gr.linkedin.com/in/ziaziosk'
+      - path: 'content/community/organizers/kostas-ziazios'
 tags: ['web-rendering', 'angular', 'signals']
 image: 'https://secure.meetupstatic.com/photos/event/4/e/8/a/highres_524780106.jpeg'
 ---
