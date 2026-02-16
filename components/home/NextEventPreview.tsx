@@ -204,7 +204,12 @@ export function NextEventPreview({ event, speakerFormUrl }: NextEventPreviewProp
     )
   }
 
-  const eventDate = new Date(event.date)
+  // Build event Date in Europe/Athens timezone (handles EET/EEST automatically)
+  const asUtc = new Date(`${event.date}T${event.time}:00Z`)
+  const utcStr = asUtc.toLocaleString('en-US', { timeZone: 'UTC' })
+  const athensStr = asUtc.toLocaleString('en-US', { timeZone: 'Europe/Athens' })
+  const offsetMs = new Date(athensStr).getTime() - new Date(utcStr).getTime()
+  const eventDate = new Date(asUtc.getTime() - offsetMs)
   const formattedDate = eventDate.toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
