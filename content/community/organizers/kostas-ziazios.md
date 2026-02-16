@@ -13,6 +13,7 @@ skills:
   - Security
 contributedTalks:
   - AI Supercharged Angular
+  - Angular Signals
 ---
 
 Ziazios Konstantinos is a long time Software Engineer with roots in C++. He has designed, and developed many complex solutions (web, desktop or mobile) using tools like .NET/.net core, NodeJS, angular, reactjs etc. He has built and maintained systems from years, and has experience in devops tools like Docker and Kubernetes. He has experience in cloud and on premise solutions.

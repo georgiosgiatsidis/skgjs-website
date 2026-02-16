@@ -13,6 +13,7 @@ skills:
   - React
 contributedTalks:
   - Web Rendering Architectures
+  - Predictive Streaming UIs with local LLMs - Impact on React State
 ---
 
 With two decades of experience spanning established tech companies, research institutions, and startups, I am dedicated to empowering frontend engineers to thrive in the ever-evolving tech landscape. As the founder of Philomath, a frontend engineering academy, I focus on providing high-quality, framework-agnostic training that not only addresses current industry needs but also prepares engineers for future growth. ￼ ￼
