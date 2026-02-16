@@ -71,7 +71,8 @@ export function Hero({ stats: siteStats }: HeroProps) {
 
       <div className="pointer-events-none absolute inset-0 z-[0]">
         <Image
-          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop"
+          // src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop"
+          src="/images/hero-cover.jpg"
           alt="JavaScript developers collaborating"
           fill
           className="object-cover"
