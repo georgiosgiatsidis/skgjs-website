@@ -12,6 +12,7 @@ talks:
       - path: 'content/community/organizers/kostas-ziazios'
   - title: 'Virtual DOM vs Signals: Two Roads to Reactivity'
     description: 'Deep dive into two leading paradigms: Virtual DOM diffing (React) and fine-grained signals (Solid.js). Performance trade-offs and how the React Compiler optimizes React.'
+    presentation: 'virtual-dom/presentation.pptx'
     speaker:
       - path: 'content/community/speakers/savvas-papageorgiadis'
 tags: ['angular', 'ai', 'reactivity', 'signals', 'virtual-dom']

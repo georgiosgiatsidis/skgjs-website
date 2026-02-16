@@ -12,6 +12,7 @@ talks:
       - path: 'content/community/speakers/alexandros-tsichouridis'
   - title: 'Human-AI Interaction (HAII)'
     description: 'Designing interactions with AI is different from traditional HCI. Human-AI Interaction is probabilistic, dynamic, and sometimes unpredictable. Practical takeaways for building AI features.'
+    presentation: 'beyond-clicks/presentation.pptx'
     speaker:
       - path: 'content/community/organizers/eleftheria-batsou'
 tags: ['microfrontends', 'architecture', 'ai', 'ux', 'haii']

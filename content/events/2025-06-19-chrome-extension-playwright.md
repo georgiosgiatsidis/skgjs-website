@@ -12,6 +12,7 @@ talks:
       - path: 'content/community/speakers/elias-papavasileiou'
   - title: 'E2E Testing Coverage with Playwright & Istanbul'
     description: 'Integration of Playwright for end-to-end testing with Istanbul code coverage capabilities. Setting up a robust testing environment that automates user interactions.'
+    presentation: 'e2e/presentation.pptx'
     speaker:
       - path: 'content/community/speakers/john-pourdanis'
 tags: ['chrome-extension', 'open-source', 'testing', 'playwright', 'e2e']
