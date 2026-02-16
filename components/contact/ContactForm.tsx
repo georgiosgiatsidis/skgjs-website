@@ -15,7 +15,7 @@ export function ContactForm() {
     setErrorMessage('')
 
     const formData = new FormData(e.currentTarget)
-    
+
     // Honeypot check
     if (formData.get('botcheck')) {
       setFormState('error')
@@ -46,16 +46,8 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
-      <input
-        type="hidden"
-        name="access_key"
-        value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''}
-      />
-      <input
-        type="hidden"
-        name="subject"
-        value="SKG JS Contact Form Submission"
-      />
+      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''} />
+      <input type="hidden" name="subject" value="SKG JS Contact Form Submission" />
       <input
         type="checkbox"
         name="botcheck"
@@ -111,7 +103,7 @@ export function ContactForm() {
             'w-full rounded-lg border border-gray-300 px-4 py-2 transition-colors',
             'focus:border-js-yellow focus:outline-none focus:ring-2 focus:ring-js-yellow focus:ring-opacity-50',
             'dark:border-gray-600 dark:bg-gray-700 dark:text-white',
-            'disabled:opacity-50 disabled:cursor-not-allowed'
+            'disabled:cursor-not-allowed disabled:opacity-50'
           )}
         />
       </div>

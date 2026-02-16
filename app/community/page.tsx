@@ -112,7 +112,8 @@ export default async function CommunityPage() {
           {speakers.length > 0 && <MemberGrid members={speakers} title="Past Speakers" />}
 
           {/* Photo Gallery */}
-          <PhotoGallery photos={photos} />
+          {/* [TODO] Bring back when we have some photos */}
+          {/* <PhotoGallery photos={photos} /> */}
         </Container>
       </section>
     </>

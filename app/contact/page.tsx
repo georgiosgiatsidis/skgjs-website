@@ -41,10 +41,10 @@ const socialLinks = [
 export default function ContactPage() {
   const config = getSiteConfig()
 
-  const socialWithLinks = socialLinks.map((social) => ({
-    ...social,
-    href: config.social[social.name.toLowerCase() as keyof typeof config.social],
-  }))
+  const socialWithLinks = socialLinks.reduce((acc, social) => {
+    const href = config.social[social.name.toLowerCase() as keyof typeof config.social]
+    return [...acc, ...(href ? [{ ...social, href }] : [])]
+  }, [])
 
   return (
     <>
@@ -120,7 +120,12 @@ export default function ContactPage() {
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-js-yellow text-js-black">
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -139,17 +144,23 @@ export default function ContactPage() {
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Location
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Location</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Thessaloniki, Greece
-                </p>
+                <p className="text-gray-600 dark:text-gray-400">Thessaloniki, Greece</p>
               </div>
             </div>
           </div>
