@@ -8,6 +8,7 @@ rsvpLink: 'https://www.meetup.com/skg-js/events/305900778/'
 talks:
   - title: 'Gen AI and LLMs in Javascript'
     description: 'An introduction to Generative AI and Large Language Models (LLMs) using Javascript. Practical demonstrations on how to setup and use OpenAI API within Jupyter Notebooks.'
+    presentation: 'llms/presentation.key'
     speaker:
       - path: 'content/community/speakers/panagiota-mitsopoulou'
   - title: 'The Power of Web Assembly in Web Performance'

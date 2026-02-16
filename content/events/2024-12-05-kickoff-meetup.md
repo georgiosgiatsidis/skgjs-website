@@ -8,6 +8,7 @@ rsvpLink: 'https://www.meetup.com/skg-js/events/304635003/'
 talks:
   - title: 'The Evolution of Web Rendering Architectures'
     description: 'From Server to Client and Back Again – A deep dive into how web rendering architectures have evolved and their impact on today’s web.'
+    presentation: 'web-rendering/presentation.pptx'
     speaker:
       - path: 'content/community/organizers/evangelia-mitsopoulou'
   - title: 'Angular Signals'

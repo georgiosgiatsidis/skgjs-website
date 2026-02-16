@@ -8,6 +8,7 @@ rsvpLink: 'https://www.meetup.com/skg-js/events/307229886/'
 talks:
   - title: 'Thinking Beyond Core Web Vitals'
     description: 'While Core Web Vitals are great baseline indicators, they do not always tell the full story. Explore how the native Performance API can be used to define custom performance metrics.'
+    presentation: 'web-vitals/presentation.key'
     speaker:
       - path: 'content/community/speakers/katerina-patticha'
   - title: 'How React 19 New Features Can Improve Our Apps'
