@@ -5,9 +5,14 @@ import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { clsx } from 'clsx'
 
-export function ContactForm() {
+interface ContactFormProps {
+  disabled?: boolean
+}
+
+export function ContactForm({ disabled = false }: ContactFormProps) {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const isDisabled = disabled || formState === 'submitting'
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -15,7 +20,7 @@ export function ContactForm() {
     setErrorMessage('')
 
     const formData = new FormData(e.currentTarget)
-    
+
     // Honeypot check
     if (formData.get('botcheck')) {
       setFormState('error')
@@ -46,16 +51,8 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
-      <input
-        type="hidden"
-        name="access_key"
-        value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''}
-      />
-      <input
-        type="hidden"
-        name="subject"
-        value="SKG JS Contact Form Submission"
-      />
+      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''} />
+      <input type="hidden" name="subject" value="SKG JS Contact Form Submission" />
       <input
         type="checkbox"
         name="botcheck"
@@ -72,7 +69,8 @@ export function ContactForm() {
           type="text"
           required
           placeholder="Your name"
-          disabled={formState === 'submitting'}
+          disabled={isDisabled}
+          className="disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:disabled:bg-gray-800"
         />
         <Input
           label="Email"
@@ -80,7 +78,8 @@ export function ContactForm() {
           type="email"
           required
           placeholder="your@email.com"
-          disabled={formState === 'submitting'}
+          disabled={isDisabled}
+          className="disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:disabled:bg-gray-800"
         />
       </div>
 
@@ -90,7 +89,8 @@ export function ContactForm() {
         type="text"
         required
         placeholder="What is this about?"
-        disabled={formState === 'submitting'}
+        disabled={isDisabled}
+        className="disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:disabled:bg-gray-800"
       />
 
       <div>
@@ -106,12 +106,12 @@ export function ContactForm() {
           rows={6}
           required
           placeholder="Your message..."
-          disabled={formState === 'submitting'}
+          disabled={isDisabled}
           className={clsx(
             'w-full rounded-lg border border-gray-300 px-4 py-2 transition-colors',
             'focus:border-js-yellow focus:outline-none focus:ring-2 focus:ring-js-yellow focus:ring-opacity-50',
             'dark:border-gray-600 dark:bg-gray-700 dark:text-white',
-            'disabled:opacity-50 disabled:cursor-not-allowed'
+            'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100 dark:disabled:bg-gray-800'
           )}
         />
       </div>
@@ -134,7 +134,7 @@ export function ContactForm() {
         type="submit"
         variant="primary"
         size="lg"
-        disabled={formState === 'submitting'}
+        disabled={isDisabled}
         className="w-full sm:w-auto"
       >
         {formState === 'submitting' ? 'Sending...' : 'Send Message'}

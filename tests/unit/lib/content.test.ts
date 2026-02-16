@@ -166,8 +166,8 @@ describe('Content Loading Utilities', () => {
 
     it('should have contact email', async () => {
       const config = await getSiteConfig()
-      expect(config.contact.email).toBeDefined()
-      expect(typeof config.contact.email).toBe('string')
+      expect(config.contact?.email).toBeDefined()
+      expect(typeof config.contact?.email).toBe('string')
     })
 
     it('should have about markdown content', async () => {
