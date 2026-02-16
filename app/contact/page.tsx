@@ -41,10 +41,10 @@ const socialLinks = [
 export default function ContactPage() {
   const config = getSiteConfig()
 
-  const socialWithLinks = socialLinks.reduce((acc, social) => {
+  const socialWithLinks = socialLinks.flatMap((social) => {
     const href = config.social[social.name.toLowerCase() as keyof typeof config.social]
-    return [...acc, ...(href ? [{ ...social, href }] : [])]
-  }, [])
+    return href ? [{ ...social, href }] : []
+  })
 
   return (
     <>
