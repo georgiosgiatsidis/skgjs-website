@@ -47,7 +47,7 @@ const socialIcons = {
   ),
 }
 
-export function Footer({ social = {}, email = 'hello@skgjs.gr' }: FooterProps) {
+export function Footer({ social = {}, email }: FooterProps) {
   return (
     <footer className="relative overflow-hidden border-t border-gray-200 bg-gradient-to-b from-gray-50 to-white dark:border-gray-800 dark:from-gray-900 dark:to-gray-950">
       <div className="pointer-events-none absolute inset-0">
@@ -126,11 +126,13 @@ export function Footer({ social = {}, email = 'hello@skgjs.gr' }: FooterProps) {
                   )
                 })}
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-500">
-                <a href={`mailto:${email}`} className="transition-colors hover:text-js-yellow">
-                  {email}
-                </a>
-              </p>
+              {email && (
+                <p className="text-sm text-gray-500 dark:text-gray-500">
+                  <a href={`mailto:${email}`} className="transition-colors hover:text-js-yellow">
+                    {email}
+                  </a>
+                </p>
+              )}
             </div>
           </div>
 

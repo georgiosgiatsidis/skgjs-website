@@ -5,8 +5,8 @@ description: 'Join the Thessaloniki JavaScript community for meetups, talks, and
 social:
   meetup: 'https://www.meetup.com/skg-js/'
   instagram: 'https://www.instagram.com/skgjs.gr/'
-contact:
-  email: 'organizers@skgjs.gr'
+# contact:
+#   email: 'organizers@skgjs.gr'
 speakerFormUrl: 'https://forms.gle/your-speaker-form-id'
 ---
 

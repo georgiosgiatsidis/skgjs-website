@@ -54,10 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const siteConfig = await getSiteConfig()
 
   return (
-    <html
-      lang="en"
-      className={`dark ${ubuntu.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en" className={`dark ${ubuntu.variable} ${jetbrainsMono.variable}`}>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
@@ -67,7 +64,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <Footer social={siteConfig.social} email={siteConfig.contact.email} />
+        <Footer social={siteConfig.social} email={siteConfig.contact?.email} />
       </body>
     </html>
   )

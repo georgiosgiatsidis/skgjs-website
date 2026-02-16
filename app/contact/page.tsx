@@ -79,11 +79,11 @@ export default function ContactPage() {
       <section className="py-16 md:py-24">
         <Container>
           <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
-            <div className="rounded-3xl bg-white p-8 shadow-xl dark:bg-gray-900 md:p-10">
+            <div className="rounded-3xl bg-white p-8 shadow-xl dark:bg-gray-900 md:p-10 md:pt-0">
               <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
-                Send us a message
+                Send us a message{!config.contact?.email ? ' (Coming soom)' : ''}
               </h2>
-              <ContactForm />
+              <ContactForm disabled={!config.contact?.email} />
             </div>
 
             <div className="space-y-8">
@@ -116,29 +116,36 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-js-yellow/10 to-transparent p-6 dark:border-gray-800">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-js-yellow text-js-black">
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
+              {config.contact?.email && (
+                <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-js-yellow/10 to-transparent p-6 dark:border-gray-800">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-js-yellow text-js-black">
+                      <svg
+                        className="h-5 w-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      Email Us Directly
+                    </h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Email Us Directly
-                  </h3>
+                  <a
+                    href={`mailto:${config.contact?.email}`}
+                    className="text-lg font-medium text-js-yellow transition-colors hover:text-yellow-500"
+                  >
+                    {config.contact?.email}
+                  </a>
                 </div>
-                <a
-                  href={`mailto:${config.contact.email}`}
-                  className="text-lg font-medium text-js-yellow transition-colors hover:text-yellow-500"
-                >
-                  {config.contact.email}
-                </a>
-              </div>
+              )}
 
               <div className="rounded-2xl border border-gray-200 p-6 dark:border-gray-800">
                 <div className="mb-4 flex items-center gap-3">
