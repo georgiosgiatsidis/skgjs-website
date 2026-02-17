@@ -4,13 +4,15 @@ Official website for the Thessaloniki JavaScript Meetup community - connecting J
 
 ## 🛠 Tech Stack
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Language**: [TypeScript 5](https://www.typescriptlang.org/)
+- **UI**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Content**: Markdown files with [gray-matter](https://github.com/jonschlinkert/gray-matter)
 - **Markdown Rendering**: [react-markdown](https://github.com/remarkjs/react-markdown) + [remark-gfm](https://github.com/remarkjs/remark-gfm)
 - **Validation**: [Zod](https://zod.dev/)
-- **Testing**: 
+- **Testing**:
   - E2E: [Playwright](https://playwright.dev/)
   - Unit: [Vitest](https://vitest.dev/)
 - **Deployment**: GitHub Pages
@@ -47,10 +49,14 @@ Official website for the Thessaloniki JavaScript Meetup community - connecting J
 - `npm run build` - Build for production
 - `npm start` - Start production server
 - `npm run lint` - Run ESLint
+- `npm run lint:fix` - Run ESLint with auto-fix
+- `npm run type-check` - Run TypeScript type checking
 - `npm run format` - Format code with Prettier
 - `npm test` - Run unit tests
+- `npm run test:watch` - Run unit tests in watch mode
 - `npm run test:e2e` - Run E2E tests
-- `npm run test:ui` - Run E2E tests with UI
+- `npm run test:e2e:ui` - Run E2E tests with UI
+- `npm run analyze` - Build with bundle analyzer
 
 ## 📁 Project Structure
 
@@ -59,14 +65,16 @@ skgjs-website/
 ├── app/                      # Next.js App Router pages
 │   ├── layout.tsx           # Root layout
 │   ├── page.tsx             # Homepage
+│   ├── about-us/            # About us page
 │   ├── events/              # Events page
 │   ├── community/           # Community page
 │   ├── contact/             # Contact page
 │   ├── sitemap.ts           # Dynamic sitemap
 │   └── robots.ts            # Robots.txt
 ├── components/              # React components
-│   ├── ui/                  # UI components (Button, Card, Input)
-│   ├── layout/              # Layout components (Header, Footer)
+│   ├── ui/                  # UI components (Button, Card, Input, Countdown)
+│   ├── layout/              # Layout components (Header, Footer, Container)
+│   ├── animations/          # Animation components (ScrollReveal, CountUp, ParallaxWrapper)
 │   ├── events/              # Event-related components
 │   ├── community/           # Community-related components
 │   ├── contact/             # Contact form components
@@ -74,21 +82,24 @@ skgjs-website/
 ├── content/                 # Markdown content files
 │   ├── events/             # Event markdown files
 │   ├── community/          # Community member profiles
-│   ├── sponsors/           # Sponsor information
+│   │   ├── organizers/     # Organizer profiles
+│   │   └── speakers/       # Speaker profiles
+│   ├── partners/           # Partner information
 │   └── site-config.md      # Site configuration
 ├── lib/                     # Utilities and helpers
 │   ├── types.ts            # TypeScript types
 │   ├── schemas.ts          # Zod validation schemas
 │   ├── markdown.ts         # Markdown parsing utilities
 │   ├── content.ts          # Content loading functions
+│   ├── event-utils.ts      # Event date/status helpers
+│   ├── stats.ts            # Community statistics
 │   └── constants.ts        # App constants
 ├── public/                  # Static assets
 │   └── images/             # Images and logos
 ├── styles/                  # Global styles
-├── tests/                   # Test files
-│   ├── e2e/                # End-to-end tests
-│   └── unit/               # Unit tests
-└── specs/                   # Project specifications
+└── tests/                   # Test files
+    ├── e2e/                # End-to-end tests
+    └── unit/               # Unit tests
 ```
 
 ## 📄 Content Management
@@ -210,7 +221,7 @@ Edit `content/site-config.md` to update:
 npm run test:e2e
 
 # Run with UI
-npm run test:ui
+npm run test:e2e:ui
 
 # Run specific test file
 npx playwright test tests/e2e/events.spec.ts
@@ -222,7 +233,7 @@ npx playwright test tests/e2e/events.spec.ts
 npm test
 
 # Watch mode
-npm test -- --watch
+npm run test:watch
 ```
 
 ## 🚀 Deployment
@@ -251,22 +262,17 @@ npm run build
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📜 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## 🙏 Acknowledgments
 
 - Thanks to all the speakers, organizers, and members of the Thessaloniki JavaScript community
-- Built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), and ❤️
+- Built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), and [Framer Motion](https://www.framer.com/motion/)
 
 ## 📧 Contact
 
 - Website: [skgjs.gr](https://skgjs.gr)
 - Email: info@skgjs.gr
-- Instagram: [@skgjs.gr](https://instagram.com/skgjs.gr)
-- GitHub: [github.com/skgjs](https://github.com/skgjs)
-- LinkedIn: [Thessaloniki JavaScript Meetup](https://linkedin.com/company/skgjs)
+- Meetup: [SKG JS](https://www.meetup.com/skg-js/)
+- Instagram: [@skgjs.gr](https://www.instagram.com/skgjs.gr/)
 
 ---
 
