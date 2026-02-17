@@ -107,66 +107,91 @@ skgjs-website/
 
 ### Adding a New Event
 
-1. Create a new markdown file in `content/events/`:
+1. Create a new markdown file in `content/events/` named `YYYY-MM-DD-event-slug.md`:
    ```bash
-   touch content/events/my-event-slug.md
+   touch content/events/2025-11-15-my-event.md
    ```
 
 2. Add frontmatter and content:
    ```markdown
    ---
-   title: "Event Title"
-   date: "2025-11-15"
-   time: "19:00"
-   location: "Venue Name, Thessaloniki"
-   status: "upcoming"
-   rsvpLink: "https://meetup.com/your-event"
-   speakers:
-     - name: "Speaker Name"
-       bio: "Speaker bio"
-   tags:
-     - React
-     - TypeScript
+   index: 7
+   title: 'SKG JS Meetup #7: Event Title'
+   date: '2025-11-15'
+   time: '19:00'
+   location: 'OKThess, 2 Komotinis Street, 54655, Thessaloniki'
+   rsvpLink: 'https://www.meetup.com/skg-js/events/123456/'
+   talks:
+     - title: 'Talk Title'
+       description: 'Brief description of the talk.'
+       presentation: 'folder-name/presentation.pptx'
+       speaker:
+         - path: 'content/community/speakers/speaker-slug'
+     - title: 'Second Talk Title'
+       description: 'Brief description of the second talk.'
+       speaker:
+         - path: 'content/community/organizers/organizer-slug'
+   tags: ['react', 'typescript']
+   image: 'https://example.com/event-image.jpeg'
    ---
-   
+
    Event description in markdown...
    ```
 
+   **Notes:**
+   - `index` — sequential meetup number
+   - `talks[].speaker[].path` — references a community member file (without `.md` extension)
+   - `talks[].presentation` — optional, path to the presentation file
+   - `image` — optional, URL for the event cover image
+   - Upcoming/past status is determined automatically from the `date` field
+
 ### Adding a Community Member
 
-1. Create a markdown file in `content/community/`:
+Community members are organized in subdirectories by role: `content/community/organizers/` and `content/community/speakers/`.
+
+1. Create a markdown file in the appropriate subdirectory:
    ```markdown
    ---
-   name: "Member Name"
-   role: "organizer" | "speaker" | "member"
-   title: "Job Title"
-   company: "Company Name"
-   avatar: "/images/community/slug.svg"
+   index: 1
+   name: 'Member Name'
+   role: organizer
    social:
-     github: "https://github.com/username"
-     linkedin: "https://linkedin.com/in/username"
-   skills:
-     - JavaScript
-     - React
+     linkedin: 'https://linkedin.com/in/username'
+     github: 'https://github.com/username'
+   contributedTalks:
+     - 'Talk Title'
    ---
-   
-   Member bio...
+
+   Member bio (minimum 50 characters)...
    ```
 
-### Adding a Sponsor
+   **Notes:**
+   - `index` — controls display order
+   - `role` — one of `organizer`, `speaker`, or `member`
+   - `social` — all fields optional (`github`, `linkedin`, `twitter`, `website`)
+   - `contributedTalks` — lists the talks given by this member
+   - The filename slug is used as the reference path from event files (e.g., `content/community/speakers/john-doe`)
 
-1. Create a markdown file in `content/sponsors/`:
+### Adding a Partner
+
+1. Create a markdown file in `content/partners/`:
    ```markdown
    ---
-   name: "Sponsor Name"
-   logo: "/images/sponsors/logo.svg"
-   website: "https://sponsor.com"
-   tier: "gold"
+   name: 'Partner Name'
+   logo: '/images/partners/logo.webp'
+   website: 'https://partner.com'
+   tier: 'community'
    active: true
+   since: '2025-09-01'
+   description: 'Short description of the partner (20-200 characters).'
    ---
-   
-   Sponsor description...
+
+   Longer partner description in markdown...
    ```
+
+   **Notes:**
+   - `tier` — one of `gold`, `silver`, `bronze`, `community`
+   - Add the logo image to `public/images/partners/`
 
 ## 🎨 Customization
 
@@ -183,10 +208,11 @@ colors: {
 ### Site Configuration
 
 Edit `content/site-config.md` to update:
-- Site name and tagline
-- Social media links
+- Site name, tagline, and description
+- Social media links (Meetup, Instagram)
 - Contact email
-- Next event reference
+- Speaker form URL (`speakerFormUrl`)
+- About section content (markdown body of the file)
 
 ## 🧪 Testing
 
