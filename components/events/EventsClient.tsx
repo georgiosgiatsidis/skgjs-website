@@ -8,7 +8,6 @@ import { isUpcomingEvent } from '@/lib/event-utils'
 
 interface EventsClientProps {
   events: Event[]
-  speakerFormUrl?: string
 }
 
 const defaultFilter = 'upcoming'
@@ -20,7 +19,7 @@ function getFilterFromURL() {
   return filter === 'past' ? 'past' : defaultFilter
 }
 
-export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
+export function EventsClient({ events }: EventsClientProps) {
   const [activeFilter, setActiveFilter] = useState<'upcoming' | 'past'>(defaultFilter)
 
   const setFilter = useCallback((filter: 'upcoming' | 'past') => {
@@ -64,7 +63,6 @@ export function EventsClient({ events, speakerFormUrl }: EventsClientProps) {
         events={displayedEvents}
         emptyMessage={emptyMessage}
         filterType={activeFilter}
-        speakerFormUrl={speakerFormUrl}
       />
     </>
   )

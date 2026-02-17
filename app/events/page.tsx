@@ -1,5 +1,6 @@
 import { Container } from '@/components/layout/Container'
 import { EventsClient } from '@/components/events/EventsClient'
+import { BecomeASpeakerSection } from '@/components/home/BecomeASpeakerSection'
 import { getAllEvents, getSiteConfig } from '@/lib/content'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
 
@@ -40,9 +41,11 @@ export default function EventsPage() {
 
       <section className="relative -mt-8 md:-mt-12">
         <Container>
-          <EventsClient events={allEvents} speakerFormUrl={siteConfig.speakerFormUrl} />
+          <EventsClient events={allEvents} />
         </Container>
       </section>
+
+      <BecomeASpeakerSection speakerFormUrl={siteConfig.speakerFormUrl} />
     </>
   )
 }

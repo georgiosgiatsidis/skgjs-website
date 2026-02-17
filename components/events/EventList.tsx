@@ -9,7 +9,6 @@ interface EventListProps {
   events: Event[]
   emptyMessage?: string
   filterType?: 'upcoming' | 'past'
-  speakerFormUrl?: string
 }
 
 const containerVariants = {
@@ -41,7 +40,7 @@ const itemVariants = {
   },
 }
 
-export function EventList({ events, emptyMessage = 'No events found.', filterType = 'upcoming', speakerFormUrl }: EventListProps) {
+export function EventList({ events, emptyMessage = 'No events found.', filterType = 'upcoming' }: EventListProps) {
   const isUpcoming = filterType === 'upcoming'
   const eventCount = events.length
 
@@ -101,30 +100,8 @@ export function EventList({ events, emptyMessage = 'No events found.', filterTyp
               <h3 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white">
                 No Upcoming Events Yet
               </h3>
-              <p className="mb-8 text-gray-600 dark:text-gray-400">
-                Want to speak at our next meetup? Share your knowledge with the Thessaloniki JS community.
-              </p>
-
-              {/* Speaker CTA */}
-              {speakerFormUrl && (
-                <a
-                  href={speakerFormUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 rounded-xl bg-js-yellow px-8 py-4 font-semibold text-js-black shadow-lg transition-all hover:gap-4 hover:shadow-xl hover:shadow-js-yellow/25"
-                >
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                  </svg>
-                  Become a Speaker
-                  <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              )}
-
-              <p className="mt-4 text-sm text-gray-500 dark:text-gray-500">
-                We&apos;re always looking for passionate developers to share their experiences
+              <p className="mb-4 text-gray-600 dark:text-gray-400">
+                Stay tuned for upcoming events from the Thessaloniki JS community.
               </p>
             </div>
           </div>
