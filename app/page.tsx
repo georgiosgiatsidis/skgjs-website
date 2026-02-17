@@ -4,6 +4,7 @@ import { Hero } from '@/components/home/Hero'
 import { NextEventPreview } from '@/components/home/NextEventPreview'
 import { AboutSection } from '@/components/home/AboutSection'
 import { PartnersSection } from '@/components/home/PartnersSection'
+import { BecomeASpeakerSection } from '@/components/home/BecomeASpeakerSection'
 import { CTASection } from '@/components/home/CTASection'
 
 export default async function HomePage() {
@@ -14,7 +15,8 @@ export default async function HomePage() {
   return (
     <div>
       <Hero stats={stats} />
-      <NextEventPreview event={nextEvent} speakerFormUrl={siteConfig.speakerFormUrl} />
+      <NextEventPreview event={nextEvent} />
+      <BecomeASpeakerSection speakerFormUrl={siteConfig.speakerFormUrl} />
       <AboutSection content={siteConfig.aboutMarkdown} />
       <PartnersSection />
       <CTASection />
