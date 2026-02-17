@@ -2,18 +2,6 @@
 
 Official website for the Thessaloniki JavaScript Meetup community - connecting JavaScript developers in Thessaloniki, Greece.
 
-## 🚀 Features
-
-- **Events Page**: Browse upcoming and past meetup events with filtering
-- **Community Page**: Meet organizers, speakers, and active community members
-- **Contact Form**: Get in touch with organizers via Web3Forms integration
-- **Sponsors Section**: Showcase community sponsors
-- **Instagram Feed**: Follow latest community updates
-- **Dark Mode**: Full dark mode support
-- **Responsive Design**: Mobile-first design that works on all devices
-- **SEO Optimized**: Meta tags, Open Graph, sitemap, and robots.txt
-- **Fast Performance**: Static site generation with Next.js 14
-
 ## 🛠 Tech Stack
 
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
