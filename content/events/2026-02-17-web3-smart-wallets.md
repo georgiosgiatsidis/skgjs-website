@@ -8,6 +8,7 @@ rsvpLink: 'https://www.meetup.com/skg-js/events/313112197/'
 talks:
   - title: 'Bridging Web2 and Web3: Interact with Smart Wallets in React Applications'
     description: 'Web3 often feels like a steep learning curve involving Solidity and smart contracts. This talk demonstrates how to enable a standard React application to interact directly with the blockchain using TypeScript, Wagmi, and Viem, no smart contracts required.'
+    presentation: 'web3/presentation.pdf'
     speaker:
       - path: 'content/community/speakers/georgios-michoulis'
   - title: 'Predictive Streaming UIs with local LLMs: Impact on React State'
