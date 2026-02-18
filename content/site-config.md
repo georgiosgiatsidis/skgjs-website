@@ -4,6 +4,7 @@ tagline: 'JavaScript community in Thessaloniki'
 description: 'Join the Thessaloniki JavaScript community for meetups, talks, and networking with local developers.'
 social:
   meetup: 'https://www.meetup.com/skg-js/'
+  linkedin: 'https://www.linkedin.com/company/skg-js/'
   instagram: 'https://www.instagram.com/skgjs.gr/'
 contact:
   email: 'info@skgjs.gr'
