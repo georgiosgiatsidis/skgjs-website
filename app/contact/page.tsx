@@ -40,6 +40,7 @@ const socialLinks = [
 
 export default function ContactPage() {
   const config = getSiteConfig()
+  const contactFormDisabled = !config.contact?.email || !config.contact?.enableContactForm
 
   const socialWithLinks = socialLinks.flatMap((social) => {
     const href = config.social[social.name.toLowerCase() as keyof typeof config.social]
@@ -81,9 +82,9 @@ export default function ContactPage() {
           <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
             <div className="rounded-3xl bg-white p-8 shadow-xl dark:bg-gray-900 md:p-10 md:pt-0">
               <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
-                Send us a message{!config.contact?.email ? ' (Coming soom)' : ''}
+                Send us a message{contactFormDisabled ? ' (Coming soom)' : ''}
               </h2>
-              <ContactForm disabled={!config.contact?.email} />
+              <ContactForm disabled={contactFormDisabled} />
             </div>
 
             <div className="space-y-8">
