@@ -88,6 +88,7 @@ export interface SiteConfig {
   }
   contact: {
     email: string
+    enableContactForm?: boolean
   }
   analytics?: {
     googleAnalyticsId?: string
