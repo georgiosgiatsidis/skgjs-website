@@ -2,6 +2,7 @@
 index: 3
 name: Georgios Michoulis
 role: speaker
+avatar: /images/community/george-michoulis.jpeg
 social:
   linkedin: https://www.linkedin.com/in/george-michoulis/
 contributedTalks:
