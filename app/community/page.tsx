@@ -109,7 +109,7 @@ export default async function CommunityPage() {
           {organizers.length > 0 && <MemberGrid members={organizers} title="Organizers" />}
 
           {/* Speakers */}
-          {speakers.length > 0 && <MemberGrid members={speakers} title="Past Speakers" />}
+          {speakers.length > 0 && <MemberGrid members={speakers} title="Speakers" />}
 
           {/* Photo Gallery */}
           {/* [TODO] Bring back when we have some photos */}

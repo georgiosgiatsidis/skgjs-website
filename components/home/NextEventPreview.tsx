@@ -1,17 +1,27 @@
 'use client'
 
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Event } from '@/lib/types'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Countdown } from '@/components/ui/Countdown'
+import { isUpcomingEvent } from '@/lib/event-utils'
 
 interface NextEventPreviewProps {
   event: Event | null
 }
 
 export function NextEventPreview({ event }: NextEventPreviewProps) {
+  const [resolvedEvent, setResolvedEvent] = useState(event)
+
+  useEffect(() => {
+    // Re-evaluate at runtime to correct stale build-time snapshots
+    setResolvedEvent(event && isUpcomingEvent(event.date) ? event : null)
+  }, [event])
+
+  event = resolvedEvent
   if (!event) {
     return (
       <section className="relative overflow-hidden py-24">

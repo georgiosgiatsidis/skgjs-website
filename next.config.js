@@ -6,6 +6,9 @@ const nextConfig = {
   },
   basePath: process.env.NODE_ENV === 'production' ? '' : '',
   trailingSlash: true,
+  turbopack: {
+    root: __dirname,
+  },
 }
 
 module.exports = nextConfig
