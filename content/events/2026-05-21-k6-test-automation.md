@@ -4,7 +4,7 @@ title: 'SKG JS Meetup #8 Nuke Your Services with k6, Test Automation Best Practi
 date: '2026-05-21'
 time: '19:00'
 location: 'OK!Thess, Komotinis 2, 54655, Thessaloniki'
-rsvpLink: 'https://www.meetup.com/skg-js/events/313112197/'
+rsvpLink: 'https://www.meetup.com/skg-js/events/314470670/'
 talks:
   - title: 'Nuke Your Services with k6'
     description: 'In this session, Apostolos will walk us through effective load and performance testing using k6. You’ll learn how to stress-test your services, identify bottlenecks, and ensure your applications stand strong under real-world load. Whether you’re running APIs, microservices, or full-stack apps, this talk will give you practical insights and tools to boost reliability.'
