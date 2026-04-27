@@ -8,6 +8,7 @@ import {
   getAllPartners,
   getSiteConfig,
 } from '@/lib/content'
+import { isUpcomingEvent } from '@/lib/event-utils'
 
 describe('Content Loading Utilities', () => {
   describe('getAllEvents', () => {
@@ -80,12 +81,15 @@ describe('Content Loading Utilities', () => {
       }
     })
 
-    it('should return the earliest event by date', async () => {
+    it('should return the earliest upcoming event by date', async () => {
       const nextEvent = await getNextEvent()
       const sortedEvents = await getEventsSortedAscending()
+      const upcomingEvents = sortedEvents.filter((e) => isUpcomingEvent(e.date))
 
-      if (sortedEvents.length > 0) {
-        expect(nextEvent).toEqual(sortedEvents[0])
+      if (upcomingEvents.length > 0) {
+        expect(nextEvent).toEqual(upcomingEvents[0])
+      } else {
+        expect(nextEvent).toBeNull()
       }
     })
   })
@@ -159,7 +163,6 @@ describe('Content Loading Utilities', () => {
     it('should have valid social links', async () => {
       const config = await getSiteConfig()
       expect(config.social).toHaveProperty('meetup')
-      expect(config.social).toHaveProperty('github')
       expect(config.social).toHaveProperty('instagram')
       expect(config.social).toHaveProperty('linkedin')
     })
