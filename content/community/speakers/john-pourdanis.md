@@ -7,6 +7,7 @@ social:
   linkedin: https://www.linkedin.com/in/jpourdanis/
 contributedTalks:
   - Playwright Testing
+  - Test Automation Best Practices
 ---
 
 Speaker at SKG JS meetup events.
