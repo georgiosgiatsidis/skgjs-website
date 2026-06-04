@@ -1,5 +1,5 @@
 ---
-index: 9
+index: 8
 title: 'SKG JS Meetup #8 Nuke Your Services with k6, Test Automation Best Practices'
 date: '2026-05-21'
 time: '19:00'
