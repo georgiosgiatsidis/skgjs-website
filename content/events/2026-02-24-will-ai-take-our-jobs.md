@@ -1,5 +1,5 @@
 ---
-index: 8
+index: 7.5
 title: 'Will AI take our jobs? The Meetup of Meetups'
 date: '2026-02-24'
 time: '18:30'
