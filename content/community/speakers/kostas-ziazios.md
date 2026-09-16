@@ -1,7 +1,7 @@
 ---
 index: 5
 name: Konstantinos Ziazios
-role: organizer
+role: speaker
 title: Senior Technical Consultant
 company: Microsoft
 avatar: /images/community/kostas-ziazios.jpeg
