@@ -2,6 +2,7 @@ import { getAllCommunityMembers } from '@/lib/content'
 import { getStats } from '@/lib/stats'
 import { Container } from '@/components/layout/Container'
 import { MemberGrid } from '@/components/community/MemberGrid'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for re-enabling the hidden photo gallery
 import { PhotoGallery } from '@/components/community/PhotoGallery'
 import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { CountUp } from '@/components/animations/CountUp'
@@ -22,6 +23,7 @@ export default async function CommunityPage() {
   const speakers = allMembers.filter((m) => m.role === 'speaker').sort((a, b) => a.index - b.index)
 
   // Photo gallery data
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for re-enabling the hidden photo gallery
   const photos = [
     {
       src: '/images/gallery/event-march-2024.svg',

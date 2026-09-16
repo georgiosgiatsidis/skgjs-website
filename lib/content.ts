@@ -1,7 +1,16 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseMarkdown } from './markdown'
-import type { Event, CommunityMember, Sponsor, SiteConfig, Speaker, SpeakerRef, Talk } from './types'
+import { validateCommunityMember, validateEventFrontmatter } from './schemas'
+import type {
+  Event,
+  CommunityMember,
+  Sponsor,
+  SiteConfig,
+  Speaker,
+  SpeakerRef,
+  Talk,
+} from './types'
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -65,7 +74,7 @@ export function getAllEvents(): Event[] {
 
       const event = {
         slug: filename.replace('.md', ''),
-        ...frontmatter,
+        ...validateEventFrontmatter(frontmatter, `content/events/${filename}`),
         markdown,
       } as Event
 
@@ -76,7 +85,7 @@ export function getAllEvents(): Event[] {
           return {
             ...talk,
             speaker: rawSpeakers.map((ref) =>
-              'path' in ref ? resolveSpeaker(ref as SpeakerRef) : ref as Speaker
+              'path' in ref ? resolveSpeaker(ref as SpeakerRef) : (ref as Speaker)
             ),
           }
         })
@@ -137,7 +146,7 @@ export function getAllCommunityMembers(role?: string): CommunityMember[] {
 
         members.push({
           slug: filename.replace('.md', ''),
-          ...frontmatter,
+          ...validateCommunityMember(frontmatter, markdown, `content/community/${r}/${filename}`),
           bio: markdown,
         } as CommunityMember)
       })

@@ -189,7 +189,6 @@ test.describe('Homepage', () => {
       const nextEventDate = page.locator('[data-testid="next-event-date"]')
 
       const titleVisible = await nextEventTitle.isVisible().catch(() => false)
-      const dateVisible = await nextEventDate.isVisible().catch(() => false)
 
       if (titleVisible) {
         await expect(nextEventTitle).toBeVisible()
