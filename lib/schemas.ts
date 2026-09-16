@@ -34,7 +34,8 @@ export const EventSchema = z
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     time: z.string().regex(/^\d{2}:\d{2}(-\d{2}:\d{2})?$/),
     location: z.string().min(10),
-    rsvpLink: z.string().url().startsWith('https://'),
+    // Optional so events can be announced before their Meetup page exists; the UI hides RSVP without it
+    rsvpLink: z.string().url().startsWith('https://').optional(),
     description: z.string().optional(),
     talks: z.array(TalkSchema).optional(),
     tags: z.array(z.string()).optional(),

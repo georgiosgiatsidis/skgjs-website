@@ -18,18 +18,30 @@ point to an existing community member file, otherwise `lib/content.ts` throws an
 
 | Field          | Required | Default / source                                                   |
 | -------------- | -------- | ------------------------------------------------------------------ |
-| Title          | yes      | `SKG JS Meetup #<index> <Talk A>, <Talk B>` (5–100 chars)          |
+| Title          | yes      | `SKG JS Meetup #<index>: <Talk A> & <Talk B>` (5–100 chars)        |
 | Date           | yes      | `YYYY-MM-DD`                                                       |
 | Time           | yes      | `'19:00'` (format `HH:MM` or `HH:MM-HH:MM`)                        |
 | Location       | yes      | `'OK!Thess, Komotinis 2, 54655, Thessaloniki'`                     |
-| RSVP link      | yes      | Meetup event URL, must start with `https://`                       |
+| RSVP link      | no       | the Meetup **event** URL, must start with `https://`               |
 | Talks          | no       | title, description, speaker(s), optional presentation file name    |
 | Tags           | no       | short lowercase topics, e.g. `['k6', 'test', 'automation']`        |
 | Cover image    | no       | the Meetup event image URL (`https://secure.meetupstatic.com/...`) |
 | Body text      | yes      | one or more paragraphs describing the event                        |
 | Special event? | yes      | whether this is off the numbered series (affects `index`)          |
 
-Never invent missing required values (RSVP link, date, speakers). Ask for them.
+- "Usual venue", "same venue", or no venue given → use the default location above.
+- Never invent values: date, time, speakers, talk details, tags beyond obvious topics, co-hosts.
+  Ask for anything missing.
+- Body text uses only what the user said. Do not add sentences, names, or details they did not give.
+
+### When there is no RSVP link
+
+The Meetup event page may not exist yet. Omit `rsvpLink` entirely — the site hides the RSVP
+button when it is missing — and tell the user to send the link when the Meetup event is created.
+
+**Never use a placeholder RSVP link**, including the Meetup group page
+(`https://www.meetup.com/skg-js/`), a past event, or a made-up event ID. A placeholder sends
+people to the wrong page; a missing link just hides the button.
 
 ## 2. Pick the index
 
@@ -38,7 +50,8 @@ grep -h '^index:' content/events/*.md
 ```
 
 - Numbered meetup: highest **integer** index + 1.
-- Special off-series event: a decimal between its neighbours (existing example: `7.5`).
+- Special off-series event: a decimal between its neighbours (existing example: `7.5`), and a
+  title that is the event's own name (no `SKG JS Meetup #N:` prefix).
 - Confirm the index with the user — presentations are served from `events/event-<index>/` in B2,
   so changing it later breaks presentation links.
 
@@ -51,12 +64,12 @@ ls content/community/speakers/ content/community/organizers/
 ```
 
 - **Exists:** reference it as `content/community/<speakers|organizers>/<slug>` (no `.md`), and
-  append the new talk title to that file's `contributedTalks`.
+  append the exact talk title, as written in the event file, to that file's `contributedTalks`.
 - **Missing:** create `content/community/speakers/<firstname-lastname>.md`:
 
 ```markdown
 ---
-index: <highest index in content/community/speakers/ + 1>
+index: <highest index among content/community/speakers/*.md only + 1>
 name: Firstname Lastname
 role: speaker
 avatar: /images/community/<firstname-lastname>.jpeg
@@ -83,7 +96,7 @@ File name: `content/events/<date>-<short-kebab-slug>.md` (e.g. `2026-05-21-k6-te
 ```markdown
 ---
 index: 9
-title: 'SKG JS Meetup #9 Talk A, Talk B'
+title: 'SKG JS Meetup #9: Talk A & Talk B'
 date: '2026-10-15'
 time: '19:00'
 location: 'OK!Thess, Komotinis 2, 54655, Thessaloniki'
@@ -140,4 +153,6 @@ Fix the content — never loosen `EventSchema` to make an event pass.
 | Speaker path with `.md` or wrong folder     | `Speaker file not found`                                    | `content/community/<folder>/<slug>` |
 | New speaker without a file                  | `Speaker file not found`                                    | Create the speaker file (step 3)    |
 | Index reused or guessed                     | Wrong B2 presentation URLs                                  | Compute and confirm (step 2)        |
+| RSVP link set to the Meetup group page      | RSVP button opens the wrong page                            | Omit `rsvpLink` until it exists     |
+| Extra sentences added to the body text      | Published claims the user never made                        | Use only the user's text            |
 | Pinning via `nextEvent` in `site-config.md` | Unneeded; the soonest upcoming event is shown automatically | Only pin when the user asks         |

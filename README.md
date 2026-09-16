@@ -150,6 +150,7 @@ skgjs-website/
    **Notes:**
    - `index` — sequential meetup number (special off-series events may use a decimal, e.g. `7.5`)
    - `date` and `time` — must be quoted strings; unquoted YAML dates are parsed as `Date` objects and fail validation
+   - `rsvpLink` — optional, the Meetup event URL; omit it (never use a placeholder) until the Meetup event exists, and the RSVP button stays hidden
    - `talks` — optional, omit for events without talks
    - `talks[].speaker[].path` — references a community member file (without `.md` extension); the file must exist or the build fails
    - `talks[].presentation` — optional, path relative to `events/event-<index>/` in the B2 bucket (upload the file there)

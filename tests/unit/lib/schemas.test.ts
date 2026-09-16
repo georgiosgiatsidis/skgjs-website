@@ -79,9 +79,15 @@ describe('EventSchema', () => {
     expect(EventSchema.safeParse({ ...validEvent, time: '7pm' }).success).toBe(false)
   })
 
-  it('should reject a missing rsvpLink', () => {
+  it('should accept a missing rsvpLink for events announced before their Meetup page exists', () => {
     const { rsvpLink: _rsvpLink, ...event } = validEvent
-    expect(EventSchema.safeParse(event).success).toBe(false)
+    expect(EventSchema.safeParse(event).success).toBe(true)
+  })
+
+  it('should reject a non-https rsvpLink', () => {
+    expect(
+      EventSchema.safeParse({ ...validEvent, rsvpLink: 'http://www.meetup.com/skg-js/' }).success
+    ).toBe(false)
   })
 
   it('should reject a missing index', () => {
