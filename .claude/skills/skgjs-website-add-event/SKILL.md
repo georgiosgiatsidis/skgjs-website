@@ -29,6 +29,9 @@ point to an existing community member file, otherwise `lib/content.ts` throws an
 | Body text      | yes      | one or more paragraphs describing the event                        |
 | Special event? | yes      | whether this is off the numbered series (affects `index`)          |
 
+- Special off-series event: the title is the event's own name, given by the user. If the user did
+  not name the event, ask for the title before creating the event file. Do not make one up from
+  the description.
 - "Usual venue", "same venue", or no venue given → use the default location above.
 - Never invent values: date, time, speakers, talk details, tags beyond obvious topics, co-hosts.
   Ask for anything missing.
@@ -50,8 +53,8 @@ grep -h '^index:' content/events/*.md
 ```
 
 - Numbered meetup: highest **integer** index + 1.
-- Special off-series event: a decimal between its neighbours (existing example: `7.5`), and a
-  title that is the event's own name (no `SKG JS Meetup #N:` prefix).
+- Special off-series event: a decimal between its neighbours (existing example: `7.5`). Its title
+  has no `SKG JS Meetup #N:` prefix (see step 1).
 - Confirm the index with the user — presentations are served from `events/event-<index>/` in B2,
   so changing it later breaks presentation links.
 
@@ -154,5 +157,6 @@ Fix the content — never loosen `EventSchema` to make an event pass.
 | New speaker without a file                  | `Speaker file not found`                                    | Create the speaker file (step 3)    |
 | Index reused or guessed                     | Wrong B2 presentation URLs                                  | Compute and confirm (step 2)        |
 | RSVP link set to the Meetup group page      | RSVP button opens the wrong page                            | Omit `rsvpLink` until it exists     |
+| Special event title made up from the blurb  | Published name the organizers never chose                   | Ask the user for the title          |
 | Extra sentences added to the body text      | Published claims the user never made                        | Use only the user's text            |
 | Pinning via `nextEvent` in `site-config.md` | Unneeded; the soonest upcoming event is shown automatically | Only pin when the user asks         |
