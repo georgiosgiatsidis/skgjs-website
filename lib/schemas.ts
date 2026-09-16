@@ -17,16 +17,44 @@ export const SpeakerRefSchema = z.object({
   path: z.string().min(1),
 })
 
-export const EventSchema = z.object({
-  title: z.string().min(5).max(100),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  time: z.string().regex(/^\d{2}:\d{2}(-\d{2}:\d{2})?$/),
-  location: z.string().min(10),
-  rsvpLink: z.string().url().startsWith('https://'),
-  tags: z.array(z.string()).optional(),
-  capacity: z.number().positive().optional(),
-  image: z.string().optional(),
-})
+export const TalkSchema = z
+  .object({
+    title: z.string().min(1),
+    description: z.string().optional(),
+    presentation: z.string().optional(),
+    speaker: z.array(z.union([SpeakerRefSchema.strict(), SpeakerSchema])).min(1),
+  })
+  .strict()
+
+// Strict so that typos in frontmatter keys fail instead of being silently dropped
+export const EventSchema = z
+  .object({
+    index: z.number().positive(),
+    title: z.string().min(5).max(100),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    time: z.string().regex(/^\d{2}:\d{2}(-\d{2}:\d{2})?$/),
+    location: z.string().min(10),
+    rsvpLink: z.string().url().startsWith('https://'),
+    description: z.string().optional(),
+    talks: z.array(TalkSchema).optional(),
+    tags: z.array(z.string()).optional(),
+    capacity: z.number().positive().optional(),
+    image: z.string().optional(),
+  })
+  .strict()
+
+export function validateEventFrontmatter(frontmatter: unknown, source: string) {
+  const result = EventSchema.safeParse(frontmatter)
+
+  if (!result.success) {
+    const issues = result.error.issues
+      .map((issue) => `  - ${issue.path.join('.') || '(root)'}: ${issue.message}`)
+      .join('\n')
+    throw new Error(`Invalid event frontmatter in ${source}:\n${issues}`)
+  }
+
+  return result.data
+}
 
 export const CommunityMemberSchema = z.object({
   name: z.string().min(2).max(50),

@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseMarkdown } from './markdown'
+import { validateEventFrontmatter } from './schemas'
 import type { Event, CommunityMember, Sponsor, SiteConfig, Speaker, SpeakerRef, Talk } from './types'
 
 const contentDir = path.join(process.cwd(), 'content')
@@ -65,7 +66,7 @@ export function getAllEvents(): Event[] {
 
       const event = {
         slug: filename.replace('.md', ''),
-        ...frontmatter,
+        ...validateEventFrontmatter(frontmatter, `content/events/${filename}`),
         markdown,
       } as Event
 

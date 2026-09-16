@@ -106,6 +106,8 @@ skgjs-website/
 
 ### Adding a New Event
 
+> Coding agents can follow the `skgjs-website-add-event` skill in `.claude/skills/` (see [AGENTS.md](./AGENTS.md)).
+
 1. Create a new markdown file in `content/events/` named `YYYY-MM-DD-event-slug.md`:
    ```bash
    touch content/events/2025-11-15-my-event.md
@@ -118,7 +120,7 @@ skgjs-website/
    title: 'SKG JS Meetup #7: Event Title'
    date: '2025-11-15'
    time: '19:00'
-   location: 'OKThess, 2 Komotinis Street, 54655, Thessaloniki'
+   location: 'OK!Thess, Komotinis 2, 54655, Thessaloniki'
    rsvpLink: 'https://www.meetup.com/skg-js/events/123456/'
    talks:
      - title: 'Talk Title'
@@ -138,11 +140,16 @@ skgjs-website/
    ```
 
    **Notes:**
-   - `index` — sequential meetup number
-   - `talks[].speaker[].path` — references a community member file (without `.md` extension)
-   - `talks[].presentation` — optional, path to the presentation file
+   - `index` — sequential meetup number (special off-series events may use a decimal, e.g. `7.5`)
+   - `date` and `time` — must be quoted strings; unquoted YAML dates are parsed as `Date` objects and fail validation
+   - `talks` — optional, omit for events without talks
+   - `talks[].speaker[].path` — references a community member file (without `.md` extension); the file must exist or the build fails
+   - `talks[].presentation` — optional, path relative to `events/event-<index>/` in the B2 bucket (upload the file there)
+   - `description` — optional, short summary shown on the event card
    - `image` — optional, URL for the event cover image
    - Upcoming/past status is determined automatically from the `date` field
+
+3. Run `npm test` — event frontmatter is validated against `EventSchema` in `lib/schemas.ts`, and unknown keys (e.g. typos) are rejected
 
 ### Adding a Community Member
 
