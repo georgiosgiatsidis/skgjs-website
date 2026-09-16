@@ -43,7 +43,7 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
         setFormState('error')
         setErrorMessage(data.message || 'Something went wrong. Please try again.')
       }
-    } catch (error) {
+    } catch (_error) {
       setFormState('error')
       setErrorMessage('Network error. Please check your connection and try again.')
     }
@@ -70,7 +70,7 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
           required
           placeholder="Your name"
           disabled={isDisabled}
-          className="disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:disabled:bg-gray-800"
+          className="disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 dark:disabled:bg-gray-800"
         />
         <Input
           label="Email"
@@ -79,7 +79,7 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
           required
           placeholder="your@email.com"
           disabled={isDisabled}
-          className="disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:disabled:bg-gray-800"
+          className="disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 dark:disabled:bg-gray-800"
         />
       </div>
 
@@ -90,7 +90,7 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
         required
         placeholder="What is this about?"
         disabled={isDisabled}
-        className="disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:disabled:bg-gray-800"
+        className="disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 dark:disabled:bg-gray-800"
       />
 
       <div>
@@ -111,7 +111,7 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
             'w-full rounded-lg border border-gray-300 px-4 py-2 transition-colors',
             'focus:border-js-yellow focus:outline-none focus:ring-2 focus:ring-js-yellow focus:ring-opacity-50',
             'dark:border-gray-600 dark:bg-gray-700 dark:text-white',
-            'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100 dark:disabled:bg-gray-800'
+            'disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 dark:disabled:bg-gray-800'
           )}
         />
       </div>

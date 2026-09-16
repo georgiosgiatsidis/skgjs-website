@@ -71,7 +71,10 @@ Speaker at SKG JS meetup events.
 
 - Ask the user for the speaker's LinkedIn/GitHub URLs and a photo. Omit `social` keys that are not
   provided. Include `avatar` only if the photo is saved to `public/images/community/`.
-- Use a bio from the user in place of the default body when one is given.
+- Use a bio from the user in place of the default body when one is given. The body must not be empty.
+- Member frontmatter is validated strictly by `CommunityMemberSchema`: allowed keys are `index`,
+  `name`, `role`, `title`, `company`, `avatar`, `joinedDate`, `social` (`twitter`, `github`,
+  `linkedin`, `website`), `skills`, `contributedTalks`.
 
 ## 4. Create the event file
 
@@ -116,7 +119,7 @@ Rules:
 ## 5. Verify
 
 ```bash
-npm test            # validates every event file and resolves speaker paths
+npm test            # validates every event and member file and resolves speaker paths
 npm run type-check
 ```
 

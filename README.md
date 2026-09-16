@@ -25,17 +25,20 @@ Official website for the Thessaloniki JavaScript Meetup community - connecting J
 ## 🏃‍♂️ Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-org/skgjs-website.git
    cd skgjs-website
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Run development server**
+
    ```bash
    npm run dev
    ```
@@ -62,6 +65,9 @@ Official website for the Thessaloniki JavaScript Meetup community - connecting J
 
 ```
 skgjs-website/
+├── .claude/skills/           # Task instructions for coding agents
+├── AGENTS.md                 # Repository guidelines for coding agents
+├── CLAUDE.md                 # Points Claude Code to AGENTS.md
 ├── app/                      # Next.js App Router pages
 │   ├── layout.tsx           # Root layout
 │   ├── page.tsx             # Homepage
@@ -109,11 +115,13 @@ skgjs-website/
 > Coding agents can follow the `skgjs-website-add-event` skill in `.claude/skills/` (see [AGENTS.md](./AGENTS.md)).
 
 1. Create a new markdown file in `content/events/` named `YYYY-MM-DD-event-slug.md`:
+
    ```bash
    touch content/events/2025-11-15-my-event.md
    ```
 
 2. Add frontmatter and content:
+
    ```markdown
    ---
    index: 7
@@ -156,6 +164,7 @@ skgjs-website/
 Community members are organized in subdirectories by role: `content/community/organizers/` and `content/community/speakers/`.
 
 1. Create a markdown file in the appropriate subdirectory:
+
    ```markdown
    ---
    index: 1
@@ -168,7 +177,7 @@ Community members are organized in subdirectories by role: `content/community/or
      - 'Talk Title'
    ---
 
-   Member bio (minimum 50 characters)...
+   Member bio in markdown...
    ```
 
    **Notes:**
@@ -176,11 +185,15 @@ Community members are organized in subdirectories by role: `content/community/or
    - `role` — one of `organizer`, `speaker`, or `member`
    - `social` — all fields optional (`github`, `linkedin`, `twitter`, `website`)
    - `contributedTalks` — lists the talks given by this member
+   - Optional fields: `title`, `company`, `avatar`, `joinedDate` (quoted `YYYY-MM-DD`), `skills`
+   - The markdown body is the member bio and must not be empty
+   - Frontmatter is validated against `CommunityMemberSchema` in `lib/schemas.ts`; unknown keys (e.g. typos) are rejected
    - The filename slug is used as the reference path from event files (e.g., `content/community/speakers/john-doe`)
 
 ### Adding a Partner
 
 1. Create a markdown file in `content/partners/`:
+
    ```markdown
    ---
    name: 'Partner Name'
@@ -204,6 +217,7 @@ Community members are organized in subdirectories by role: `content/community/or
 ### Colors
 
 Edit `tailwind.config.ts` to change the color scheme:
+
 ```typescript
 colors: {
   'js-yellow': '#F7DF1E',  // JavaScript yellow
@@ -214,6 +228,7 @@ colors: {
 ### Site Configuration
 
 Edit `content/site-config.md` to update:
+
 - Site name, tagline, and description
 - Social media links (Meetup, Instagram)
 - Contact email
@@ -223,6 +238,7 @@ Edit `content/site-config.md` to update:
 ## 🧪 Testing
 
 ### E2E Tests
+
 ```bash
 # Run all E2E tests
 npm run test:e2e
@@ -235,6 +251,7 @@ npx playwright test tests/e2e/events.spec.ts
 ```
 
 ### Unit Tests
+
 ```bash
 # Run unit tests
 npm test

@@ -56,7 +56,7 @@ test.describe('Events Page', () => {
     }
   })
 
-  test('should open RSVP link in new tab', async ({ page, context }) => {
+  test('should open RSVP link in new tab', async ({ page }) => {
     await page.goto('/events/')
     await page.click('button:has-text("Upcoming")')
 

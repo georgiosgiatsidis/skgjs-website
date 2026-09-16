@@ -43,41 +43,67 @@ export const EventSchema = z
   })
   .strict()
 
+function formatIssues(issues: z.ZodIssue[]) {
+  return issues
+    .map((issue) => `  - ${issue.path.join('.') || '(root)'}: ${issue.message}`)
+    .join('\n')
+}
+
 export function validateEventFrontmatter(frontmatter: unknown, source: string) {
   const result = EventSchema.safeParse(frontmatter)
 
   if (!result.success) {
-    const issues = result.error.issues
-      .map((issue) => `  - ${issue.path.join('.') || '(root)'}: ${issue.message}`)
-      .join('\n')
-    throw new Error(`Invalid event frontmatter in ${source}:\n${issues}`)
+    throw new Error(`Invalid event frontmatter in ${source}:\n${formatIssues(result.error.issues)}`)
   }
 
   return result.data
 }
 
-export const CommunityMemberSchema = z.object({
-  name: z.string().min(2).max(50),
-  role: z.enum(['organizer', 'member', 'speaker']),
-  title: z.string().optional(),
-  company: z.string().optional(),
-  avatar: z.string().optional(),
-  bio: z.string().min(50).max(500),
-  joinedDate: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/)
-    .optional(),
-  social: z
-    .object({
-      twitter: z.string().optional(),
-      github: z.string().optional(),
-      linkedin: z.string().optional(),
-      website: z.string().url().optional(),
+// Frontmatter only: the bio is the markdown body and is checked in validateCommunityMember
+export const CommunityMemberSchema = z
+  .object({
+    index: z.number().positive(),
+    name: z.string().min(2).max(50),
+    role: z.enum(['organizer', 'member', 'speaker']),
+    title: z.string().optional(),
+    company: z.string().optional(),
+    avatar: z.string().optional(),
+    joinedDate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/)
+      .optional(),
+    social: z
+      .object({
+        twitter: z.string().optional(),
+        github: z.string().optional(),
+        linkedin: z.string().optional(),
+        website: z.string().url().optional(),
+      })
+      .strict()
+      .optional(),
+    skills: z.array(z.string()).optional(),
+    contributedTalks: z.array(z.string()).optional(),
+  })
+  .strict()
+
+export function validateCommunityMember(frontmatter: unknown, bio: string, source: string) {
+  const result = CommunityMemberSchema.safeParse(frontmatter)
+  const issues = result.success ? [] : [...result.error.issues]
+
+  if (bio.trim().length === 0) {
+    issues.push({
+      code: z.ZodIssueCode.custom,
+      path: ['bio'],
+      message: 'Markdown body must not be empty',
     })
-    .optional(),
-  skills: z.array(z.string()).optional(),
-  contributedTalks: z.array(z.string()).optional(),
-})
+  }
+
+  if (!result.success || issues.length > 0) {
+    throw new Error(`Invalid community member in ${source}:\n${formatIssues(issues)}`)
+  }
+
+  return result.data
+}
 
 export const SponsorSchema = z.object({
   name: z.string().min(2).max(50),

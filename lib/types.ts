@@ -28,7 +28,7 @@ export interface Event {
   time: string
   location: string
   rsvpLink: string
-  description: string
+  description?: string
   speakers: Speaker[]
   talks?: Talk[]
   tags?: string[]

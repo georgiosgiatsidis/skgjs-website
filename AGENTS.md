@@ -31,6 +31,7 @@
 ## Content Rules
 
 - Event frontmatter is validated strictly by `EventSchema` (`lib/schemas.ts`); unknown keys and unquoted dates fail. Fix the content rather than loosening the schema.
+- Community member frontmatter is validated strictly by `CommunityMemberSchema`; the markdown body (bio) must not be empty.
 - Speaker references in events (`talks[].speaker[].path`) must point to an existing file under `content/community/`, otherwise the build fails.
 
 ## Skills

@@ -1,7 +1,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { describe, it, expect } from 'vitest'
-import { EventSchema, validateEventFrontmatter } from '@/lib/schemas'
+import {
+  CommunityMemberSchema,
+  EventSchema,
+  validateCommunityMember,
+  validateEventFrontmatter,
+} from '@/lib/schemas'
 import { parseMarkdown } from '@/lib/markdown'
 
 const validEvent = {
@@ -106,6 +111,88 @@ describe('validateEventFrontmatter', () => {
         fs.readFileSync(path.join(eventsDir, filename), 'utf-8')
       )
       expect(() => validateEventFrontmatter(frontmatter, filename)).not.toThrow()
+    })
+  })
+})
+
+const validMember = {
+  index: 10,
+  name: 'Jane Doe',
+  role: 'speaker',
+  avatar: '/images/community/jane-doe.jpeg',
+  social: {
+    linkedin: 'https://www.linkedin.com/in/jane-doe/',
+    website: 'https://jane.dev/',
+  },
+  contributedTalks: ['Talk Title'],
+}
+
+describe('CommunityMemberSchema', () => {
+  it('should accept a valid member', () => {
+    expect(CommunityMemberSchema.safeParse(validMember).success).toBe(true)
+  })
+
+  it('should accept optional organizer fields', () => {
+    const member = {
+      ...validMember,
+      role: 'organizer',
+      title: 'Software Engineer',
+      company: 'Example Co',
+      joinedDate: '2023-06-10',
+      skills: ['JavaScript'],
+    }
+    expect(CommunityMemberSchema.safeParse(member).success).toBe(true)
+  })
+
+  it('should reject a missing index', () => {
+    const { index: _index, ...member } = validMember
+    expect(CommunityMemberSchema.safeParse(member).success).toBe(false)
+  })
+
+  it('should reject an invalid role', () => {
+    expect(CommunityMemberSchema.safeParse({ ...validMember, role: 'host' }).success).toBe(false)
+  })
+
+  it('should reject an unknown top-level key', () => {
+    expect(CommunityMemberSchema.safeParse({ ...validMember, avtar: 'x.jpeg' }).success).toBe(false)
+  })
+
+  it('should reject an unknown social key', () => {
+    const member = { ...validMember, social: { linkdin: 'https://linkedin.com/in/jane' } }
+    expect(CommunityMemberSchema.safeParse(member).success).toBe(false)
+  })
+})
+
+describe('validateCommunityMember', () => {
+  it('should return the parsed frontmatter when valid', () => {
+    expect(validateCommunityMember(validMember, 'Short bio.', 'valid.md')).toEqual(validMember)
+  })
+
+  it('should throw an error naming the file when the bio is empty', () => {
+    expect(() => validateCommunityMember(validMember, '  \n', 'no-bio.md')).toThrow(
+      /no-bio\.md[\s\S]*bio/
+    )
+  })
+
+  it('should throw an error naming the file and the invalid field', () => {
+    expect(() =>
+      validateCommunityMember({ ...validMember, role: 'host' }, 'Bio.', 'broken.md')
+    ).toThrow(/broken\.md[\s\S]*role/)
+  })
+
+  it('should accept every member file in content/community', () => {
+    const communityDir = path.join(process.cwd(), 'content', 'community')
+    const files = fs.readdirSync(communityDir).flatMap((roleDir) =>
+      fs
+        .readdirSync(path.join(communityDir, roleDir))
+        .filter((filename) => filename.endsWith('.md'))
+        .map((filename) => path.join(communityDir, roleDir, filename))
+    )
+
+    expect(files.length).toBeGreaterThan(0)
+    files.forEach((file) => {
+      const { frontmatter, markdown } = parseMarkdown(fs.readFileSync(file, 'utf-8'))
+      expect(() => validateCommunityMember(frontmatter, markdown, file)).not.toThrow()
     })
   })
 })
