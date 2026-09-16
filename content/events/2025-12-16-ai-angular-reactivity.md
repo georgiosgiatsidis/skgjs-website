@@ -9,7 +9,7 @@ talks:
   - title: 'Angular: Build with AI'
     description: 'Learn how Angular developers can develop faster and more efficiently using AI: Angular-focused LLM prompts, AI-powered IDE workflow, and best practices for AI-assisted development.'
     speaker:
-      - path: 'content/community/organizers/kostas-ziazios'
+      - path: 'content/community/speakers/kostas-ziazios'
   - title: 'Virtual DOM vs Signals: Two Roads to Reactivity'
     description: 'Deep dive into two leading paradigms: Virtual DOM diffing (React) and fine-grained signals (Solid.js). Performance trade-offs and how the React Compiler optimizes React.'
     presentation: 'virtual-dom/presentation.pptx'

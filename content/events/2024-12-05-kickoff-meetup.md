@@ -14,7 +14,7 @@ talks:
   - title: 'Angular Signals'
     description: 'Explore the exciting world of Angular Signals and their role in reactivity for modern Angular applications.'
     speaker:
-      - path: 'content/community/organizers/kostas-ziazios'
+      - path: 'content/community/speakers/kostas-ziazios'
 tags: ['web-rendering', 'angular', 'signals']
 image: 'https://secure.meetupstatic.com/photos/event/4/e/8/a/highres_524780106.jpeg'
 ---

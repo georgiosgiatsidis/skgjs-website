@@ -313,7 +313,7 @@ export default async function EventPage({ params }: EventPageProps) {
                               src={speaker.avatar}
                               alt={speaker.name}
                               fill
-                              className="object-cover"
+                              className="!h-full !w-full object-cover"
                             />
                           ) : (
                             <div className="flex h-full w-full items-center justify-center text-xl font-bold text-gray-400">

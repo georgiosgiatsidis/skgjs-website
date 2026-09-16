@@ -135,7 +135,7 @@ export function EventCard({ event }: EventCardProps) {
                 {event.speakers.slice(0, 4).map((speaker, i) => (
                   <div
                     key={i}
-                    className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"
+                    className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"
                     title={speaker.name}
                   >
                     {speaker.avatar ? (
@@ -143,7 +143,7 @@ export function EventCard({ event }: EventCardProps) {
                         src={speaker.avatar}
                         alt={speaker.name}
                         fill
-                        className="object-cover"
+                        className="!h-full !w-full object-cover"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-gray-500 dark:text-gray-400">

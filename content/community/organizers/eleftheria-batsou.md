@@ -1,5 +1,5 @@
 ---
-index: 3
+index: 4
 name: Eleftheria Batsou
 role: organizer
 title: Community manager
@@ -13,6 +13,7 @@ skills:
   - Social media evangelist
 contributedTalks:
   - Beyond Clicks & Prompts - Design for Human AI Interaction
+  - Your App Is Up. Your Business Is Down.
 ---
 
 Hi, I'm Eleftheria, a Community manager with a coding background, keen on UX research.
