@@ -154,13 +154,13 @@ export function EventCardWide({ event }: EventCardWideProps) {
                 <div className="space-y-3">
                   {event.speakers.map((speaker, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-js-yellow/20 bg-gray-200 dark:bg-gray-700">
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-js-yellow/20 bg-gray-200 dark:bg-gray-700">
                         {speaker.avatar ? (
                           <Image
                             src={speaker.avatar}
                             alt={speaker.name}
                             fill
-                            className="object-cover"
+                            className="!h-full !w-full object-cover"
                           />
                         ) : (
                           <div className="flex h-full w-full items-center justify-center text-lg font-semibold text-gray-500 dark:text-gray-400">
