@@ -4,8 +4,10 @@ import { describe, it, expect } from 'vitest'
 import {
   CommunityMemberSchema,
   EventSchema,
+  SiteConfigSchema,
   validateCommunityMember,
   validateEventFrontmatter,
+  validateSiteConfig,
 } from '@/lib/schemas'
 import { parseMarkdown } from '@/lib/markdown'
 
@@ -200,5 +202,61 @@ describe('validateCommunityMember', () => {
       const { frontmatter, markdown } = parseMarkdown(fs.readFileSync(file, 'utf-8'))
       expect(() => validateCommunityMember(frontmatter, markdown, file)).not.toThrow()
     })
+  })
+})
+
+const validSiteConfig = {
+  siteName: 'Thessaloniki JavaScript Meetup',
+  tagline: 'JavaScript community in Thessaloniki',
+  description: 'Join the Thessaloniki JavaScript community for meetups, talks, and networking.',
+  social: {
+    meetup: 'https://www.meetup.com/skg-js/',
+    linkedin: 'https://www.linkedin.com/company/skg-js/',
+    instagram: 'https://www.instagram.com/skgjs.gr/',
+  },
+  contact: {
+    email: 'info@skgjs.gr',
+    enableContactForm: false,
+  },
+  speakerFormUrl: 'https://docs.google.com/forms/d/e/example/viewform',
+}
+
+describe('SiteConfigSchema', () => {
+  it('should accept a valid site config', () => {
+    expect(SiteConfigSchema.safeParse(validSiteConfig).success).toBe(true)
+  })
+
+  it('should reject unknown top-level keys', () => {
+    expect(SiteConfigSchema.safeParse({ ...validSiteConfig, siteNmae: 'Typo' }).success).toBe(false)
+  })
+
+  it('should reject unknown social keys', () => {
+    const config = {
+      ...validSiteConfig,
+      social: { ...validSiteConfig.social, meetupUrl: 'https://www.meetup.com/skg-js/' },
+    }
+    expect(SiteConfigSchema.safeParse(config).success).toBe(false)
+  })
+
+  it('should reject a missing meetup link', () => {
+    const { meetup: _meetup, ...social } = validSiteConfig.social
+    expect(SiteConfigSchema.safeParse({ ...validSiteConfig, social }).success).toBe(false)
+  })
+})
+
+describe('validateSiteConfig', () => {
+  it('should return the parsed frontmatter when valid', () => {
+    expect(validateSiteConfig(validSiteConfig, 'site-config.md')).toEqual(validSiteConfig)
+  })
+
+  it('should throw an error naming the file and the invalid field', () => {
+    const config = { ...validSiteConfig, social: { ...validSiteConfig.social, meetup: 'skg-js' } }
+    expect(() => validateSiteConfig(config, 'broken.md')).toThrow(/broken\.md[\s\S]*social\.meetup/)
+  })
+
+  it('should accept content/site-config.md', () => {
+    const file = path.join(process.cwd(), 'content', 'site-config.md')
+    const { frontmatter } = parseMarkdown(fs.readFileSync(file, 'utf-8'))
+    expect(() => validateSiteConfig(frontmatter, file)).not.toThrow()
   })
 })

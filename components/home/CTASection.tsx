@@ -74,7 +74,7 @@ export function CTASection({ meetupUrl }: CTASectionProps) {
               viewport={{ once: true }}
             >
               Connect with fellow developers, learn from industry experts, and grow your skills at
-              our monthly meetups in Thessaloniki.
+              our meetups in Thessaloniki.
             </motion.p>
 
             <motion.div

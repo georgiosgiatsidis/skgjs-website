@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseMarkdown } from './markdown'
-import { validateCommunityMember, validateEventFrontmatter } from './schemas'
+import { validateCommunityMember, validateEventFrontmatter, validateSiteConfig } from './schemas'
 import type {
   Event,
   CommunityMember,
@@ -197,9 +197,9 @@ export function getSiteConfig(): SiteConfig {
   const { frontmatter, markdown } = parseMarkdown(fileContent)
 
   return {
-    ...frontmatter,
+    ...validateSiteConfig(frontmatter, 'content/site-config.md'),
     aboutMarkdown: markdown,
-  } as SiteConfig
+  }
 }
 
 /**

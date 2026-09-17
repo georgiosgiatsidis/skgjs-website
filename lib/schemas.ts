@@ -119,28 +119,49 @@ export const SponsorSchema = z.object({
   description: z.string().min(20).max(200),
 })
 
-export const SiteConfigSchema = z.object({
-  siteName: z.string(),
-  tagline: z.string(),
-  description: z.string().min(50).max(160),
-  nextEvent: z
-    .object({
-      slug: z.string(),
-      highlight: z.boolean(),
-    })
-    .optional(),
-  social: z.object({
-    meetup: z.string().url(),
-    github: z.string().url().optional(),
-    instagram: z.string().url(),
-    linkedin: z.string().url(),
-  }),
-  contact: z.object({
-    email: z.string().email(),
-  }),
-  analytics: z
-    .object({
-      googleAnalyticsId: z.string().optional(),
-    })
-    .optional(),
-})
+// Frontmatter only: the about text is the markdown body
+export const SiteConfigSchema = z
+  .object({
+    siteName: z.string(),
+    tagline: z.string(),
+    description: z.string().min(50).max(160),
+    nextEvent: z
+      .object({
+        slug: z.string(),
+        highlight: z.boolean(),
+      })
+      .strict()
+      .optional(),
+    social: z
+      .object({
+        meetup: z.string().url(),
+        github: z.string().url().optional(),
+        instagram: z.string().url(),
+        linkedin: z.string().url(),
+      })
+      .strict(),
+    contact: z
+      .object({
+        email: z.string().email(),
+        enableContactForm: z.boolean().optional(),
+      })
+      .strict(),
+    analytics: z
+      .object({
+        googleAnalyticsId: z.string().optional(),
+      })
+      .strict()
+      .optional(),
+    speakerFormUrl: z.string().url().optional(),
+  })
+  .strict()
+
+export function validateSiteConfig(frontmatter: unknown, source: string) {
+  const result = SiteConfigSchema.safeParse(frontmatter)
+
+  if (!result.success) {
+    throw new Error(`Invalid site config in ${source}:\n${formatIssues(result.error.issues)}`)
+  }
+
+  return result.data
+}
