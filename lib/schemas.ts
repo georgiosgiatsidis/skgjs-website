@@ -131,7 +131,7 @@ export const SiteConfigSchema = z.object({
     .optional(),
   social: z.object({
     meetup: z.string().url(),
-    github: z.string().url(),
+    github: z.string().url().optional(),
     instagram: z.string().url(),
     linkedin: z.string().url(),
   }),

@@ -82,7 +82,7 @@ export interface SiteConfig {
   }
   social: {
     meetup: string
-    github: string
+    github?: string
     instagram: string
     linkedin: string
   }
