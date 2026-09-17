@@ -4,7 +4,11 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 
-export function CTASection() {
+interface CTASectionProps {
+  meetupUrl: string
+}
+
+export function CTASection({ meetupUrl }: CTASectionProps) {
   return (
     <section className="relative overflow-hidden bg-js-black py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -70,7 +74,7 @@ export function CTASection() {
               viewport={{ once: true }}
             >
               Connect with fellow developers, learn from industry experts, and grow your skills at
-              our monthly meetups in Thessaloniki.
+              our meetups in Thessaloniki.
             </motion.p>
 
             <motion.div
@@ -81,7 +85,7 @@ export function CTASection() {
               viewport={{ once: true }}
             >
               <a
-                href="https://www.meetup.com/thessaloniki-javascript-meetup/"
+                href={meetupUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >

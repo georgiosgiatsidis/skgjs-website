@@ -19,7 +19,7 @@ export default async function HomePage() {
       <BecomeASpeakerSection speakerFormUrl={siteConfig.speakerFormUrl} />
       <AboutSection content={siteConfig.aboutMarkdown} />
       <PartnersSection />
-      <CTASection />
+      <CTASection meetupUrl={siteConfig.social.meetup} />
     </div>
   )
 }

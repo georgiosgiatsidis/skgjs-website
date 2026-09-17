@@ -74,11 +74,17 @@ test.describe('Contact Page', () => {
     const footer = page.locator('footer')
     await expect(footer).toBeVisible()
 
-    // Check for social link texts
-    await expect(footer.locator('text=Meetup')).toBeVisible()
-    await expect(footer.locator('text=GitHub')).toBeVisible()
-    await expect(footer.locator('text=Instagram')).toBeVisible()
-    await expect(footer.locator('text=LinkedIn')).toBeVisible()
+    // Footer links are icon-only, so match them by aria-label and destination
+    const socialLinks = [
+      { label: 'meetup', host: 'meetup.com' },
+      { label: 'instagram', host: 'instagram.com' },
+      { label: 'linkedin', host: 'linkedin.com' },
+    ]
+    for (const { label, host } of socialLinks) {
+      const link = footer.locator(`a[aria-label="${label}"]`)
+      await expect(link).toBeVisible()
+      await expect(link).toHaveAttribute('href', new RegExp(host.replace('.', '\\.')))
+    }
   })
 
   test('should open social links in new tab', async ({ page }) => {

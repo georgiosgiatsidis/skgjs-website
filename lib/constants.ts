@@ -1,6 +1,4 @@
-export const SITE_NAME = 'Thessaloniki JavaScript Meetup'
 export const SITE_SHORT_NAME = 'Thessaloniki JS'
-export const SITE_TAGLINE = 'JavaScript community in Thessaloniki'
 
 export const COLORS = {
   jsYellow: '#F7DF1E',

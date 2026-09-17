@@ -14,3 +14,9 @@ Thumbs.db
 *.tmp
 *.swp
 *.tsbuildinfo
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/

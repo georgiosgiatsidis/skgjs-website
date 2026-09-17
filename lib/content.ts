@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseMarkdown } from './markdown'
-import { validateCommunityMember, validateEventFrontmatter } from './schemas'
+import { validateCommunityMember, validateEventFrontmatter, validateSiteConfig } from './schemas'
 import type {
   Event,
   CommunityMember,
@@ -188,32 +188,18 @@ export function getAllPartners(activeOnly = false): Sponsor[] {
 export function getSiteConfig(): SiteConfig {
   const configPath = path.join(contentDir, 'site-config.md')
 
+  // No in-code fallback: site-config.md is the single source of truth for site-wide values
   if (!fs.existsSync(configPath)) {
-    // Return default config if file doesn't exist
-    return {
-      siteName: 'Thessaloniki JavaScript Meetup',
-      tagline: 'JavaScript community in Thessaloniki',
-      description: 'Join the Thessaloniki JavaScript community for meetups and networking.',
-      social: {
-        meetup: 'https://www.meetup.com/skgjs/',
-        github: 'https://github.com/skgjs',
-        instagram: 'https://instagram.com/skgjs',
-        linkedin: 'https://www.linkedin.com/company/skgjs',
-      },
-      contact: {
-        email: 'organizers@skgjs.gr',
-      },
-      aboutMarkdown: '',
-    }
+    throw new Error(`Site config not found: ${configPath}`)
   }
 
   const fileContent = fs.readFileSync(configPath, 'utf-8')
   const { frontmatter, markdown } = parseMarkdown(fileContent)
 
   return {
-    ...frontmatter,
+    ...validateSiteConfig(frontmatter, 'content/site-config.md'),
     aboutMarkdown: markdown,
-  } as SiteConfig
+  }
 }
 
 /**
