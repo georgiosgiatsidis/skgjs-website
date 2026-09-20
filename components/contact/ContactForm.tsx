@@ -1,18 +1,26 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, useRef, FormEvent } from 'react'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { clsx } from 'clsx'
 
 interface ContactFormProps {
   disabled?: boolean
+  accessKey?: string
 }
 
-export function ContactForm({ disabled = false }: ContactFormProps) {
+// Web3Forms' shared hCaptcha sitekey, public by design on the free plan.
+const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
+
+export function ContactForm({ disabled = false, accessKey = '' }: ContactFormProps) {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [captchaToken, setCaptchaToken] = useState('')
+  const captchaRef = useRef<HCaptcha>(null)
   const isDisabled = disabled || formState === 'submitting'
+  const canSubmit = !isDisabled && captchaToken !== ''
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -20,6 +28,7 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
     setErrorMessage('')
 
     const formData = new FormData(e.currentTarget)
+    formData.append('h-captcha-response', captchaToken)
 
     // Honeypot check
     if (formData.get('botcheck')) {
@@ -46,12 +55,16 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
     } catch (_error) {
       setFormState('error')
       setErrorMessage('Network error. Please check your connection and try again.')
+    } finally {
+      // hCaptcha tokens are single-use; force a fresh challenge for the next attempt.
+      setCaptchaToken('')
+      captchaRef.current?.resetCaptcha()
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
-      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ''} />
+      <input type="hidden" name="access_key" value={accessKey} />
       <input type="hidden" name="subject" value="SKG JS Contact Form Submission" />
       <input
         type="checkbox"
@@ -130,11 +143,22 @@ export function ContactForm({ disabled = false }: ContactFormProps) {
         </div>
       )}
 
+      {!disabled && (
+        <HCaptcha
+          ref={captchaRef}
+          sitekey={HCAPTCHA_SITEKEY}
+          reCaptchaCompat={false}
+          onVerify={setCaptchaToken}
+          onExpire={() => setCaptchaToken('')}
+          onError={() => setCaptchaToken('')}
+        />
+      )}
+
       <Button
         type="submit"
         variant="primary"
         size="lg"
-        disabled={isDisabled}
+        disabled={!canSubmit}
         className="w-full sm:w-auto"
       >
         {formState === 'submitting' ? 'Sending...' : 'Send Message'}

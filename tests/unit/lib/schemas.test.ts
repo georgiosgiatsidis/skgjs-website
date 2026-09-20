@@ -216,7 +216,8 @@ const validSiteConfig = {
   },
   contact: {
     email: 'info@skgjs.gr',
-    enableContactForm: false,
+    enableContactForm: true,
+    web3formsKey: '00000000-0000-0000-0000-000000000000',
   },
   speakerFormUrl: 'https://docs.google.com/forms/d/e/example/viewform',
 }
@@ -241,6 +242,16 @@ describe('SiteConfigSchema', () => {
   it('should reject a missing meetup link', () => {
     const { meetup: _meetup, ...social } = validSiteConfig.social
     expect(SiteConfigSchema.safeParse({ ...validSiteConfig, social }).success).toBe(false)
+  })
+
+  it('should accept a contact block without a web3forms key', () => {
+    const { web3formsKey: _key, ...contact } = validSiteConfig.contact
+    expect(SiteConfigSchema.safeParse({ ...validSiteConfig, contact }).success).toBe(true)
+  })
+
+  it('should reject unknown contact keys', () => {
+    const contact = { ...validSiteConfig.contact, web3FormsKey: 'wrong-casing' }
+    expect(SiteConfigSchema.safeParse({ ...validSiteConfig, contact }).success).toBe(false)
   })
 })
 

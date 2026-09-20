@@ -8,7 +8,8 @@ social:
   instagram: 'https://www.instagram.com/skgjs.gr/'
 contact:
   email: 'info@skgjs.gr'
-  enableContactForm: false
+  enableContactForm: true
+  web3formsKey: '8e347ef4-20b1-4d1a-98e3-cab3201642b6'
 speakerFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfUXrzRAZQFoNBAkimDE4NvBSlYlrl079cc7Nyaa6bkE9t_vA/viewform?edit_requested=true&pli=1'
 ---
 

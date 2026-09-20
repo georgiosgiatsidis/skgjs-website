@@ -144,6 +144,7 @@ export const SiteConfigSchema = z
       .object({
         email: z.string().email(),
         enableContactForm: z.boolean().optional(),
+        web3formsKey: z.string().optional(),
       })
       .strict(),
     analytics: z
