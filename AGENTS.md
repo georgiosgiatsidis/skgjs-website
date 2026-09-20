@@ -15,7 +15,7 @@
 
 ## Build, Test, and Development Commands
 
-- `npm ci --legacy-peer-deps` — install dependencies (same as CI).
+- `npm ci` — install dependencies (same as CI).
 - `npm run dev` — development server on http://localhost:3000.
 - `npm run build` — static export to `out/`; requires `B2_ACCESS_KEY_ID`, `B2_SECRET_ACCESS_KEY`, `B2_BUCKET_NAME`, and `B2_REGION`.
 - `npm test` — Vitest unit tests, including validation of every event file.
