@@ -11,4 +11,5 @@ export const ROUTES = {
   events: '/events/',
   community: '/community/',
   contact: '/contact/',
+  privacy: '/privacy/',
 }
