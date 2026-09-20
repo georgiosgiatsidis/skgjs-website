@@ -89,6 +89,7 @@ export interface SiteConfig {
   contact: {
     email: string
     enableContactForm?: boolean
+    web3formsKey?: string
   }
   analytics?: {
     googleAnalyticsId?: string
