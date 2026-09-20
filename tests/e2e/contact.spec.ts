@@ -10,7 +10,7 @@ test.describe('Contact Page', () => {
     await page.goto('/')
     await page.click('a[href="/contact/"]')
     await expect(page).toHaveURL('/contact/')
-    await expect(page.locator('h1')).toContainText('Contact')
+    await expect(page.locator('h1')).toContainText('Get in Touch')
   })
 
   test('should display contact form with all fields', async ({ page }) => {
@@ -18,7 +18,7 @@ test.describe('Contact Page', () => {
 
     await expect(page.locator('input[name="name"]')).toBeVisible()
     await expect(page.locator('input[name="email"]')).toBeVisible()
-    await expect(page.locator('input[name="subject"]')).toBeVisible()
+    await expect(page.locator('input#subject')).toBeVisible()
     await expect(page.locator('textarea[name="message"]')).toBeVisible()
     await expect(page.locator('button[type="submit"]')).toBeVisible()
   })
