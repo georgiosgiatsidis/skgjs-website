@@ -27,8 +27,10 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
     setFormState('submitting')
     setErrorMessage('')
 
+    // hCaptcha writes the token into its own h-captcha-response field inside
+    // this form; appending it again submits the key twice and Web3Forms then
+    // fails verification.
     const formData = new FormData(e.currentTarget)
-    formData.append('h-captcha-response', captchaToken)
 
     // Honeypot check
     if (formData.get('botcheck')) {
