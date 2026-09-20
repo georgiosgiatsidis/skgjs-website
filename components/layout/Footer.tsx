@@ -137,9 +137,17 @@ export function Footer({ social = {}, email }: FooterProps) {
           </div>
 
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 dark:border-gray-800 md:flex-row">
-            <p className="text-sm text-gray-500 dark:text-gray-500">
-              {new Date().getFullYear()} Thessaloniki JavaScript Meetup. All rights reserved.
-            </p>
+            <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
+              <p className="text-sm text-gray-500 dark:text-gray-500">
+                {new Date().getFullYear()} Thessaloniki JavaScript Meetup. All rights reserved.
+              </p>
+              <Link
+                href={ROUTES.privacy}
+                className="text-sm text-gray-500 transition-colors hover:text-js-yellow dark:text-gray-500"
+              >
+                Privacy
+              </Link>
+            </div>
             <p className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-500">
               Made with
               <motion.span

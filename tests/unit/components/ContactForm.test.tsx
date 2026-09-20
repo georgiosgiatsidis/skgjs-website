@@ -77,6 +77,25 @@ describe('ContactForm', () => {
     expect(body.getAll('h-captcha-response')).toEqual([TOKEN])
   })
 
+  it('should disclose the third-party processors and link to the privacy page', async () => {
+    render(<ContactForm accessKey="test-key" />)
+
+    // The note is the GDPR Art. 13 pointer; it must survive refactors of the form.
+    const note = screen.getByText(/Web3Forms/i)
+    expect(note).toHaveTextContent(/hCaptcha/i)
+    // next/link normalises the trailing slash away without the Next config that
+    // vitest does not load; the built site serves /privacy/ (trailingSlash: true).
+    expect(screen.getByRole('link', { name: /privacy page/i }).getAttribute('href')).toMatch(
+      /^\/privacy\/?$/
+    )
+  })
+
+  it('should show the disclosure even when the form is disabled', async () => {
+    render(<ContactForm disabled />)
+
+    expect(screen.getByRole('link', { name: /privacy page/i })).toBeInTheDocument()
+  })
+
   it('should submit the configured access key', async () => {
     render(<ContactForm accessKey="test-key" />)
     await fillAndSubmit()

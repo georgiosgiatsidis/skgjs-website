@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useRef, FormEvent } from 'react'
+import Link from 'next/link'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { clsx } from 'clsx'
+import { ROUTES } from '@/lib/constants'
 
 interface ContactFormProps {
   disabled?: boolean
@@ -160,6 +162,15 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
           onError={() => setCaptchaToken('')}
         />
       )}
+
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Your message is delivered by Web3Forms and this form is protected by hCaptcha, both
+        third-party services. See our{' '}
+        <Link href={ROUTES.privacy} className="text-js-yellow hover:underline">
+          privacy page
+        </Link>{' '}
+        for what they receive.
+      </p>
 
       <Button
         type="submit"

@@ -6,6 +6,10 @@ interface GoogleAnalyticsProps {
   gaId?: string
 }
 
+// Analytics are deliberately off: NEXT_PUBLIC_GA_ID is unset in CI, so nothing
+// loads. /privacy states that this site runs no analytics and sets no cookies of
+// its own - setting the variable would make that statement false and would also
+// require a consent mechanism before this script may run for EU visitors.
 export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
   if (!gaId) {
     return null
