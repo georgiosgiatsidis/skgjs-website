@@ -107,9 +107,11 @@ export default function PrivacyPage() {
                 <ul>
                   <li>
                     <strong>Web3Forms</strong> receives your submission and forwards it to our
-                    inbox. It is operated by Web3Creative, which operates from India and uses Amazon
-                    Web Services, Cloudflare and Hetzner as infrastructure providers across several
-                    regions. Web3Forms acts as our data processor under its Data Processing
+                    inbox. Alongside the fields you fill in, it records technical metadata about the
+                    submission &mdash; your <strong>IP address</strong>, a timestamp and the page
+                    you submitted from. It is operated by Web3Creative, which operates from India
+                    and uses Amazon Web Services, Cloudflare and Hetzner (EU) as infrastructure
+                    providers. Web3Forms acts as our data processor under its Data Processing
                     Agreement, and transfers of data out of the EEA are made under Standard
                     Contractual Clauses. Note that Web3Forms{' '}
                     <strong>
