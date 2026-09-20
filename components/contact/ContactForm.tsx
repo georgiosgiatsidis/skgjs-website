@@ -14,6 +14,10 @@ interface ContactFormProps {
 // Web3Forms' shared hCaptcha sitekey, public by design on the free plan.
 const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
 
+// The widget theme is fixed because the site renders dark-only (see the root
+// layout); revisit this if a light mode is ever introduced.
+const HCAPTCHA_THEME = 'dark'
+
 export function ContactForm({ disabled = false, accessKey = '' }: ContactFormProps) {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -27,8 +31,10 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
     setFormState('submitting')
     setErrorMessage('')
 
+    // hCaptcha writes the token into its own h-captcha-response field inside
+    // this form; appending it again submits the key twice and Web3Forms then
+    // fails verification.
     const formData = new FormData(e.currentTarget)
-    formData.append('h-captcha-response', captchaToken)
 
     // Honeypot check
     if (formData.get('botcheck')) {
@@ -148,6 +154,7 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
           ref={captchaRef}
           sitekey={HCAPTCHA_SITEKEY}
           reCaptchaCompat={false}
+          theme={HCAPTCHA_THEME}
           onVerify={setCaptchaToken}
           onExpire={() => setCaptchaToken('')}
           onError={() => setCaptchaToken('')}
