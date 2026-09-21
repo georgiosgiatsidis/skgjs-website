@@ -16,7 +16,11 @@ export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) 
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
     >
-      <div className="relative inline-flex rounded-2xl bg-white p-1.5 shadow-lg dark:bg-gray-800">
+      <div
+        role="group"
+        aria-label="Filter events"
+        className="relative inline-flex rounded-2xl bg-white p-1.5 shadow-lg dark:bg-gray-800"
+      >
         <motion.div
           className="absolute inset-y-1.5 rounded-xl bg-js-yellow"
           initial={false}
