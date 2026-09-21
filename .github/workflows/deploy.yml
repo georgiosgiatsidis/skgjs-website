@@ -64,6 +64,10 @@ jobs:
           B2_SECRET_ACCESS_KEY: ${{ secrets.B2_SECRET_ACCESS_KEY }}
           B2_BUCKET_NAME: ${{ secrets.B2_BUCKET_NAME }}
           B2_REGION: ${{ secrets.B2_REGION }}
+          # Pull requests from forks never receive the secrets, so there the B2-backed sections
+          # are left out of the export. On a run that can deploy, a missing secret is a broken
+          # site and has to fail the build instead.
+          B2_REQUIRED: ${{ github.event_name != 'pull_request' }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
