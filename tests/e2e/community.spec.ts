@@ -2,181 +2,97 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Community Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/community')
+    await page.goto('/community/')
   })
 
   test('should navigate to community page successfully', async ({ page }) => {
-    await expect(page).toHaveURL('/community')
+    await expect(page).toHaveURL('/community/')
     await expect(page.locator('h1')).toContainText(/Community|Our Community/i)
   })
 
   test.describe('Member Cards', () => {
     test('should display member cards', async ({ page }) => {
-      const memberCards = page.locator('[data-testid="member-card"]')
-      const count = await memberCards.count()
-      expect(count).toBeGreaterThan(0)
+      await expect(page.getByTestId('member-card').first()).toBeVisible()
     })
 
     test('should display organizer members', async ({ page }) => {
-      const organizers = page.locator('text=Organizers').locator('..')
-      await expect(organizers).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'Organizers' })).toBeVisible()
 
-      const organizerCards = page.locator('[data-testid="member-card"]').filter({
-        has: page.locator('text=Organizer'),
+      const organizerCards = page.getByTestId('member-card').filter({
+        has: page.getByTestId('member-role').filter({ hasText: /^Organizer$/ }),
       })
-      const count = await organizerCards.count()
-      expect(count).toBeGreaterThan(0)
+      expect(await organizerCards.count()).toBeGreaterThan(0)
     })
 
     test('should display speaker members', async ({ page }) => {
-      const speakers = page.locator('text=/Speakers|Past Speakers/i').locator('..')
+      await expect(page.getByRole('heading', { name: 'Speakers' })).toBeVisible()
 
-      if (await speakers.isVisible()) {
-        const speakerCards = page.locator('[data-testid="member-card"]').filter({
-          has: page.locator('text=/Speaker/i'),
-        })
-        const count = await speakerCards.count()
-        expect(count).toBeGreaterThan(0)
-      }
+      const speakerCards = page.getByTestId('member-card').filter({
+        has: page.getByTestId('member-role').filter({ hasText: /^Speaker$/ }),
+      })
+      expect(await speakerCards.count()).toBeGreaterThan(0)
     })
 
     test('should display member avatar or fallback', async ({ page }) => {
-      const firstMember = page.locator('[data-testid="member-card"]').first()
-      const avatar = firstMember.locator('[data-testid="member-avatar"]')
+      const firstMember = page.getByTestId('member-card').first()
 
-      await expect(avatar).toBeVisible()
+      await expect(firstMember.getByTestId('member-avatar')).toBeVisible()
     })
 
     test('should display member name and role', async ({ page }) => {
-      const firstMember = page.locator('[data-testid="member-card"]').first()
-      const name = firstMember.locator('[data-testid="member-name"]')
-      const role = firstMember.locator('[data-testid="member-role"]')
+      const firstMember = page.getByTestId('member-card').first()
 
-      await expect(name).toBeVisible()
-      await expect(role).toBeVisible()
+      await expect(firstMember.getByTestId('member-name')).toBeVisible()
+      await expect(firstMember.getByTestId('member-role')).toBeVisible()
     })
 
     test('should display member bio', async ({ page }) => {
-      const firstMember = page.locator('[data-testid="member-card"]').first()
-      const bio = firstMember.locator('[data-testid="member-bio"]')
+      const firstMember = page.getByTestId('member-card').first()
 
-      await expect(bio).toBeVisible()
+      await expect(firstMember.getByTestId('member-bio')).toBeVisible()
     })
 
     test('should display social links when available', async ({ page }) => {
-      const memberWithSocial = page.locator('[data-testid="member-social"]').first()
+      const socialContainers = page.getByTestId('member-social')
+      expect(await socialContainers.count()).toBeGreaterThan(0)
 
-      if (await memberWithSocial.isVisible()) {
-        const socialLinks = memberWithSocial.locator('a')
-        const count = await socialLinks.count()
-        expect(count).toBeGreaterThan(0)
+      const socialLinks = socialContainers.first().locator('a')
+      expect(await socialLinks.count()).toBeGreaterThan(0)
 
-        const firstLink = socialLinks.first()
-        await expect(firstLink).toHaveAttribute('target', '_blank')
-        await expect(firstLink).toHaveAttribute('rel', 'noopener noreferrer')
-      }
+      const firstLink = socialLinks.first()
+      await expect(firstLink).toHaveAttribute('target', '_blank')
+      await expect(firstLink).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
     test('should truncate long bios with read more', async ({ page }) => {
-      const readMoreButton = page.locator('button').filter({ hasText: /Read More|Show More/i })
+      const readMore = page.getByRole('button', { name: /Read More/i }).first()
+      await expect(readMore).toBeVisible()
 
-      if (await readMoreButton.first().isVisible()) {
-        await readMoreButton.first().click()
-        const showLess = page.locator('button').filter({ hasText: /Read Less|Show Less/i })
-        await expect(showLess.first()).toBeVisible()
-      }
-    })
-  })
+      await readMore.click()
 
-  test.describe('Photo Gallery', () => {
-    test('should display photo gallery section', async ({ page }) => {
-      const gallery = page.locator('text=/Gallery|Photo Gallery|Past Events/i').locator('..')
-
-      if (await gallery.isVisible()) {
-        await expect(gallery).toBeVisible()
-      }
-    })
-
-    test('should display event photos', async ({ page }) => {
-      const photos = page.locator('[data-testid="gallery-photo"]')
-
-      if ((await photos.count()) > 0) {
-        await expect(photos.first()).toBeVisible()
-      }
-    })
-
-    test('should load gallery images without errors', async ({ page }) => {
-      const photos = page.locator('[data-testid="gallery-photo"] img')
-      const count = await photos.count()
-
-      if (count > 0) {
-        for (let i = 0; i < Math.min(count, 3); i++) {
-          const photo = photos.nth(i)
-          await expect(photo).toBeVisible()
-        }
-      }
-    })
-
-    test('should support lazy loading for images', async ({ page }) => {
-      const photos = page.locator('[data-testid="gallery-photo"] img')
-
-      if ((await photos.count()) > 0) {
-        const firstPhoto = photos.first()
-        const loading = await firstPhoto.getAttribute('loading')
-        expect(loading).toBe('lazy')
-      }
-    })
-
-    test('should display photos in responsive grid', async ({ page }) => {
-      const gallery = page.locator('[data-testid="photo-gallery"]')
-
-      if (await gallery.isVisible()) {
-        const classes = await gallery.getAttribute('class')
-        expect(classes).toMatch(/grid/)
-      }
+      await expect(page.getByRole('button', { name: /Read Less/i }).first()).toBeVisible()
     })
   })
 
   test.describe('Mobile Layout', () => {
-    test('should display member cards on mobile', async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 })
+    test.use({ viewport: { width: 375, height: 667 } })
 
-      const memberCards = page.locator('[data-testid="member-card"]')
-      await expect(memberCards.first()).toBeVisible()
+    test('should display member cards on mobile', async ({ page }) => {
+      await expect(page.getByTestId('member-card').first()).toBeVisible()
     })
 
     test('should stack member cards on mobile', async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 })
+      const cards = page.getByTestId('member-card')
+      expect(await cards.count()).toBeGreaterThan(1)
 
-      const grid = page
-        .locator('.grid')
-        .filter({ has: page.locator('[data-testid="member-card"]') })
+      const first = await cards.nth(0).boundingBox()
+      const second = await cards.nth(1).boundingBox()
 
-      if (await grid.isVisible()) {
-        const classes = await grid.getAttribute('class')
-        // Should not have multiple columns on mobile
-        expect(classes).toMatch(/grid/)
-      }
-    })
-
-    test('should display photo gallery on mobile', async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 })
-
-      const gallery = page.locator('[data-testid="photo-gallery"]')
-
-      if (await gallery.isVisible()) {
-        await expect(gallery).toBeVisible()
-      }
-    })
-
-    test('should adapt photo grid for mobile', async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 })
-
-      const photos = page.locator('[data-testid="gallery-photo"]')
-
-      if ((await photos.count()) > 0) {
-        await expect(photos.first()).toBeVisible()
-      }
+      expect(first).not.toBeNull()
+      expect(second).not.toBeNull()
+      // One column: the second card sits below the first, not beside it.
+      expect(second!.x).toBeCloseTo(first!.x, 0)
+      expect(second!.y).toBeGreaterThan(first!.y)
     })
   })
 })
