@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { CountUp } from '@/components/animations/CountUp'
 import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
+import { DecorativeBoundary } from '@/components/ui/DecorativeBoundary'
 import type { SiteStats } from '@/lib/stats'
 
 interface HeroProps {
@@ -49,24 +50,26 @@ export function Hero({ stats: siteStats }: HeroProps) {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0 z-10 opacity-30">
-        <LiquidEther
-          colors={['#F7DD3E', '#FFD700', '#FFA500']}
-          mouseForce={30}
-          cursorSize={100}
-          isViscous={false}
-          viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.5}
-          isBounce={false}
-          autoDemo={true}
-          autoSpeed={0.5}
-          autoIntensity={2.2}
-          takeoverDuration={0.25}
-          autoResumeDelay={500}
-          autoRampDuration={0.6}
-          style={{ width: '100%', height: '100%' }}
-        />
+        <DecorativeBoundary label="Hero background animation">
+          <LiquidEther
+            colors={['#F7DD3E', '#FFD700', '#FFA500']}
+            mouseForce={30}
+            cursorSize={100}
+            isViscous={false}
+            viscous={30}
+            iterationsViscous={32}
+            iterationsPoisson={32}
+            resolution={0.5}
+            isBounce={false}
+            autoDemo={true}
+            autoSpeed={0.5}
+            autoIntensity={2.2}
+            takeoverDuration={0.25}
+            autoResumeDelay={500}
+            autoRampDuration={0.6}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </DecorativeBoundary>
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-[0]">
