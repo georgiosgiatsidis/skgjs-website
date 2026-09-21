@@ -51,19 +51,16 @@ export function EventsClient({ events }: EventsClientProps) {
       ? 'No upcoming events scheduled. Check back soon!'
       : 'Event history coming soon.'
 
+  // Adopt the filter the URL asks for without writing it back: a plain /events/ visit must not
+  // rewrite itself to /events/?filter=upcoming just to restate the default.
   useEffect(() => {
-    const filter = getFilterFromURL()
-    setFilter(filter)
+    setActiveFilter(getFilterFromURL())
   }, [])
 
   return (
     <>
       <EventFilter activeFilter={activeFilter} onFilterChange={setFilter} />
-      <EventList
-        events={displayedEvents}
-        emptyMessage={emptyMessage}
-        filterType={activeFilter}
-      />
+      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} />
     </>
   )
 }
