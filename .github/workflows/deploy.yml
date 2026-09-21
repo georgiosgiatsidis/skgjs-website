@@ -70,6 +70,39 @@ jobs:
         with:
           path: ./out
 
+  e2e:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Chromium only: firefox and webkit have never been run against this suite, so committing
+      # CI to them would commit it to an unknown amount of work.
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      # Playwright serves the app with `npm run dev`, which needs no B2 credentials, so this job
+      # also works on pull requests from forks.
+      - name: End-to-end tests
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
   deploy:
     if: github.event_name != 'pull_request'
     permissions:
@@ -79,7 +112,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
-    needs: build
+    needs: [build, e2e]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

@@ -38,7 +38,7 @@ export function EventCardWide({ event }: EventCardWideProps) {
 
   return (
     <Link href={`/events/${event.slug}`} className="block">
-      <Card hover glowOnHover className="group overflow-hidden">
+      <Card data-testid="event-card" hover glowOnHover className="group overflow-hidden">
         {/* Horizontal layout: image left, content right */}
         <div className="flex flex-col md:flex-row">
           {/* Left side: Image with date badge */}

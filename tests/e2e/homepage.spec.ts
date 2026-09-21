@@ -7,252 +7,131 @@ test.describe('Homepage', () => {
   })
 
   test.describe('Complete Homepage Flow', () => {
-    test('should display all homepage sections in correct order', async ({ page }) => {
+    test('should display all homepage sections', async ({ page }) => {
       await page.goto('/')
 
-      // Hero section
-      const hero = page.locator('text=/Thessaloniki.*JavaScript Meetup/i').first()
-      await expect(hero).toBeVisible()
-
-      // Next Event section
-      const nextEvent = page.locator('text=/Next Event/i')
-      await expect(nextEvent).toBeVisible()
-
-      // About section
-      const about = page.locator('text=/About Us/i')
-      await expect(about).toBeVisible()
-
-      // Sponsors section
-      const sponsors = page.locator('text=/Our Sponsors/i')
-      await expect(sponsors).toBeVisible()
-
-      // Instagram section
-      const instagram = page.locator('text=/Follow.*Instagram/i')
-      if (await instagram.isVisible()) {
-        await expect(instagram).toBeVisible()
-      }
+      await expect(page.locator('h1')).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'Next Event' })).toBeVisible()
+      // The section heading and the markdown body it renders both read "About SKG JS".
+      await expect(page.getByRole('heading', { name: 'About SKG JS' }).first()).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'Our Community Partners' })).toBeVisible()
     })
 
     test('should navigate to all pages from homepage', async ({ page }) => {
       await page.goto('/')
+      const header = page.locator('header')
 
-      // Navigate to Events
-      await page.click('a[href="/events"]')
-      await expect(page).toHaveURL('/events')
-      await page.goBack()
+      const destinations = [
+        { name: 'Events', url: '/events/' },
+        { name: 'Community', url: '/community/' },
+        { name: 'Contact', url: '/contact/' },
+      ] as const
 
-      // Navigate to Community
-      await page.click('a[href="/community"]')
-      await expect(page).toHaveURL('/community')
-      await page.goBack()
+      for (const { name, url } of destinations) {
+        await header.getByRole('link', { name, exact: true }).click()
+        await expect(page).toHaveURL(url)
 
-      // Navigate to Contact
-      await page.click('a[href="/contact"]')
-      await expect(page).toHaveURL('/contact')
+        await page.goBack()
+        await expect(page).toHaveURL('/')
+      }
     })
 
     test('should display hero with logo and tagline', async ({ page }) => {
       await page.goto('/')
 
-      const logo = page.locator('img[alt*="Logo"]').first()
-      await expect(logo).toBeVisible()
-
-      const tagline = page.locator('text=/Join the vibrant JavaScript community/i')
-      await expect(tagline).toBeVisible()
+      await expect(page.locator('img[alt*="Logo"]').first()).toBeVisible()
+      await expect(page.getByText(/Join the vibrant JavaScript community/i)).toBeVisible()
     })
 
     test('should display CTA buttons in hero', async ({ page }) => {
       await page.goto('/')
 
-      const exploreEventsBtn = page.locator('a').filter({ hasText: /Explore Events/i })
-      await expect(exploreEventsBtn).toBeVisible()
-
-      const communityBtn = page.locator('a').filter({ hasText: /Meet the Community/i })
-      await expect(communityBtn).toBeVisible()
+      await expect(page.getByRole('link', { name: /Explore Events/i })).toBeVisible()
+      await expect(page.getByRole('link', { name: /Meet the Community/i })).toBeVisible()
     })
   })
 
-  test('should display sponsor logos on homepage', async ({ page }) => {
-    await page.goto('/')
+  test.describe('Community Partners', () => {
+    // Scoped to the partners section so the header and footer logos cannot match. The marquee
+    // renders a second, aria-hidden copy of every partner, which role selectors already exclude.
+    const partnerLink = (page: import('@playwright/test').Page) =>
+      page
+        .locator('section')
+        .filter({ has: page.getByRole('heading', { name: 'Our Community Partners' }) })
+        .getByRole('link', { name: /logo/i })
 
-    // Look for sponsors section
-    const sponsorsSection = page.locator('text=Our Sponsors').locator('..')
-
-    if (await sponsorsSection.isVisible()) {
-      // Check if sponsor logos are displayed
-      const sponsorLogos = page.locator('img[alt*="Corp"], img[alt*="Labs"], img[alt*="Hub"]')
-      const count = await sponsorLogos.count()
-      expect(count).toBeGreaterThan(0)
-    }
-  })
-
-  test('should make sponsor logos clickable with correct attributes', async ({ page }) => {
-    await page.goto('/')
-
-    // Find sponsor links
-    const sponsorLinks = page.locator('a[href*="example.com"]')
-
-    if ((await sponsorLinks.count()) > 0) {
-      const firstLink = sponsorLinks.first()
-      await expect(firstLink).toHaveAttribute('target', '_blank')
-      await expect(firstLink).toHaveAttribute('rel', 'noopener noreferrer')
-    }
-  })
-
-  test('should apply hover effects to sponsor logos', async ({ page }) => {
-    await page.goto('/')
-
-    const sponsorLinks = page.locator('a[href*="example.com"]')
-
-    if ((await sponsorLinks.count()) > 0) {
-      const firstLink = sponsorLinks.first()
-
-      // Check for hover transition classes
-      const classes = await firstLink.getAttribute('class')
-      expect(classes).toContain('transition')
-    }
-  })
-
-  test('should display sponsors in responsive grid', async ({ page }) => {
-    await page.goto('/')
-
-    const grid = page.locator('.grid').filter({ has: page.locator('img[alt*="Corp"]') })
-
-    if (await grid.isVisible()) {
-      const classes = await grid.getAttribute('class')
-      expect(classes).toMatch(/grid-cols/)
-    }
-  })
-
-  test('should display sponsors on mobile viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 })
-    await page.goto('/')
-
-    // Check if sponsors section adapts to mobile
-    const sponsorsSection = page.locator('text=Our Sponsors')
-
-    if (await sponsorsSection.isVisible()) {
-      await expect(sponsorsSection).toBeVisible()
-    }
-  })
-
-  test.describe('Instagram Feed', () => {
-    test('should display Instagram feed section', async ({ page }) => {
+    test('should display partner logos on homepage', async ({ page }) => {
       await page.goto('/')
-      const instagramSection = page.locator('text=/Follow.*Instagram/i')
 
-      if (await instagramSection.isVisible()) {
-        await expect(instagramSection).toBeVisible()
-      }
+      await expect(page.getByRole('heading', { name: 'Our Community Partners' })).toBeVisible()
+      expect(await partnerLink(page).count()).toBeGreaterThan(0)
     })
 
-    test('should display Instagram embed or fallback link', async ({ page }) => {
+    test('should make partner logos clickable with correct attributes', async ({ page }) => {
       await page.goto('/')
-      const instagramEmbed = page.locator('blockquote.instagram-media')
-      const fallbackLink = page.locator('a[href*="instagram.com"]')
 
-      const embedVisible = await instagramEmbed.isVisible().catch(() => false)
-      const linkVisible = await fallbackLink.isVisible().catch(() => false)
-
-      // Either embed or fallback should be visible
-      expect(embedVisible || linkVisible).toBe(true)
+      const firstPartner = partnerLink(page).first()
+      await expect(firstPartner).toHaveAttribute('target', '_blank')
+      await expect(firstPartner).toHaveAttribute('rel', 'noopener noreferrer')
+      await expect(firstPartner).toHaveAttribute('href', /^https:\/\//)
     })
 
-    test('should have correct fallback link attributes', async ({ page }) => {
+    test('should display partners on mobile viewport', async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 })
       await page.goto('/')
-      const fallbackLink = page.locator('a').filter({ hasText: /Follow.*@skgjs/i })
 
-      if (await fallbackLink.isVisible()) {
-        await expect(fallbackLink).toHaveAttribute('href', expect.stringContaining('instagram.com'))
-        await expect(fallbackLink).toHaveAttribute('target', '_blank')
-        await expect(fallbackLink).toHaveAttribute('rel', 'noopener noreferrer')
-      }
-    })
-
-    test('should load Instagram script', async ({ page }) => {
-      await page.goto('/')
-      const scripts = await page.locator('script[src*="instagram.com/embed.js"]').count()
-      expect(scripts).toBeGreaterThanOrEqual(0) // May be lazy loaded
+      await expect(page.getByRole('heading', { name: 'Our Community Partners' })).toBeVisible()
+      expect(await partnerLink(page).count()).toBeGreaterThan(0)
     })
   })
 
   test.describe('Next Event Preview', () => {
-    test('should display next event section', async ({ page }) => {
+    test('should show either the next event or the no-event placeholder', async ({ page }) => {
       await page.goto('/')
-      const nextEventSection = page.locator('text=/Next Event|Upcoming Event/i')
-      await expect(nextEventSection).toBeVisible()
-    })
+      await expect(page.getByRole('heading', { name: 'Next Event' })).toBeVisible()
 
-    test('should display next event title and date', async ({ page }) => {
-      await page.goto('/')
-      const nextEventTitle = page.locator('[data-testid="next-event-title"]')
-      const nextEventDate = page.locator('[data-testid="next-event-date"]')
+      const eventTitle = page.getByTestId('next-event-title')
+      const placeholder = page.getByTestId('home-page-no-event-container')
 
-      const titleVisible = await nextEventTitle.isVisible().catch(() => false)
-
-      if (titleVisible) {
-        await expect(nextEventTitle).toBeVisible()
-        await expect(nextEventDate).toBeVisible()
+      if ((await eventTitle.count()) > 0) {
+        await expect(eventTitle).toBeVisible()
+        await expect(placeholder).toHaveCount(0)
+      } else {
+        await expect(placeholder).toBeVisible()
       }
     })
 
-    test('should have RSVP/Register button', async ({ page }) => {
+    test('should display the next event details when one is scheduled', async ({ page }) => {
       await page.goto('/')
-      const rsvpButton = page.locator('a').filter({ hasText: /RSVP|Register/i })
 
-      if (await rsvpButton.isVisible()) {
-        await expect(rsvpButton).toHaveAttribute('href')
-      }
-    })
+      const eventTitle = page.getByTestId('next-event-title')
+      test.skip((await eventTitle.count()) === 0, 'No upcoming event in the content at this date')
 
-    test('should display event location', async ({ page }) => {
-      await page.goto('/')
-      const location = page.locator('[data-testid="next-event-location"]')
+      await expect(eventTitle).toBeVisible()
+      await expect(page.getByTestId('next-event-date')).toBeVisible()
+      await expect(page.getByTestId('next-event-location')).toBeVisible()
+      await expect(page.getByTestId('next-event-description')).toBeVisible()
 
-      if (await location.isVisible()) {
-        await expect(location).toBeVisible()
-      }
-    })
-
-    test('should display event description', async ({ page }) => {
-      await page.goto('/')
-      const description = page.locator('[data-testid="next-event-description"]')
-
-      if (await description.isVisible()) {
-        await expect(description).toBeVisible()
-      }
+      const rsvp = page.getByRole('link', { name: /RSVP/i }).first()
+      await expect(rsvp).toHaveAttribute('href', /meetup\.com/)
+      await expect(rsvp).toHaveAttribute('target', '_blank')
+      await expect(rsvp).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
     test('should link to full events page', async ({ page }) => {
       await page.goto('/')
-      const viewAllLink = page.locator('a').filter({ hasText: /View All Events|See All Events/i })
 
-      if (await viewAllLink.isVisible()) {
-        await expect(viewAllLink).toHaveAttribute('href', '/events')
-      }
-    })
+      const viewAllLink = page.getByRole('link', { name: /View All Events/i })
+      test.skip((await viewAllLink.count()) === 0, 'No upcoming event in the content at this date')
 
-    test('should display placeholder when no upcoming events', async ({ page }) => {
-      await page.goto('/')
-      const placeholder = page.locator('text=/No upcoming events|Check back soon/i')
-      const nextEvent = page.locator('[data-testid="next-event-title"]')
-
-      const hasEvent = await nextEvent.isVisible().catch(() => false)
-      const hasPlaceholder = await placeholder.isVisible().catch(() => false)
-
-      // Either event or placeholder should be visible
-      expect(hasEvent || hasPlaceholder).toBe(true)
+      await expect(viewAllLink).toHaveAttribute('href', '/events/')
     })
 
     test('should be responsive on mobile', async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 })
       await page.goto('/')
 
-      const nextEventSection = page.locator('text=/Next Event|Upcoming Event/i')
-
-      if (await nextEventSection.isVisible()) {
-        await expect(nextEventSection).toBeVisible()
-      }
+      await expect(page.getByRole('heading', { name: 'Next Event' })).toBeVisible()
     })
   })
 })

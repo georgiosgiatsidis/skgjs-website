@@ -27,6 +27,8 @@ export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) 
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         />
         <button
+          type="button"
+          aria-pressed={activeFilter === 'upcoming'}
           onClick={() => onFilterChange('upcoming')}
           className={clsx(
             'relative z-10 rounded-xl px-8 py-3 text-sm font-semibold transition-colors duration-200',
@@ -48,6 +50,8 @@ export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) 
           </span>
         </button>
         <button
+          type="button"
+          aria-pressed={activeFilter === 'past'}
           onClick={() => onFilterChange('past')}
           className={clsx(
             'relative z-10 rounded-xl px-8 py-3 text-sm font-semibold transition-colors duration-200',

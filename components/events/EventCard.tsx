@@ -20,7 +20,12 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <Link href={`/events/${event.slug}`} className="block h-full">
-      <Card hover glowOnHover className="group flex h-full flex-col overflow-hidden">
+      <Card
+        data-testid="event-card"
+        hover
+        glowOnHover
+        className="group flex h-full flex-col overflow-hidden"
+      >
         <div data-testid="event-card-image-container" className="relative">
           {event.image && (
             <div className="relative -mx-6 -mt-6 mb-6 h-48 overflow-hidden">

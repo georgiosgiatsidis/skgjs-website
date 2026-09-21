@@ -31,17 +31,19 @@ function calculateTimeLeft(targetDate: Date): TimeLeft {
   }
 }
 
-function TimeUnit({ value, label }: { value: number; label: string }) {
+function TimeUnit({ value, label }: { value: number | null; label: string }) {
+  const display = value === null ? '--' : value.toString().padStart(2, '0')
+
   return (
     <div className="flex flex-col items-center">
       <div className="relative">
         <motion.div
-          key={value}
+          key={display}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="flex h-16 w-16 items-center justify-center rounded-xl bg-js-black text-3xl font-bold text-js-yellow shadow-lg dark:bg-gray-800 sm:h-20 sm:w-20 sm:text-4xl"
         >
-          {value.toString().padStart(2, '0')}
+          {display}
         </motion.div>
         <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/10 to-transparent" />
       </div>
@@ -53,10 +55,16 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
 }
 
 export function Countdown({ targetDate, onComplete, className = '' }: CountdownProps) {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft(targetDate))
+  // The remaining time is deliberately not computed during render. The site is a static export,
+  // so a render-time value is baked into the HTML at build and is already stale by the time anyone
+  // loads the page; hydrating against it mismatches and makes React throw the server-rendered tree
+  // away, which drops clicks on everything around it. Null until mounted, so both sides agree.
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
   const [hasCompleted, setHasCompleted] = useState(false)
 
   useEffect(() => {
+    setTimeLeft(calculateTimeLeft(targetDate))
+
     const timer = setInterval(() => {
       const newTimeLeft = calculateTimeLeft(targetDate)
       setTimeLeft(newTimeLeft)
@@ -92,13 +100,13 @@ export function Countdown({ targetDate, onComplete, className = '' }: CountdownP
 
   return (
     <div className={`flex justify-center gap-3 sm:gap-4 ${className}`}>
-      <TimeUnit value={timeLeft.days} label="Days" />
+      <TimeUnit value={timeLeft?.days ?? null} label="Days" />
       <div className="flex items-center text-2xl font-bold text-gray-400">:</div>
-      <TimeUnit value={timeLeft.hours} label="Hours" />
+      <TimeUnit value={timeLeft?.hours ?? null} label="Hours" />
       <div className="flex items-center text-2xl font-bold text-gray-400">:</div>
-      <TimeUnit value={timeLeft.minutes} label="Min" />
+      <TimeUnit value={timeLeft?.minutes ?? null} label="Min" />
       <div className="flex items-center text-2xl font-bold text-gray-400">:</div>
-      <TimeUnit value={timeLeft.seconds} label="Sec" />
+      <TimeUnit value={timeLeft?.seconds ?? null} label="Sec" />
     </div>
   )
 }
