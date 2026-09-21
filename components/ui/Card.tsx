@@ -4,7 +4,17 @@ import { ReactNode, useRef, useState } from 'react'
 import { clsx } from 'clsx'
 import { motion } from 'framer-motion'
 
-interface CardProps {
+// framer-motion redefines these DOM handlers with incompatible signatures, so they cannot be
+// forwarded from plain HTML attributes.
+type MotionIncompatibleProps =
+  | 'onAnimationStart'
+  | 'onAnimationEnd'
+  | 'onAnimationIteration'
+  | 'onDrag'
+  | 'onDragStart'
+  | 'onDragEnd'
+
+interface CardProps extends Omit<React.HTMLAttributes<HTMLElement>, MotionIncompatibleProps> {
   children: ReactNode
   className?: string
   hover?: boolean
@@ -20,6 +30,7 @@ export function Card({
   tilt = false,
   glowOnHover = false,
   as: Component = 'div',
+  ...rest
 }: CardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [rotateX, setRotateX] = useState(0)
@@ -48,9 +59,11 @@ export function Card({
 
   const MotionComponent = motion[Component]
 
+  // Caller props are spread first so the card's own presentation and tilt handlers always win.
   if (tilt) {
     return (
       <MotionComponent
+        {...rest}
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -83,6 +96,7 @@ export function Card({
 
   return (
     <MotionComponent
+      {...rest}
       className={clsx(
         'rounded-xl bg-white p-6 shadow-md transition-all duration-300 dark:bg-gray-800',
         {
