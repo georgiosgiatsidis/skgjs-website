@@ -1,11 +1,17 @@
 'use client'
 
-import { Component, ReactNode } from 'react'
+import { Component, type ErrorInfo, type ReactNode } from 'react'
 import { Button } from './Button'
 
 interface Props {
   children: ReactNode
+  /**
+   * Rendered in place of the children once they throw. Omit it for the recovery panel below;
+   * pass null to drop the subtree silently, which only suits content the page can do without.
+   */
   fallback?: ReactNode
+  /** What this wraps, for the console message. */
+  label: string
 }
 
 interface State {
@@ -13,6 +19,13 @@ interface State {
   error?: Error
 }
 
+/**
+ * Contains a failure to the subtree it wraps.
+ *
+ * React unmounts the whole tree when a client component throws past every boundary, which on a
+ * Next app means the page is replaced by its error page. A boundary keeps that trade the right
+ * way round: the fallback shows and the rest of the page survives.
+ */
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
@@ -23,13 +36,16 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error }
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo)
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error(`${this.props.label} failed and was replaced:`, error, errorInfo.componentStack)
   }
 
   render() {
     if (this.state.hasError) {
-      if (this.props.fallback) {
+      // Compared against undefined rather than tested for truthiness, so that an explicit
+      // fallback={null} drops the subtree silently. A caller who left it out - or passed an
+      // undefined by accident - gets the visible panel instead of a blank.
+      if (this.props.fallback !== undefined) {
         return this.props.fallback
       }
 

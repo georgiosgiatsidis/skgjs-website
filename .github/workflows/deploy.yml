@@ -64,6 +64,10 @@ jobs:
           B2_SECRET_ACCESS_KEY: ${{ secrets.B2_SECRET_ACCESS_KEY }}
           B2_BUCKET_NAME: ${{ secrets.B2_BUCKET_NAME }}
           B2_REGION: ${{ secrets.B2_REGION }}
+          # Pull requests from forks never receive the secrets, so there the B2-backed sections
+          # are left out of the export. On a run that can deploy, a missing secret is a broken
+          # site and has to fail the build instead.
+          B2_REQUIRED: ${{ github.event_name != 'pull_request' }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
@@ -72,6 +76,11 @@ jobs:
 
   e2e:
     runs-on: ubuntu-24.04
+    strategy:
+      # One engine failing should not hide the state of the other two.
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -85,21 +94,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Chromium only: firefox and webkit have never been run against this suite, so committing
-      # CI to them would commit it to an unknown amount of work.
       - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps ${{ matrix.browser }}
 
       # Playwright serves the app with `npm run dev`, which needs no B2 credentials, so this job
       # also works on pull requests from forks.
       - name: End-to-end tests
-        run: npx playwright test --project=chromium
+        run: npx playwright test --project=${{ matrix.browser }}
 
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
           retention-days: 7
 

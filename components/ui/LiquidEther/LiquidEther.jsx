@@ -25,6 +25,23 @@ import {
 } from 'three'
 import './LiquidEther.css'
 
+/**
+ * A WebGL context is not something a browser guarantees: a GPU-less CI runner, a VM, blocklisted
+ * drivers or webgl.disabled all take it away. WebGLRenderer throws in that case, and an uncaught
+ * throw here replaces the whole document with Next's error page - so the animation is skipped
+ * rather than attempted.
+ */
+function canCreateWebGLContext() {
+  if (typeof document === 'undefined') return false
+
+  try {
+    const canvas = document.createElement('canvas')
+    return !!(canvas.getContext('webgl2') || canvas.getContext('webgl'))
+  } catch {
+    return false
+  }
+}
+
 export default function LiquidEther({
   mouseForce = 20,
   cursorSize = 100,
@@ -56,6 +73,9 @@ export default function LiquidEther({
 
   useEffect(() => {
     if (!mountRef.current) return
+    // The later effects all bail on webglRef being unset, so this one check disables the whole
+    // animation. The hero keeps its gradient and cover image behind it.
+    if (!canCreateWebGLContext()) return
 
     function makePaletteTexture(stops) {
       let arr
