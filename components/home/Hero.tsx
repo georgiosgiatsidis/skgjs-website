@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { CountUp } from '@/components/animations/CountUp'
 import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
-import { DecorativeBoundary } from '@/components/ui/DecorativeBoundary'
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 import type { SiteStats } from '@/lib/stats'
 
 interface HeroProps {
@@ -50,7 +50,7 @@ export function Hero({ stats: siteStats }: HeroProps) {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0 z-10 opacity-30">
-        <DecorativeBoundary label="Hero background animation">
+        <ErrorBoundary label="Hero background animation" fallback={null}>
           <LiquidEther
             colors={['#F7DD3E', '#FFD700', '#FFA500']}
             mouseForce={30}
@@ -69,7 +69,7 @@ export function Hero({ stats: siteStats }: HeroProps) {
             autoRampDuration={0.6}
             style={{ width: '100%', height: '100%' }}
           />
-        </DecorativeBoundary>
+        </ErrorBoundary>
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-[0]">
