@@ -14,9 +14,20 @@ talks:
     description: 'Eleftheria will explore dependency-driven failures, why adding more monitoring checks may not solve the underlying problem, how teams can discover their real dependencies, and why independent outside observers can provide a perspective that internal telemetry cannot.'
     speaker:
       - path: 'content/community/organizers/eleftheria-batsou'
-tags: ['architecture', 'migrations', 'e-commerce', 'frontend', 'ux', 'observability', 'reliability', 'dependencies']
+tags:
+  [
+    'architecture',
+    'migrations',
+    'e-commerce',
+    'frontend',
+    'ux',
+    'observability',
+    'reliability',
+    'dependencies',
+  ]
 image: 'https://secure.meetupstatic.com/photos/event/2/b/8/0/highres_536171136.webp?w=1080'
 ---
+
 For our next SKG-JS meetup, we’re bringing together two talks on some of the less obvious challenges of building and running modern software systems.
 
 From transforming the architecture of a live e-commerce platform to understanding what happens when the services your application relies on fail, we’ll hear two real-world stories full of lessons, challenges, and things that don’t always go according to plan.

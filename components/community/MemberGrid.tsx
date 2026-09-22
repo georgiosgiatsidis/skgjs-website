@@ -40,9 +40,7 @@ export function MemberGrid({ members, title }: MemberGridProps) {
     <div className="mb-20">
       {title && (
         <div className="mb-10 flex items-center gap-4">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
-            {title}
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">{title}</h2>
           <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent dark:from-gray-800" />
         </div>
       )}

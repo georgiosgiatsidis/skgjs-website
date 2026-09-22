@@ -52,12 +52,7 @@ export function BecomeASpeakerSection({ speakerFormUrl }: BecomeASpeakerSectionP
           >
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-js-yellow to-yellow-400 opacity-75 blur transition-opacity group-hover:opacity-100" />
             <span className="relative inline-flex items-center gap-3 rounded-xl bg-js-yellow px-8 py-4 text-lg font-bold text-js-black shadow-lg transition-all hover:gap-4 hover:shadow-xl hover:shadow-js-yellow/25">
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

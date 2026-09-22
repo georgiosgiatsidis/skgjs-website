@@ -40,7 +40,11 @@ const itemVariants = {
   },
 }
 
-export function EventList({ events, emptyMessage = 'No events found.', filterType = 'upcoming' }: EventListProps) {
+export function EventList({
+  events,
+  emptyMessage = 'No events found.',
+  filterType = 'upcoming',
+}: EventListProps) {
   const isUpcoming = filterType === 'upcoming'
   const eventCount = events.length
 
@@ -87,10 +91,22 @@ export function EventList({ events, emptyMessage = 'No events found.', filterTyp
                   ))}
                 </div>
                 <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-sm backdrop-blur dark:bg-gray-900/80">
-                  <svg className="h-5 w-5 text-js-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <svg
+                    className="h-5 w-5 text-js-yellow"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
                   </svg>
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Stay tuned!</span>
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                    Stay tuned!
+                  </span>
                 </div>
               </motion.div>
             </div>
@@ -123,8 +139,18 @@ export function EventList({ events, emptyMessage = 'No events found.', filterTyp
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         >
-          <svg className="h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <svg
+            className="h-10 w-10 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
           </svg>
         </motion.div>
         <p className="text-lg text-gray-600 dark:text-gray-400">{emptyMessage}</p>
