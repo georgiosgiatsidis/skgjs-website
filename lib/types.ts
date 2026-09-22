@@ -85,6 +85,7 @@ export interface SiteConfig {
     github?: string
     instagram: string
     linkedin: string
+    discord?: string
   }
   contact: {
     email: string

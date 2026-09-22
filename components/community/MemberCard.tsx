@@ -32,7 +32,13 @@ export function MemberCard({ member }: MemberCardProps) {
   const roleColor = roleColors[member.role] || roleColors.member
 
   return (
-    <Card data-testid="member-card" hover tilt glowOnHover className="group flex h-full flex-col p-6">
+    <Card
+      data-testid="member-card"
+      hover
+      tilt
+      glowOnHover
+      className="group flex h-full flex-col p-6"
+    >
       <div className="mb-6 flex items-start gap-4">
         {/* Avatar */}
         <motion.div
@@ -135,8 +141,16 @@ export function MemberCard({ member }: MemberCardProps) {
           <ul className="space-y-1.5 text-xs text-gray-600 dark:text-gray-400">
             {member.contributedTalks.slice(0, 3).map((talk, index) => (
               <li key={index} className="flex items-start gap-2">
-                <svg className="mt-0.5 h-3 w-3 shrink-0 text-js-yellow" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                <svg
+                  className="mt-0.5 h-3 w-3 shrink-0 text-js-yellow"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>{talk}</span>
               </li>

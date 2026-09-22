@@ -298,6 +298,7 @@ npm run build
 - Email: info@skgjs.gr
 - Meetup: [SKG JS](https://www.meetup.com/skg-js/)
 - Instagram: [@skgjs.gr](https://www.instagram.com/skgjs.gr/)
+- Discord: [Join our server](https://discord.gg/dQY7TPUTBb)
 
 ---
 

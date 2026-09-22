@@ -9,7 +9,11 @@ interface EventRsvpButtonProps {
   variant?: 'primary' | 'sidebar'
 }
 
-export function EventRsvpButton({ eventDate, rsvpLink, variant = 'primary' }: EventRsvpButtonProps) {
+export function EventRsvpButton({
+  eventDate,
+  rsvpLink,
+  variant = 'primary',
+}: EventRsvpButtonProps) {
   const isUpcoming = isUpcomingEvent(eventDate)
 
   if (!isUpcoming) {

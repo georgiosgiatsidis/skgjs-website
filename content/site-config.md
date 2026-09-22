@@ -6,6 +6,7 @@ social:
   meetup: 'https://www.meetup.com/skg-js/'
   linkedin: 'https://www.linkedin.com/company/skg-js/'
   instagram: 'https://www.instagram.com/skgjs.gr/'
+  discord: 'https://discord.gg/dQY7TPUTBb'
 contact:
   email: 'info@skgjs.gr'
   enableContactForm: true

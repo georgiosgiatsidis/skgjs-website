@@ -138,6 +138,7 @@ export const SiteConfigSchema = z
         github: z.string().url().optional(),
         instagram: z.string().url(),
         linkedin: z.string().url(),
+        discord: z.string().url().optional(),
       })
       .strict(),
     contact: z

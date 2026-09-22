@@ -16,18 +16,18 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
 
   return (
     <div className="mb-16">
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">
+      <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
         Photo Gallery
       </h2>
       <div
         data-testid="photo-gallery"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
       >
         {photos.map((photo, index) => (
           <div
             key={index}
             data-testid="gallery-photo"
-            className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800 group"
+            className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800"
           >
             <Image
               src={photo.src}
@@ -37,7 +37,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
               loading="lazy"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-black bg-opacity-0 transition-opacity duration-300 group-hover:bg-opacity-20" />
           </div>
         ))}
       </div>

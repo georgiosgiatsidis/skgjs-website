@@ -79,9 +79,10 @@ test.describe('Contact Page', () => {
 
     // Footer links are icon-only, so match them by aria-label and destination
     const socialLinks = [
-      { label: 'meetup', host: 'meetup.com' },
-      { label: 'instagram', host: 'instagram.com' },
-      { label: 'linkedin', host: 'linkedin.com' },
+      { label: 'Meetup', host: 'meetup.com' },
+      { label: 'LinkedIn', host: 'linkedin.com' },
+      { label: 'Instagram', host: 'instagram.com' },
+      { label: 'Discord', host: 'discord.gg' },
     ]
     for (const { label, host } of socialLinks) {
       const link = footer.locator(`a[aria-label="${label}"]`)
@@ -96,5 +97,37 @@ test.describe('Contact Page', () => {
     const meetupLink = page.locator('footer a[href*="meetup.com"]')
     await expect(meetupLink).toHaveAttribute('target', '_blank')
     await expect(meetupLink).toHaveAttribute('rel', 'noopener noreferrer')
+  })
+
+  test('should reveal the platform name on hovering a footer social icon', async ({ page }) => {
+    await page.goto('/contact/')
+
+    const link = page.locator('footer a[aria-label="Discord"]')
+    const tooltip = page.locator('footer a[aria-label="Discord"] + [role="tooltip"]')
+
+    await expect(tooltip).toHaveText('Discord')
+    await expect(tooltip).toHaveCSS('opacity', '0')
+
+    // Scrolling the footer into view can shift it out from under the pointer,
+    // so keep re-hovering until the layout has settled.
+    await expect(async () => {
+      await link.hover()
+      await expect(tooltip).toHaveCSS('opacity', '1', { timeout: 1000 })
+    }).toPass()
+  })
+
+  test('should display a card per social platform', async ({ page }) => {
+    await page.goto('/contact/')
+
+    const cards = page.locator('main a[target="_blank"]')
+    for (const { label, host } of [
+      { label: 'Meetup', host: 'meetup.com' },
+      { label: 'LinkedIn', host: 'linkedin.com' },
+      { label: 'Instagram', host: 'instagram.com' },
+      { label: 'Discord', host: 'discord.gg' },
+    ]) {
+      const card = cards.filter({ hasText: label })
+      await expect(card).toHaveAttribute('href', new RegExp(host.replace('.', '\\.')))
+    }
   })
 })

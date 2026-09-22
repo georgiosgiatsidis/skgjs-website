@@ -43,78 +43,69 @@ export function CTASection({ meetupUrl }: CTASectionProps) {
       <div className="container relative z-10 mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
           <motion.span
-              className="mb-6 inline-block text-sm font-semibold uppercase tracking-widest text-js-yellow"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Join Us
-            </motion.span>
+            className="mb-6 inline-block text-sm font-semibold uppercase tracking-widest text-js-yellow"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            Join Us
+          </motion.span>
 
-            <motion.h2
-              className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Ready to be part of the{' '}
-              <span className="bg-gradient-to-r from-js-yellow to-yellow-400 bg-clip-text text-transparent">
-                JavaScript
-              </span>{' '}
-              community?
-            </motion.h2>
+          <motion.h2
+            className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            Ready to be part of the{' '}
+            <span className="bg-gradient-to-r from-js-yellow to-yellow-400 bg-clip-text text-transparent">
+              JavaScript
+            </span>{' '}
+            community?
+          </motion.h2>
 
-            <motion.p
-              className="mx-auto mb-10 max-w-2xl text-lg text-gray-400 md:text-xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Connect with fellow developers, learn from industry experts, and grow your skills at
-              our meetups in Thessaloniki.
-            </motion.p>
+          <motion.p
+            className="mx-auto mb-10 max-w-2xl text-lg text-gray-400 md:text-xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Connect with fellow developers, learn from industry experts, and grow your skills at our
+            meetups in Thessaloniki.
+          </motion.p>
 
-            <motion.div
-              className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <a
-                href={meetupUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+          <motion.div
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <a href={meetupUrl} target="_blank" rel="noopener noreferrer">
+              <Button variant="primary" size="lg" glowOnHover className="px-10">
+                Join on Meetup
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </Button>
+            </a>
+            <Link href="/contact">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow"
               >
-                <Button variant="primary" size="lg" glowOnHover className="px-10">
-                  Join on Meetup
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </Button>
-              </a>
-              <Link href="/contact">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow"
-                >
-                  Get in Touch
-                </Button>
-              </Link>
+                Get in Touch
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>

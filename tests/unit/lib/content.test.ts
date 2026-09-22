@@ -165,6 +165,7 @@ describe('Content Loading Utilities', () => {
       expect(config.social).toHaveProperty('meetup')
       expect(config.social).toHaveProperty('instagram')
       expect(config.social).toHaveProperty('linkedin')
+      expect(config.social).toHaveProperty('discord')
     })
 
     it('should have contact email', async () => {
