@@ -2,7 +2,7 @@ import { getAllEvents, getAllCommunityMembers } from './content'
 
 // Hardcoded community stats
 const FOUNDED_YEAR = 2024
-const MEMBERS_COUNT = 490
+const MEMBERS_COUNT = 500
 
 export interface SiteStats {
   founded: number
