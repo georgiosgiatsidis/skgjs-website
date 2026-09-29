@@ -1,6 +1,6 @@
 ---
 name: 'Voxxed Days Thessaloniki'
-logo: 'https://myeventora.s3.amazonaws.com/Events/vdthess-23/Voxxed%20Thessaloniki%20logo%20grey.png'
+logo: '/images/partners/voxxeddaysthessaloniki.webp'
 website: 'https://voxxeddays.com/thessaloniki/'
 tier: 'community'
 active: true

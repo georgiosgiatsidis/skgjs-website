@@ -24,6 +24,8 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [captchaToken, setCaptchaToken] = useState('')
+  // hCaptcha is heavy and sets third-party cookies, so it loads only once someone uses the form.
+  const [captchaRequested, setCaptchaRequested] = useState(false)
   const captchaRef = useRef<HCaptcha>(null)
   const isDisabled = disabled || formState === 'submitting'
   const canSubmit = !isDisabled && captchaToken !== ''
@@ -71,7 +73,11 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
+    <form
+      onSubmit={handleSubmit}
+      onFocus={() => setCaptchaRequested(true)}
+      className="mx-auto max-w-2xl space-y-6"
+    >
       <input type="hidden" name="access_key" value={accessKey} />
       <input type="hidden" name="subject" value="SKG JS Contact Form Submission" />
       <input
@@ -152,21 +158,26 @@ export function ContactForm({ disabled = false, accessKey = '' }: ContactFormPro
       )}
 
       {!disabled && (
-        <HCaptcha
-          ref={captchaRef}
-          sitekey={HCAPTCHA_SITEKEY}
-          reCaptchaCompat={false}
-          theme={HCAPTCHA_THEME}
-          onVerify={setCaptchaToken}
-          onExpire={() => setCaptchaToken('')}
-          onError={() => setCaptchaToken('')}
-        />
+        // Reserves the widget's height (78px at normal size) so loading it shifts nothing.
+        <div className="min-h-[78px]">
+          {captchaRequested && (
+            <HCaptcha
+              ref={captchaRef}
+              sitekey={HCAPTCHA_SITEKEY}
+              reCaptchaCompat={false}
+              theme={HCAPTCHA_THEME}
+              onVerify={setCaptchaToken}
+              onExpire={() => setCaptchaToken('')}
+              onError={() => setCaptchaToken('')}
+            />
+          )}
+        </div>
       )}
 
       <p className="text-sm text-gray-500 dark:text-gray-400">
         Your message is delivered by Web3Forms and this form is protected by hCaptcha, both
         third-party services. See our{' '}
-        <Link href={ROUTES.privacy} className="text-js-yellow hover:underline">
+        <Link href={ROUTES.privacy} className="text-js-yellow underline">
           privacy page
         </Link>{' '}
         for what they receive.

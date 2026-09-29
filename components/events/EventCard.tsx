@@ -11,7 +11,9 @@ interface EventCardProps {
   index?: number
 }
 
-export function EventCard({ event }: EventCardProps) {
+export function EventCard({ event, index }: EventCardProps) {
+  // The first card sits above the fold and is the likely LCP element.
+  const isFirst = index === 0
   const eventDate = new Date(event.date)
   const day = eventDate.getDate()
   const month = eventDate.toLocaleDateString('en-US', { month: 'short' })
@@ -33,6 +35,8 @@ export function EventCard({ event }: EventCardProps) {
                 src={event.image}
                 alt={event.title}
                 fill
+                loading={isFirst ? 'eager' : 'lazy'}
+                fetchPriority={isFirst ? 'high' : undefined}
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent dark:from-gray-900" />
@@ -51,9 +55,9 @@ export function EventCard({ event }: EventCardProps) {
         >
           <div className="mb-4 flex items-start justify-between gap-3">
             <div>
-              <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white dark:group-hover:text-js-yellow">
+              <h2 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white dark:group-hover:text-js-yellow">
                 {event.title}
-              </h3>
+              </h2>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 {month} {day}, {year}
               </p>

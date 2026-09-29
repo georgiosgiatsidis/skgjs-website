@@ -1,6 +1,5 @@
 import { Container } from '@/components/layout/Container'
 import { Card } from '@/components/ui/Card'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { getSiteConfig } from '@/lib/content'
 
 export const metadata = {
@@ -38,22 +37,18 @@ export default function PrivacyPage() {
 
         <Container className="relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <ScrollReveal>
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
-                Privacy
-              </span>
-            </ScrollReveal>
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
+              Privacy
+            </span>
 
             <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl">
               How we handle your data
             </h1>
 
-            <ScrollReveal delay={0.3}>
-              <p className="text-lg text-gray-300 md:text-xl">
-                We are a volunteer community, not a business. This page explains exactly what
-                happens to personal data on this site &mdash; and what does not.
-              </p>
-            </ScrollReveal>
+            <p className="text-lg text-gray-300 md:text-xl">
+              We are a volunteer community, not a business. This page explains exactly what happens
+              to personal data on this site &mdash; and what does not.
+            </p>
           </div>
         </Container>
       </section>

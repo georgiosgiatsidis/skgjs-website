@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Container } from '@/components/layout/Container'
 import { Card } from '@/components/ui/Card'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { getAllEvents, getEventBySlug } from '@/lib/content'
 import { EventStatusBadge } from '@/components/events/EventStatusBadge'
 import { EventRsvpButton } from '@/components/events/EventRsvpButton'
@@ -89,74 +88,68 @@ export default async function EventPage({ params }: EventPageProps) {
 
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl">
-              <ScrollReveal>
-                <EventStatusBadge eventDate={event.date} variant="header" />
-              </ScrollReveal>
+              <EventStatusBadge eventDate={event.date} variant="header" />
 
-              <ScrollReveal delay={0.1}>
-                <h1 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
-                  {event.title}
-                </h1>
-              </ScrollReveal>
+              <h1 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
+                {event.title}
+              </h1>
 
-              <ScrollReveal delay={0.2}>
-                <div className="flex flex-wrap gap-6 text-gray-300">
-                  <div className="flex items-center gap-2">
-                    <svg
-                      className="h-5 w-5 text-js-yellow"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <span>{formattedDate}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <svg
-                      className="h-5 w-5 text-js-yellow"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>{event.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <svg
-                      className="h-5 w-5 text-js-yellow"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    <span>{event.location}</span>
-                  </div>
+              <div className="flex flex-wrap gap-6 text-gray-300">
+                <div className="flex items-center gap-2">
+                  <svg
+                    className="h-5 w-5 text-js-yellow"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span>{formattedDate}</span>
                 </div>
-              </ScrollReveal>
+                <div className="flex items-center gap-2">
+                  <svg
+                    className="h-5 w-5 text-js-yellow"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>{event.time}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg
+                    className="h-5 w-5 text-js-yellow"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <span>{event.location}</span>
+                </div>
+              </div>
             </div>
 
             {event.rsvpLink && (
@@ -178,7 +171,8 @@ export default async function EventPage({ params }: EventPageProps) {
                       alt={event.title}
                       fill
                       className="object-cover"
-                      priority
+                      loading="eager"
+                      fetchPriority="high"
                     />
                   </div>
                 )}
@@ -236,6 +230,7 @@ export default async function EventPage({ params }: EventPageProps) {
                                     {speaker.social?.linkedin && (
                                       <a
                                         href={speaker.social.linkedin}
+                                        aria-label={`${speaker.name} on LinkedIn`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-gray-400 transition-colors hover:text-js-yellow"
@@ -287,9 +282,9 @@ export default async function EventPage({ params }: EventPageProps) {
 
                 {event.tags && event.tags.length > 0 && (
                   <div className="mt-8 border-t border-gray-100 pt-6 dark:border-gray-800">
-                    <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                       Topics
-                    </h3>
+                    </h2>
                     <div className="flex flex-wrap gap-2">
                       {event.tags.map((tag) => (
                         <span
@@ -337,6 +332,7 @@ export default async function EventPage({ params }: EventPageProps) {
                               {speaker.social.github && (
                                 <a
                                   href={speaker.social.github}
+                                  aria-label={`${speaker.name} on GitHub`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-gray-400 transition-colors hover:text-js-yellow"
@@ -349,6 +345,7 @@ export default async function EventPage({ params }: EventPageProps) {
                               {speaker.social.twitter && (
                                 <a
                                   href={speaker.social.twitter}
+                                  aria-label={`${speaker.name} on Twitter`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-gray-400 transition-colors hover:text-js-yellow"
@@ -361,6 +358,7 @@ export default async function EventPage({ params }: EventPageProps) {
                               {speaker.social.linkedin && (
                                 <a
                                   href={speaker.social.linkedin}
+                                  aria-label={`${speaker.name} on LinkedIn`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-gray-400 transition-colors hover:text-js-yellow"

@@ -4,7 +4,6 @@ import { Container } from '@/components/layout/Container'
 import { MemberGrid } from '@/components/community/MemberGrid'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept for re-enabling the hidden photo gallery
 import { PhotoGallery } from '@/components/community/PhotoGallery'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { CountUp } from '@/components/animations/CountUp'
 
 export const metadata = {
@@ -71,22 +70,18 @@ export default async function CommunityPage() {
 
         <Container className="relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <ScrollReveal>
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
-                Meet Our People
-              </span>
-            </ScrollReveal>
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
+              Meet Our People
+            </span>
 
             <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Our Community
             </h1>
 
-            <ScrollReveal delay={0.3}>
-              <p className="mb-12 text-lg text-gray-300 md:text-xl">
-                Meet the passionate individuals who make the Thessaloniki JavaScript Meetup a
-                vibrant and welcoming community for developers of all levels.
-              </p>
-            </ScrollReveal>
+            <p className="mb-12 text-lg text-gray-300 md:text-xl">
+              Meet the passionate individuals who make the Thessaloniki JavaScript Meetup a vibrant
+              and welcoming community for developers of all levels.
+            </p>
 
             <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
               {stats.map((stat) => (

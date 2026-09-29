@@ -1,11 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { CountUp } from '@/components/animations/CountUp'
-import LiquidEther from '@/components/ui/LiquidEther/LiquidEther'
+import { DeferredLiquidEther } from '@/components/ui/LiquidEther/DeferredLiquidEther'
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 import type { SiteStats } from '@/lib/stats'
 
@@ -22,36 +21,13 @@ function buildStats(s: SiteStats) {
   ]
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1] as const,
-    },
-  },
-}
-
 export function Hero({ stats: siteStats }: HeroProps) {
   const stats = buildStats(siteStats)
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0 z-10 opacity-30">
         <ErrorBoundary label="Hero background animation" fallback={null}>
-          <LiquidEther
+          <DeferredLiquidEther
             colors={['#F7DD3E', '#FFD700', '#FFA500']}
             mouseForce={30}
             cursorSize={100}
@@ -79,21 +55,16 @@ export function Hero({ stats: siteStats }: HeroProps) {
           alt="JavaScript developers collaborating"
           fill
           className="object-cover"
-          priority
-          quality={90}
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-js-black/90 via-js-black/85 to-js-black/80" />
         <div className="absolute inset-0 bg-grid-pattern opacity-20" />
       </div>
 
-      <motion.div
-        className="container relative z-20 mx-auto px-4 py-20"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="container relative z-20 mx-auto px-4 py-20">
         <div className="mx-auto mb-6 max-w-5xl text-center">
-          <motion.div className="mb-8 flex justify-center" variants={itemVariants}>
+          <div className="mb-8 flex justify-center">
             <motion.div
               className="relative"
               animate={{
@@ -111,7 +82,7 @@ export function Hero({ stats: siteStats }: HeroProps) {
                 width={140}
                 height={140}
                 className="h-28 w-28 drop-shadow-2xl md:h-36 md:w-36"
-                priority
+                loading="eager"
               />
               <motion.div
                 className="absolute inset-0 rounded-full bg-js-yellow/30 blur-2xl"
@@ -126,70 +97,52 @@ export function Hero({ stats: siteStats }: HeroProps) {
                 }}
               />
             </motion.div>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            className="mb-2 text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl"
-            variants={itemVariants}
-          >
+          <h1 className="mb-2 text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl">
             Thessaloniki
-          </motion.h1>
+          </h1>
 
-          <motion.span
-            className="mb-8 block text-4xl font-black text-js-yellow md:text-6xl lg:text-7xl"
-            variants={itemVariants}
-          >
+          <span className="mb-8 block text-4xl font-black text-js-yellow md:text-6xl lg:text-7xl">
             JavaScript Meetup
-          </motion.span>
+          </span>
 
-          <motion.p
-            className="mx-auto mb-10 max-w-2xl text-lg text-gray-300 md:text-xl lg:text-2xl"
-            variants={itemVariants}
-          >
+          <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-300 md:text-xl lg:text-2xl">
             Join the vibrant JavaScript community in Thessaloniki. Learn, share, and connect with
             fellow developers.
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-            variants={itemVariants}
-          >
-            <Link href="/events">
-              <Button variant="primary" size="lg" glowOnHover className="w-full px-10 sm:w-auto">
-                Explore Events
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-              </Button>
-            </Link>
-            <Link href="/community">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow sm:w-auto"
-              >
-                Meet the Community
-              </Button>
-            </Link>
-          </motion.div>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              href="/events"
+              variant="primary"
+              size="lg"
+              glowOnHover
+              className="w-full px-10 sm:w-auto"
+            >
+              Explore Events
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </Button>
+            <Button
+              href="/community"
+              variant="outline"
+              size="lg"
+              className="w-full border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow sm:w-auto"
+            >
+              Meet the Community
+            </Button>
+          </div>
 
-          <motion.div
-            className="mt-20 grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8"
-            variants={itemVariants}
-          >
+          <div className="mt-20 grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
             {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="group relative"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + index * 0.1 }}
-              >
+              <div key={stat.label} className="group relative">
                 <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-js-yellow/30 hover:bg-white/10">
                   <div className="mb-2 text-4xl font-black text-js-yellow md:text-5xl">
                     <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
@@ -203,18 +156,15 @@ export function Hero({ stats: siteStats }: HeroProps) {
                     viewport={{ once: true }}
                   />
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
+      <div
         data-testid="scroll-to-explore-container"
-        className="absolute bottom-8 left-1/2 z-20"
-        initial={{ opacity: 0, y: -10, x: '-50%' }}
-        animate={{ opacity: 1, y: 0, x: '-50%' }}
-        transition={{ delay: 2, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
       >
         <motion.div
           className="flex flex-col items-center gap-2"
@@ -238,7 +188,7 @@ export function Hero({ stats: siteStats }: HeroProps) {
             />
           </svg>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 }

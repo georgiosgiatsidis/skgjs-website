@@ -10,12 +10,7 @@ interface EventFilterProps {
 
 export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) {
   return (
-    <motion.div
-      className="mb-12 flex justify-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
-    >
+    <div className="mb-12 flex justify-center">
       <div
         role="group"
         aria-label="Filter events"
@@ -77,6 +72,6 @@ export function EventFilter({ activeFilter, onFilterChange }: EventFilterProps) 
           </span>
         </button>
       </div>
-    </motion.div>
+    </div>
   )
 }

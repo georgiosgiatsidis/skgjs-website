@@ -56,11 +56,21 @@ describe('ContactForm', () => {
     return user
   }
 
+  it('should load the captcha only once the form is used', async () => {
+    const user = userEvent.setup()
+    render(<ContactForm accessKey="test-key" />)
+
+    expect(screen.queryByTestId('hcaptcha-field')).not.toBeInTheDocument()
+    await user.click(screen.getByLabelText('Name'))
+    expect(screen.getByTestId('hcaptcha-field')).toBeInTheDocument()
+  })
+
   it('should keep submit disabled until the captcha is solved', async () => {
     const user = userEvent.setup()
     render(<ContactForm accessKey="test-key" />)
 
     expect(screen.getByRole('button', { name: /send message/i })).toBeDisabled()
+    await user.click(screen.getByLabelText('Name'))
     await user.click(screen.getByRole('button', { name: 'solve captcha' }))
     expect(screen.getByRole('button', { name: /send message/i })).toBeEnabled()
   })

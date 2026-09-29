@@ -2,7 +2,6 @@ import { Container } from '@/components/layout/Container'
 import { EventsClient } from '@/components/events/EventsClient'
 import { BecomeASpeakerSection } from '@/components/home/BecomeASpeakerSection'
 import { getAllEvents, getSiteConfig } from '@/lib/content'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 
 export default function EventsPage() {
   const allEvents = getAllEvents()
@@ -19,22 +18,18 @@ export default function EventsPage() {
 
         <Container className="relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <ScrollReveal>
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
-                Join Our Meetups
-              </span>
-            </ScrollReveal>
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
+              Join Our Meetups
+            </span>
 
             <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Events
             </h1>
 
-            <ScrollReveal delay={0.3}>
-              <p className="text-lg text-gray-300 md:text-xl">
-                Join us for talks, workshops, and networking with fellow JavaScript developers in
-                Thessaloniki.
-              </p>
-            </ScrollReveal>
+            <p className="text-lg text-gray-300 md:text-xl">
+              Join us for talks, workshops, and networking with fellow JavaScript developers in
+              Thessaloniki.
+            </p>
           </div>
         </Container>
       </section>

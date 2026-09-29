@@ -16,7 +16,7 @@ talks:
     speaker:
       - path: 'content/community/organizers/evangelia-mitsopoulou'
 tags: ['web3', 'react', 'LLM']
-image: 'https://secure.meetupstatic.com/photos/event/c/c/3/a/highres_532492282.webp'
+image: 'https://secure.meetupstatic.com/photos/event/c/c/3/a/clean_532492282.webp'
 ---
 
 We’re excited to welcome you back for another evening of learning, sharing, and meeting both familiar and new faces. The meetup will take place on February 17th, 2025 at 19:00 at OKThess. As always, we’ve lined up two great talks from amazing speakers in our community.

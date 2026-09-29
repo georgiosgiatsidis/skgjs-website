@@ -1,7 +1,6 @@
 import { getSiteConfig } from '@/lib/content'
 import { getStats } from '@/lib/stats'
 import { Container } from '@/components/layout/Container'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { CountUp } from '@/components/animations/CountUp'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -99,19 +98,15 @@ export default async function AboutUsPage() {
 
         <Container className="relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <ScrollReveal>
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
-                Who We Are
-              </span>
-            </ScrollReveal>
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
+              Who We Are
+            </span>
 
             <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
               About SKG JS
             </h1>
 
-            <ScrollReveal delay={0.3}>
-              <p className="text-lg text-gray-300 md:text-xl">{siteConfig.description}</p>
-            </ScrollReveal>
+            <p className="text-lg text-gray-300 md:text-xl">{siteConfig.description}</p>
           </div>
         </Container>
       </section>
@@ -127,7 +122,7 @@ export default async function AboutUsPage() {
                 <div className="mb-2 text-4xl font-black text-js-yellow">
                   <CountUp end={stat.value} duration={2} suffix={stat.suffix || ''} />
                 </div>
-                <div className="text-sm font-semibold uppercase tracking-wider text-gray-500">
+                <div className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                   {stat.label}
                 </div>
               </div>
@@ -198,38 +193,42 @@ export default async function AboutUsPage() {
                 you!
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href={siteConfig.social.meetup} target="_blank" rel="noopener noreferrer">
-                  <Button variant="secondary" size="lg" glowOnHover>
-                    Join on Meetup
+                <Button
+                  href={siteConfig.social.meetup}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="secondary"
+                  size="lg"
+                  glowOnHover
+                >
+                  Join on Meetup
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </Button>
+                {siteConfig.speakerFormUrl && (
+                  <Button
+                    href={siteConfig.speakerFormUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    size="lg"
+                  >
+                    Become a Speaker
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
                       />
                     </svg>
                   </Button>
-                </a>
-                {siteConfig.speakerFormUrl && (
-                  <a href={siteConfig.speakerFormUrl} target="_blank" rel="noopener noreferrer">
-                    <Button variant="secondary" size="lg">
-                      Become a Speaker
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                        />
-                      </svg>
-                    </Button>
-                  </a>
                 )}
               </div>
             </div>

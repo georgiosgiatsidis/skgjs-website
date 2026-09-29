@@ -1,7 +1,6 @@
 import { Container } from '@/components/layout/Container'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { getSiteConfig } from '@/lib/content'
-import { ScrollReveal } from '@/components/animations/ScrollReveal'
 import { SOCIAL_PLATFORMS } from '@/components/ui/SocialPlatforms'
 
 export default function ContactPage() {
@@ -25,21 +24,17 @@ export default function ContactPage() {
 
         <Container className="relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <ScrollReveal>
-              <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
-                Say Hello
-              </span>
-            </ScrollReveal>
+            <span className="mb-4 inline-block rounded-full bg-js-yellow/10 px-4 py-2 text-sm font-medium text-js-yellow">
+              Say Hello
+            </span>
 
             <h1 className="mb-6 text-3xl font-black text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Get in Touch
             </h1>
 
-            <ScrollReveal delay={0.3}>
-              <p className="text-lg text-gray-300 md:text-xl">
-                Have questions or want to get involved? We&apos;d love to hear from you!
-              </p>
-            </ScrollReveal>
+            <p className="text-lg text-gray-300 md:text-xl">
+              Have questions or want to get involved? We&apos;d love to hear from you!
+            </p>
           </div>
         </Container>
       </section>

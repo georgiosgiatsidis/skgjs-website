@@ -43,8 +43,12 @@ test.describe('Contact Page', () => {
     await expect(page.locator('input[name="email"]')).toHaveAttribute('type', 'email')
   })
 
-  test('should render the hCaptcha widget', async ({ page }) => {
+  test('should render the hCaptcha widget once the form is used', async ({ page }) => {
     await page.goto('/contact/')
+
+    // hCaptcha is deferred until the first focus inside the form.
+    await expect(page.locator('iframe[src*="hcaptcha.com"]')).toHaveCount(0)
+    await page.focus('input[name="name"]')
 
     await expect(page.locator('iframe[src*="hcaptcha.com"]').first()).toBeAttached()
   })

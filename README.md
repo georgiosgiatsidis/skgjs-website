@@ -80,7 +80,7 @@ skgjs-website/
 ├── components/              # React components
 │   ├── ui/                  # UI components (Button, Card, Input, Countdown)
 │   ├── layout/              # Layout components (Header, Footer, Container)
-│   ├── animations/          # Animation components (ScrollReveal, CountUp, ParallaxWrapper)
+│   ├── animations/          # Animation components (CountUp, ParallaxWrapper)
 │   ├── events/              # Event-related components
 │   ├── community/           # Community-related components
 │   ├── contact/             # Contact form components

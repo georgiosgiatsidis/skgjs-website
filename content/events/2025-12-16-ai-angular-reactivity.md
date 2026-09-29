@@ -16,7 +16,7 @@ talks:
     speaker:
       - path: 'content/community/speakers/savvas-papageorgiadis'
 tags: ['angular', 'ai', 'reactivity', 'signals', 'virtual-dom']
-image: 'https://secure.meetupstatic.com/photos/event/1/6/e/3/highres_531485859.jpeg'
+image: 'https://secure.meetupstatic.com/photos/event/1/6/e/3/clean_531485859.jpeg'
 ---
 
 Hey folks!
