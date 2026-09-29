@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Event } from '@/lib/types'
@@ -136,28 +135,27 @@ export function NextEventPreview({ event }: NextEventPreviewProps) {
 
                   <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                     {/* View Past Events */}
-                    <Link href="/events/?filter=past">
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="font-semibold transition-colors hover:border-js-yellow hover:text-js-yellow"
+                    <Button
+                      href="/events/?filter=past"
+                      variant="outline"
+                      size="lg"
+                      className="font-semibold transition-colors hover:border-js-yellow hover:text-js-yellow"
+                    >
+                      View Past Events
+                      <svg
+                        className="h-5 w-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        View Past Events
-                        <svg
-                          className="h-5 w-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                          />
-                        </svg>
-                      </Button>
-                    </Link>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </Button>
                   </div>
 
                   <p className="mt-6 text-sm text-gray-500 dark:text-gray-500">
@@ -398,14 +396,12 @@ export function NextEventPreview({ event }: NextEventPreviewProps) {
 
                   <div className="flex flex-col gap-4 pt-6 sm:flex-row">
                     {event.rsvpLink && (
-                      <a
-                        href={event.rsvpLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative inline-flex items-center justify-center"
-                      >
+                      <div className="group relative inline-flex items-center justify-center">
                         <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-js-yellow to-yellow-400 opacity-75 blur transition-opacity group-hover:opacity-100" />
                         <Button
+                          href={event.rsvpLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           variant="primary"
                           size="lg"
                           glowOnHover
@@ -426,30 +422,29 @@ export function NextEventPreview({ event }: NextEventPreviewProps) {
                           </svg>
                           RSVP Now
                         </Button>
-                      </a>
+                      </div>
                     )}
-                    <Link href="/events" className="inline-block">
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="w-full text-base font-semibold transition-colors hover:border-js-yellow hover:text-js-yellow sm:w-auto"
+                    <Button
+                      href="/events"
+                      variant="outline"
+                      size="lg"
+                      className="w-full text-base font-semibold transition-colors hover:border-js-yellow hover:text-js-yellow sm:w-auto"
+                    >
+                      View All Events
+                      <svg
+                        className="h-5 w-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        View All Events
-                        <svg
-                          className="h-5 w-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                          />
-                        </svg>
-                      </Button>
-                    </Link>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </Button>
                   </div>
                 </div>
               </div>

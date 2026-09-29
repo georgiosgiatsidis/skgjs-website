@@ -16,7 +16,7 @@ talks:
     speaker:
       - path: 'content/community/speakers/kostas-ziazios'
 tags: ['web-rendering', 'angular', 'signals']
-image: 'https://secure.meetupstatic.com/photos/event/4/e/8/a/highres_524780106.jpeg'
+image: 'https://secure.meetupstatic.com/photos/event/4/e/8/a/clean_524780106.jpeg'
 ---
 
 We’re excited to invite you to the first-ever SKG JavaScript Meetup! Whether you’re passionate about browser technologies, frontend frameworks, web services, or simply curious about the world of JavaScript, this event is the perfect opportunity to connect, learn, and share ideas with others in the local tech community.

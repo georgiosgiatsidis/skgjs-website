@@ -49,6 +49,9 @@ export function EventCardWide({ event }: EventCardWideProps) {
                   src={event.image}
                   alt={event.title}
                   fill
+                  // Only rendered as the lone upcoming event at the top of /events: the LCP image.
+                  loading="eager"
+                  fetchPriority="high"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent dark:from-gray-900 md:bg-gradient-to-r" />
@@ -78,9 +81,9 @@ export function EventCardWide({ event }: EventCardWideProps) {
             </div>
 
             {/* Title */}
-            <h3 className="mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white dark:group-hover:text-js-yellow md:text-3xl">
+            <h2 className="mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-js-yellow dark:text-white dark:group-hover:text-js-yellow md:text-3xl">
               {event.title}
-            </h3>
+            </h2>
 
             {/* Date and time */}
             <p className="mb-4 text-gray-600 dark:text-gray-400">
@@ -148,9 +151,9 @@ export function EventCardWide({ event }: EventCardWideProps) {
             {/* Speakers section */}
             {event.speakers && event.speakers.length > 0 && (
               <div className="mb-6">
-                <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                   Speaker{event.speakers.length > 1 ? 's' : ''}
-                </h4>
+                </h3>
                 <div className="space-y-3">
                   {event.speakers.map((speaker, i) => (
                     <div key={i} className="flex items-center gap-3">

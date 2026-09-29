@@ -184,8 +184,9 @@ export default function LiquidEther({
       init(container) {
         this.container = container
         container.addEventListener('mousemove', this._onMouseMove, false)
-        container.addEventListener('touchstart', this._onTouchStart, false)
-        container.addEventListener('touchmove', this._onTouchMove, false)
+        // Passive: the handlers never call preventDefault, so scrolling need not wait on them.
+        container.addEventListener('touchstart', this._onTouchStart, { passive: true })
+        container.addEventListener('touchmove', this._onTouchMove, { passive: true })
         container.addEventListener('mouseenter', this._onMouseEnter, false)
         container.addEventListener('mouseleave', this._onMouseLeave, false)
         container.addEventListener('touchend', this._onTouchEnd, false)

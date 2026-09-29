@@ -116,7 +116,7 @@ export function MemberCard({ member }: MemberCardProps) {
       {/* Skills */}
       {member.skills && member.skills.length > 0 && (
         <div className="mb-4">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-500">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
             Skills
           </p>
           <div className="flex flex-wrap gap-2">
@@ -135,7 +135,7 @@ export function MemberCard({ member }: MemberCardProps) {
       {/* Contributed Talks */}
       {member.contributedTalks && member.contributedTalks.length > 0 && (
         <div className="mb-4">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-500">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
             Talks
           </p>
           <ul className="space-y-1.5 text-xs text-gray-600 dark:text-gray-400">

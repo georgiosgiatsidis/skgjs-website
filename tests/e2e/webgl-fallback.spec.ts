@@ -20,6 +20,10 @@ test.describe('Homepage without WebGL', () => {
 
     await page.goto('/')
 
+    // The animation mounts only after load and idle; wait for it so the WebGL-less path has
+    // actually run before anything below is asserted.
+    await expect(page.locator('.liquid-ether-container')).toBeAttached()
+
     // Next stamps this on the document root when a client component throws past every boundary.
     await expect(page.locator('html#__next_error__')).toHaveCount(0)
 

@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 
@@ -84,28 +83,33 @@ export function CTASection({ meetupUrl }: CTASectionProps) {
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <a href={meetupUrl} target="_blank" rel="noopener noreferrer">
-              <Button variant="primary" size="lg" glowOnHover className="px-10">
-                Join on Meetup
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </Button>
-            </a>
-            <Link href="/contact">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow"
-              >
-                Get in Touch
-              </Button>
-            </Link>
+            <Button
+              href={meetupUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              size="lg"
+              glowOnHover
+              className="px-10"
+            >
+              Join on Meetup
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </Button>
+            <Button
+              href="/contact"
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-white hover:border-js-yellow hover:bg-js-yellow/10 hover:text-js-yellow"
+            >
+              Get in Touch
+            </Button>
           </motion.div>
         </div>
       </div>

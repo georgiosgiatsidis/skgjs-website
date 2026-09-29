@@ -16,7 +16,7 @@ talks:
     speaker:
       - path: 'content/community/speakers/john-pourdanis'
 tags: ['chrome-extension', 'open-source', 'testing', 'playwright', 'e2e']
-image: 'https://secure.meetupstatic.com/photos/event/b/d/0/d/highres_528348397.jpeg'
+image: 'https://secure.meetupstatic.com/photos/event/b/d/0/d/clean_528348397.jpeg'
 ---
 
 Hey folks!

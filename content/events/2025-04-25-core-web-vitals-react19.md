@@ -17,7 +17,7 @@ talks:
     speaker:
       - path: 'content/community/organizers/john-kapatzakis'
 tags: ['performance', 'web-vitals', 'react', 'react-19']
-image: 'https://secure.meetupstatic.com/photos/event/4/5/4/c/highres_527297740.jpeg'
+image: 'https://secure.meetupstatic.com/photos/event/4/5/4/c/clean_527297740.jpeg'
 ---
 
 Hey folks!

@@ -25,7 +25,7 @@ tags:
     'reliability',
     'dependencies',
   ]
-image: 'https://secure.meetupstatic.com/photos/event/2/b/8/0/highres_536171136.webp?w=1080'
+image: 'https://secure.meetupstatic.com/photos/event/2/b/8/0/clean_536171136.webp?w=1080'
 ---
 
 For our next SKG-JS meetup, we’re bringing together two talks on some of the less obvious challenges of building and running modern software systems.

@@ -16,7 +16,7 @@ Good test automation isn’t just about tools — it’s about smart workflows, 
     speaker:
       - path: 'content/community/speakers/john-pourdanis'
 tags: ['k6', 'test', 'automation']
-image: 'https://secure.meetupstatic.com/photos/event/1/9/f/f/highres_533886655.webp'
+image: 'https://secure.meetupstatic.com/photos/event/1/9/f/f/clean_533886655.webp'
 ---
 
 We’re excited to invite you to another evening of learning, sharing, and connecting with fellow JavaScript and software engineering enthusiasts at the SKG-JS Meetup! As always, we'll kick off with networking and then dive straight into two practical, community-driven talks that will help you level up your testing game.

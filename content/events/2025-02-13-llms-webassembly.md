@@ -16,7 +16,7 @@ talks:
     speaker:
       - path: 'content/community/organizers/george-giatsidis'
 tags: ['ai', 'llm', 'webassembly', 'performance']
-image: 'https://secure.meetupstatic.com/photos/event/7/d/b/1/highres_525992177.jpeg'
+image: 'https://secure.meetupstatic.com/photos/event/7/d/b/1/clean_525992177.jpeg'
 ---
 
 Hey folks!

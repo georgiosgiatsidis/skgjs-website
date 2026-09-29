@@ -87,6 +87,8 @@ Speaker at SKG JS meetup events.
 
 - Ask the user for the speaker's LinkedIn/GitHub URLs and a photo. Omit `social` keys that are not
   provided. Include `avatar` only if the photo is saved to `public/images/community/`.
+- Save the photo as a square 160×160 JPEG (twice the largest 80 px display size). The site is a
+  static export, so images are served exactly as stored and are never resized.
 - Use a bio from the user in place of the default body when one is given. The body must not be empty.
 - Member frontmatter is validated strictly by `CommunityMemberSchema`: allowed keys are `index`,
   `name`, `role`, `title`, `company`, `avatar`, `joinedDate`, `social` (`twitter`, `github`,
@@ -114,7 +116,7 @@ talks:
     speaker:
       - path: 'content/community/organizers/firstname-lastname'
 tags: ['topic-a', 'topic-b']
-image: 'https://secure.meetupstatic.com/photos/event/.../highres_123.webp'
+image: 'https://secure.meetupstatic.com/photos/event/.../clean_123.webp'
 ---
 
 Event description paragraphs...
@@ -129,6 +131,8 @@ Rules:
 - Put the event description in the markdown body. Do not add a `description` frontmatter field
   unless the user asks for a card summary.
 - Omit `talks` entirely for events without talks (e.g. a round-table).
+- For `image`, use Meetup's `clean_` variant (about 1024 px wide): replace `highres_` with `clean_`
+  in the copied URL. `highres_` images can be over 6000 px wide and 500 KB, and are served as-is.
 - Add `presentation: '<file-name>'` to a talk only when the user has the file; remind them to
   upload it to the B2 bucket under `events/event-<index>/<file-name>`.
 

@@ -9,6 +9,8 @@ interface EventListProps {
   events: Event[]
   emptyMessage?: string
   filterType?: 'upcoming' | 'past'
+  // Off for the list present on page load: hidden-until-hydrated cards delay LCP.
+  animateEntrance?: boolean
 }
 
 const containerVariants = {
@@ -44,7 +46,9 @@ export function EventList({
   events,
   emptyMessage = 'No events found.',
   filterType = 'upcoming',
+  animateEntrance = false,
 }: EventListProps) {
+  const skipEntrance = !animateEntrance
   const isUpcoming = filterType === 'upcoming'
   const eventCount = events.length
 
@@ -54,7 +58,7 @@ export function EventList({
       return (
         <motion.div
           className="py-16"
-          initial={{ opacity: 0, y: 20 }}
+          initial={skipEntrance ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
@@ -70,7 +74,7 @@ export function EventList({
               {/* Central illustration */}
               <motion.div
                 className="relative z-10 flex flex-col items-center"
-                initial={{ scale: 0.8, opacity: 0 }}
+                initial={skipEntrance ? false : { scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
               >
@@ -80,7 +84,7 @@ export function EventList({
                     <motion.div
                       key={i}
                       className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-js-yellow to-yellow-400 text-2xl font-bold text-js-black shadow-lg dark:border-gray-800"
-                      initial={{ y: 20, opacity: 0 }}
+                      initial={skipEntrance ? false : { y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.3 + i * 0.1 }}
                     >
@@ -129,13 +133,13 @@ export function EventList({
     return (
       <motion.div
         className="py-20 text-center"
-        initial={{ opacity: 0, y: 20 }}
+        initial={skipEntrance ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <motion.div
           className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800"
-          initial={{ scale: 0 }}
+          initial={skipEntrance ? false : { scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         >
@@ -164,10 +168,14 @@ export function EventList({
       <motion.div
         className="mx-auto max-w-4xl pb-12"
         variants={containerVariants}
-        initial="hidden"
+        initial={skipEntrance ? false : 'hidden'}
         animate="visible"
       >
-        <motion.div variants={itemVariants} initial="hidden" animate="visible">
+        <motion.div
+          variants={itemVariants}
+          initial={skipEntrance ? false : 'hidden'}
+          animate="visible"
+        >
           <EventCardWide event={events[0]} />
         </motion.div>
       </motion.div>
@@ -180,7 +188,7 @@ export function EventList({
       <motion.div
         className="mx-auto grid max-w-4xl gap-8 pb-12 sm:grid-cols-2"
         variants={containerVariants}
-        initial="hidden"
+        initial={skipEntrance ? false : 'hidden'}
         animate="visible"
       >
         <AnimatePresence mode="popLayout">
@@ -188,7 +196,7 @@ export function EventList({
             <motion.div
               key={event.slug}
               variants={itemVariants}
-              initial="hidden"
+              initial={skipEntrance ? false : 'hidden'}
               animate="visible"
               exit="exit"
               layout
@@ -206,7 +214,7 @@ export function EventList({
     <motion.div
       className="grid gap-8 pb-12 sm:grid-cols-2 lg:grid-cols-3"
       variants={containerVariants}
-      initial="hidden"
+      initial={skipEntrance ? false : 'hidden'}
       animate="visible"
     >
       <AnimatePresence mode="popLayout">
@@ -214,7 +222,7 @@ export function EventList({
           <motion.div
             key={event.slug}
             variants={itemVariants}
-            initial="hidden"
+            initial={skipEntrance ? false : 'hidden'}
             animate="visible"
             exit="exit"
             layout

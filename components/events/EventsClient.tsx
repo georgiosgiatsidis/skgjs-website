@@ -21,9 +21,11 @@ function getFilterFromURL() {
 
 export function EventsClient({ events }: EventsClientProps) {
   const [activeFilter, setActiveFilter] = useState<'upcoming' | 'past'>(defaultFilter)
+  const [hasUserFiltered, setHasUserFiltered] = useState(false)
 
   const setFilter = useCallback((filter: 'upcoming' | 'past') => {
     setActiveFilter(filter)
+    setHasUserFiltered(true)
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search)
       params.set('filter', filter)
@@ -60,7 +62,12 @@ export function EventsClient({ events }: EventsClientProps) {
   return (
     <>
       <EventFilter activeFilter={activeFilter} onFilterChange={setFilter} />
-      <EventList events={displayedEvents} emptyMessage={emptyMessage} filterType={activeFilter} />
+      <EventList
+        events={displayedEvents}
+        emptyMessage={emptyMessage}
+        filterType={activeFilter}
+        animateEntrance={hasUserFiltered}
+      />
     </>
   )
 }

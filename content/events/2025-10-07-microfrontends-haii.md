@@ -16,7 +16,7 @@ talks:
     speaker:
       - path: 'content/community/organizers/eleftheria-batsou'
 tags: ['microfrontends', 'architecture', 'ai', 'ux', 'haii']
-image: 'https://secure.meetupstatic.com/photos/event/1/d/0/3/highres_530347427.jpeg'
+image: 'https://secure.meetupstatic.com/photos/event/1/d/0/3/clean_530347427.jpeg'
 ---
 
 Hey folks!
