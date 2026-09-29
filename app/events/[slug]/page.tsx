@@ -171,7 +171,8 @@ export default async function EventPage({ params }: EventPageProps) {
                       alt={event.title}
                       fill
                       className="object-cover"
-                      priority
+                      loading="eager"
+                      fetchPriority="high"
                     />
                   </div>
                 )}

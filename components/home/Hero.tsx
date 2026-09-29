@@ -55,8 +55,8 @@ export function Hero({ stats: siteStats }: HeroProps) {
           alt="JavaScript developers collaborating"
           fill
           className="object-cover"
-          priority
-          quality={90}
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-js-black/90 via-js-black/85 to-js-black/80" />
         <div className="absolute inset-0 bg-grid-pattern opacity-20" />
@@ -82,7 +82,7 @@ export function Hero({ stats: siteStats }: HeroProps) {
                 width={140}
                 height={140}
                 className="h-28 w-28 drop-shadow-2xl md:h-36 md:w-36"
-                priority
+                loading="eager"
               />
               <motion.div
                 className="absolute inset-0 rounded-full bg-js-yellow/30 blur-2xl"

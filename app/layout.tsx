@@ -44,7 +44,7 @@ export function generateMetadata(): Metadata {
       siteName,
       images: [
         {
-          url: '/images/og-image.svg',
+          url: '/images/og-image.png',
           width: 1200,
           height: 630,
           alt: siteName,
@@ -55,7 +55,7 @@ export function generateMetadata(): Metadata {
       card: 'summary_large_image',
       title: siteName,
       description: tagline,
-      images: ['/images/og-image.svg'],
+      images: ['/images/og-image.png'],
     },
   }
 }
