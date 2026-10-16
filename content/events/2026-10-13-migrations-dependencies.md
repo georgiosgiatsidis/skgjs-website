@@ -12,6 +12,7 @@ talks:
       - path: 'content/community/speakers/konstantinos-akritidis'
   - title: 'Your App Is Up. Your Business Is Down.'
     description: 'Eleftheria will explore dependency-driven failures, why adding more monitoring checks may not solve the underlying problem, how teams can discover their real dependencies, and why independent outside observers can provide a perspective that internal telemetry cannot.'
+    presentation: 'dependencies/presentation.pdf'
     speaker:
       - path: 'content/community/organizers/eleftheria-batsou'
 tags:
